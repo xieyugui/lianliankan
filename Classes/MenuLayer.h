@@ -9,6 +9,14 @@ public:
 	virtual bool init();
 	CREATE_FUNC(MenuLayer);
 	void startGame();
+
+	void menuQuit();
+	void menuSetting();
+
+private:
+	MenuItemImage *startBtn;
+	MenuItemImage *pSetting;
+	Menu *pMenu;
 };
 
 #endif
