@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "TopMenu.h"
+#include "PauseLayer.h"
 USING_NS_CC;
 
 class GameLayer :public Layer{
@@ -17,6 +18,8 @@ private:
 	void initUI(void);
 
 	void initData(void);
+
+	//void initTopMenuUI();
 
 	cocos2d::String* imageFilename(int index);
 
@@ -51,6 +54,8 @@ private:
 
 	void gameOverSettlement();
 
+	void pauseGame();
+
 	//前一个点坐标
 	Vec2 prePoint;
 
@@ -64,6 +69,9 @@ private:
 
 	float img_w;
 	float img_h;
+
+	Label* level;
+	//PauseLayer *pauseLayer;
 
 	TopMenu* menu;
 

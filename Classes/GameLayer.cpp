@@ -8,6 +8,7 @@
 #include "MenuScene.h"
 #include "LevelSelectLayer.h"
 #include "MapNode.h"
+#include "PauseLayer.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;
@@ -32,14 +33,14 @@ bool GameLayer::init()
 		return false;
 	}
 
-
-	menu = TopMenu::create();
-	this->addChild(menu);
-
 	this->initData();
 
 
 	this->initUI();
+
+	menu = TopMenu::create();
+	this->addChild(menu);
+	//this->initTopMenuUI();
 
 	return true;
 
@@ -115,6 +116,34 @@ void GameLayer::initUI()
 		}
 
 	}
+}
+
+//void GameLayer::initTopMenuUI(){
+//	level = Label::create(String::create("Level: ")->_string + String::createWithFormat("%d", GameData::getInstance()->getChooseLevel())->_string,"Arial", 30);
+//	level->setPosition(100, VISIBLE_HEIGHT - 50);
+//	this->addChild(level, 1);
+//
+//	auto startBtn = MenuItemImage::create("pause.png", "pause.png", CC_CALLBACK_0(GameLayer::pauseGame, this));
+//	auto menu = Menu::create(startBtn, NULL);
+//	menu->alignItemsVertically();
+//	menu->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT - 50));
+//	this->addChild(menu, 1);
+//}
+
+void GameLayer::pauseGame() {
+	Audio::getInstance()->playButtonClick();
+	//得到窗口的大小  
+	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	CCRenderTexture *renderTexture = CCRenderTexture::create(visibleSize.width, visibleSize.height);
+
+	//遍历当前类的所有子节点信息，画入renderTexture中。  
+	//这里类似截图。  
+	renderTexture->begin();
+	this->getParent()->visit();
+	renderTexture->end();
+
+	//将游戏界面暂停，压入场景堆栈。并切换到GamePause界面  
+	CCDirector::sharedDirector()->pushScene(PauseLayer::scene(renderTexture));
 }
 
 
