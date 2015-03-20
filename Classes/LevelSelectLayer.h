@@ -1,0 +1,31 @@
+#ifndef __LIANLIANKANX__LEVELSELECTLAYER__
+#define __LIANLIANKANX__LEVELSELECTLAYER__
+
+#include "cocos2d.h"
+#include "LevelSelectContent.h"
+
+USING_NS_CC;
+
+class LevelSelectLayer :public Layer{
+public:
+	LevelSelectLayer();
+	~LevelSelectLayer();
+	virtual bool init();
+	CREATE_FUNC(LevelSelectLayer);
+	static Scene* createScene();
+
+private:
+	LevelSelectContent* levelSelectContent;//等级内容
+	int _currentPage;//当前页
+	int _maxPage;//最大页数
+	Menu* _leftMenu;
+	Menu* _rightMenu;
+
+	void initNavigation();//初始化导航
+	void initAllLevels();//初始化所有等级
+	void nextPageBack(Ref* sender);//下一页
+	void prePageBack(Ref* sender);//前一页
+};
+
+
+#endif
