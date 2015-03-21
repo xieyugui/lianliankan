@@ -16,91 +16,107 @@
 
 USING_NS_CC;
 
+//传入一个CCrenderTexture   
+//相当于一个正在运行的游戏的截图作为这个暂停对话框的背景   
+//这样就看起来像是对话框在游戏界面之上，一般游戏当中都是这样子写的。  
+CCScene* PauseLayer::scene(CCRenderTexture* sqr)
+{
+	CCScene *scene = CCScene::create();
+	PauseLayer *layer = PauseLayer::create();
+	scene->addChild(layer, 1);//把游戏层放上面，我们还要在这上面放按钮  
+
+
+	//增加部分：使用Game界面中截图的sqr纹理图片创建Sprite  
+	//并将Sprite添加到GamePause场景层中  
+	//得到窗口的大小  
+	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	CCSprite *back_spr = CCSprite::createWithTexture(sqr->getSprite()->getTexture());
+	back_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //放置位置,这个相对于中心位置。  
+	back_spr->setFlipY(true);            //翻转，因为UI坐标和OpenGL坐标不同  
+	back_spr->setColor(Color3B::GRAY); //图片颜色变灰色  
+	scene->addChild(back_spr);
+
+
+	//添加游戏暂停背景小图，用来放按钮  
+	CCSprite *back_small_spr = CCSprite::create("back_pause.png");
+	back_small_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //放置位置,这个相对于中心位置。  
+	scene->addChild(back_small_spr);
+
+
+	return scene;
+}
+
 bool PauseLayer::init()
 {
 
 	if (!CCLayer::init())
 	{
-		return 0;
+		return false;
 	}
-	setTouchEnabled(true);
-	//setAccelerometerEnabled(true);
-	setKeypadEnabled(true);
+	//得到窗口的大小  
+	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	//原点坐标  
+	CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+
+	//继续游戏按钮  
+	CCMenuItemImage *pContinueItem = CCMenuItemImage::create(
+		"pause_continue.png",
+		"pause_continue.png",
+		CC_CALLBACK_0(PauseLayer::menuContinueCallback,this));
+
+	pContinueItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 + 30));
+
+	//重新开始游戏按钮  
+	CCMenuItemImage *pRestartItem = CCMenuItemImage::create(
+		"pause_restart.png",
+		"pause_restart.png",
+		CC_CALLBACK_0(PauseLayer::menuRestart, this));
+
+	pRestartItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 - 20));
+
+	//回主界面  
+	CCMenuItemImage *pLoginItem = CCMenuItemImage::create(
+		"pause_login.png",
+		"pause_login.png",
+		CC_CALLBACK_0(PauseLayer::menuLogin, this));
+
+	pLoginItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 - 70));
 
 
+	// create menu, it's an autorelease object  
+	CCMenu* pMenu = CCMenu::create(pContinueItem, pRestartItem, pLoginItem, NULL);
+	pMenu->setPosition(Vec2::ZERO);
+	this->addChild(pMenu, 1000);
 
-	auto bg = Sprite::create("bgpics/mask.png");
-	bg->setPosition(ccp(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
-	this->addChild(bg, 1000);
+	CCDirector::sharedDirector()->pause();
 
-
-	MenuItemSprite *restart_item = MenuItemSprite::create(Sprite::createWithSpriteFrameName("retry_btn.png"),
-		Sprite::createWithSpriteFrameName("retry_btn_selected.png"), CC_CALLBACK_0(PauseLayer::restart, this));
-	restart_item->setPosition(ccp(VISIBLE_WIDTH / 4, VISIBLE_HEIGHT / 2));
-
-
-	MenuItemSprite *resume_item = MenuItemSprite::create(CCSprite::createWithSpriteFrameName("resume_btn.png"),
-		Sprite::createWithSpriteFrameName("resume_btn_selected.png"), CC_CALLBACK_0(PauseLayer::resume, this));
-	resume_item->setPosition(ccp(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
-
-
-	MenuItemSprite *quit_item = MenuItemSprite::create(CCSprite::createWithSpriteFrameName("menu_btn.png"),
-		CCSprite::createWithSpriteFrameName("menu_btn_selected.png"), CC_CALLBACK_0(PauseLayer::gotoMenu, this));
-	quit_item->setPosition(ccp(VISIBLE_WIDTH / 4 * 3, VISIBLE_HEIGHT / 2));
-
-	//resume_item->setPosition(restart_item->getPosition());
-	Vector<MenuItem*> items;
-	items.pushBack(quit_item);
-	items.pushBack(resume_item);
+	return true;
+}
+void PauseLayer::menuContinueCallback()
+{
 	
-	auto menu = Menu::createWithArray(items);
-	menu->setPosition(ccp(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
-	this->addChild(menu, 1001);
-
-	//schedule(schedule_selector(PauseLayer::updateAll));
-
-	//		
-	//	SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
-	CCDirector::sharedDirector()->pause();
-
-	return this;
-}
-
-void PauseLayer::updateAll(float dt)
-{
-	CCDirector::sharedDirector()->pause();
-}
-void PauseLayer::restart(CCNode * node)
-{
-
 	Audio::getInstance()->playButtonClick();
-	removeFromParentAndCleanup(true);
+	CCDirector::sharedDirector()->popScene();
+	//removeFromParentAndCleanup(true);
+	CCDirector::sharedDirector()->resume();
 
+}
+
+//重新开始游戏  
+void  PauseLayer::menuRestart()
+{
+	Audio::getInstance()->playButtonClick();
+	//removeFromParentAndCleanup(true);
+	CCDirector::sharedDirector()->popScene();
 	CCDirector::sharedDirector()->resume();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, GameScene::create()));
-
 }
-void PauseLayer::resume(CCNode * node)
+//回主界面  
+void  PauseLayer::menuLogin()
 {
 	Audio::getInstance()->playButtonClick();
-	removeFromParentAndCleanup(true);
-	CCDirector::sharedDirector()->resume();
-
-
-}
-void PauseLayer::gotoMenu(CCNode * node)
-{
-
-	Audio::getInstance()->playButtonClick();
-	removeFromParentAndCleanup(true);
-	CCDirector::sharedDirector()->resume();
+	CCDirector::sharedDirector()->popScene();
+	//removeFromParentAndCleanup(true);
+	Director::sharedDirector()->resume();
 	Director::getInstance()->replaceScene(LevelSelectLayer::createScene());
-
 }
-
-
-PauseLayer::~PauseLayer()
-{
-	
-}
-

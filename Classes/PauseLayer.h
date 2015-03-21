@@ -21,19 +21,22 @@ class PauseLayer : public cocos2d::CCLayer
 public:
 	// Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
 	virtual bool init();
+	static cocos2d::CCScene* scene(CCRenderTexture* sqr);
 
 	CREATE_FUNC(PauseLayer);
-	CCSize size;
-	void updateAll(float dt);
-	void restart(CCNode * node);
-	void setIsdialog(float dt);
-	void resume(CCNode * node);
+	//继续游戏  
+	void menuContinueCallback();
+	//重新开始游戏  
+	void menuRestart();
+	//回主界面  
+	void menuLogin();
+	//void updateAll(float dt);
+	//void restart();
+	//void resume();
 
-	void gotoMenu(CCNode * node);
-	static void getAlertdiog();
-	int lastState;
+	//void gotoMenu();
 
-	~PauseLayer();
+	//~PauseLayer();
 };
 
 #endif // _HELLOWORLD_SCENE_H_

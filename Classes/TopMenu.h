@@ -11,6 +11,7 @@ public:
 	void refresh();
 private:
 	void pauseGame();
+	
 
 	Label* level;
 };

@@ -3,6 +3,7 @@
 #include "GameUtils.h"
 #include "GameData.h"
 #include "LevelSelectLayer.h"
+#include "SetMusic.h"
 
 bool MenuLayer::init() {
 	if (!Layer::init()) {
@@ -21,14 +22,35 @@ bool MenuLayer::init() {
 	this->addChild(background, -1);
 
 	//³õÊ¼»¯²Ëµ¥
-	auto startBtn = MenuItemImage::create("menu_adventure.png", "menu_adventure.png", CC_CALLBACK_0(MenuLayer::startGame, this));
-	auto menu = Menu::create(startBtn, NULL);
-	menu->alignItemsVertically();
-	menu->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
-	log("GameUtil2 %f", VISIBLE_WIDTH);
-	this->addChild(menu);
+	startBtn = MenuItemImage::create("menu_adventure.png", "menu_adventure.png", CC_CALLBACK_0(MenuLayer::startGame, this));
+	startBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
+
+	pSetting = MenuItemImage::create("Setting_n.png", "setting_s.png",
+		CC_CALLBACK_0(MenuLayer::menuSetting, this));
+	pSetting->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - 80));
+
+	pMenu = Menu::create(startBtn, pSetting, NULL);
+	pMenu->setPosition(Vec2::ZERO);
+
+	//auto menu = Menu::create(startBtn, NULL);
+	//menu->alignItemsVertically();
+	//menu->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
+
+	this->addChild(pMenu);
 	return true;
 
+}
+
+void MenuLayer::menuQuit()
+{
+	Director::getInstance()->end();
+}
+
+void MenuLayer::menuSetting()
+{
+	Scene *pScene = Scene::create();
+	pScene->addChild(SetMusic::create());
+	Director::getInstance()->replaceScene(pScene);
 }
 
 void MenuLayer::startGame() {
