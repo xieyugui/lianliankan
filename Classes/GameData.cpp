@@ -1,4 +1,5 @@
 #include "GameData.h"
+#include "Audio.h"
 
 USING_NS_CC;
 
@@ -19,6 +20,7 @@ void GameData::init() {
 	this->initUserPassLevel();
 	//读取等级配置数据
 	this->initLevelData();
+	is_pause = false;
 }
 
 void GameData::initUserPassLevel() {
@@ -128,4 +130,15 @@ Array* GameData::getLevelData(int level) {
 
 int GameData::getLevelCount() {
 	return level_data.size();
+}
+
+void GameData::playOrStopMusic() {
+	if( is_pause==false )
+    {
+		Audio::getInstance()->pauseAllEffects();
+    }
+    else
+    {
+		Audio::getInstance()->resumeAllEffects();
+    }
 }

@@ -34,8 +34,20 @@ bool LevelSelectLayer::init(){
 	}
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("startUI.plist", "startUI.png");
 
-	auto colorLayer = LayerColor::create(Color4B(0x24, 0x2c, 0x3c, 255));
-	this->addChild(colorLayer, 0);
+
+	auto gameBg = Sprite::create("game_bg.png");
+	float wBg = gameBg->getContentSize().width;
+	if (VISIBLE_WIDTH > wBg) {
+		wBg = VISIBLE_WIDTH - (VISIBLE_WIDTH - wBg) / 2;
+	}
+
+	auto rect = Rect(((VISIBLE_WIDTH - wBg) / 2) / wBg, 1, wBg, VISIBLE_HEIGHT);   //ͼƬ�Ĵ�С
+	gameBg->setTextureRect(rect);
+	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
+	this->addChild(gameBg, -1);
+
+	//auto colorLayer = LayerColor::create(Color4B(0x24, 0x2c, 0x3c, 255));
+	//this->addChild(colorLayer, 0);
 
 
 	initAllLevels();

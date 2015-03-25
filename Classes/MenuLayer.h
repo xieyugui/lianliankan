@@ -13,9 +13,14 @@ public:
 	void menuQuit();
 	void menuSetting();
 
+	void menuMusicCallback();
+
 private:
 	MenuItemImage *startBtn;
 	MenuItemImage *pSetting;
+	MenuItemImage *moreBtn;
+	MenuItemImage *soundBtn;
+
 	Menu *pMenu;
 };
 

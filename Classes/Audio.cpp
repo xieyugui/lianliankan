@@ -36,3 +36,13 @@ void Audio::prepare(){
 	SimpleAudioEngine::getInstance()->preloadEffect("music/4.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("wav/button_click_menu.mp3");
 }
+
+void Audio::pauseAllEffects() {
+	SimpleAudioEngine::getInstance()->pauseAllEffects();
+	SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+}
+
+void Audio::resumeAllEffects() {
+	 SimpleAudioEngine::getInstance()->resumeAllEffects();
+	 SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+}

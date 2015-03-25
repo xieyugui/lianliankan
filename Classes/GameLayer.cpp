@@ -93,6 +93,16 @@ void GameLayer::initImgSpriteSize()
 
 void GameLayer::initUI()
 {
+	auto gameBg = Sprite::create("game_bg.png");
+	float wBg = gameBg->getContentSize().width;
+	if (VISIBLE_WIDTH > wBg) {
+		wBg = VISIBLE_WIDTH - (VISIBLE_WIDTH - wBg) / 2;
+	}
+
+	auto rect = Rect(((VISIBLE_WIDTH - wBg) / 2) / wBg, 1, wBg, VISIBLE_HEIGHT);   //图片的大小
+	gameBg->setTextureRect(rect);
+	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
+	this->addChild(gameBg, -1);
 	//auto spriteScale = this->getSpriteS();
 	//布局sprite
 	int wIndex = 0;
