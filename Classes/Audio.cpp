@@ -1,5 +1,6 @@
 #include "Audio.h"
 #include "SimpleAudioEngine.h"
+#include "GameData.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -13,19 +14,27 @@ Audio* Audio::getInstance() {
 }
 
 void Audio::playBGM() {
+	if(GameData::getInstance()->getisPause())
+		return;
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/class.mp3", true);
 }
 
 
 void Audio::playSprite() {
+	if(GameData::getInstance()->getisPause())
+		return;
 	SimpleAudioEngine::getInstance()->playEffect("music/12.wav");
 }
 
 void Audio::playEliminate(){
+	if(GameData::getInstance()->getisPause())
+		return;
 	SimpleAudioEngine::getInstance()->playEffect("music/4.wav");
 }
 
 void Audio::playButtonClick() {
+	if(GameData::getInstance()->getisPause())
+		return;
 	SimpleAudioEngine::getInstance()->playEffect("wav/button_click_menu.mp3");
 }
 
