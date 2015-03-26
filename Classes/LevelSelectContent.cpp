@@ -31,23 +31,25 @@ void LevelSelectContent::initAllLevels(int page){//初始化当前page 的关卡
 	_levelMenu = Menu::create();//创建关卡菜单
 	this->addChild(_levelMenu);
 
-	int const constStartPositionX = VISIBLE_WIDTH * 0.5 - levelMarginX * (g_EachLineCount / 2 - 0.5);
-	int startPositionX = constStartPositionX;
-	int topStartPositionY = VISIBLE_HEIGHT * 0.5 + levelMarginY * (g_EachPageCount / g_EachLineCount / 2 - 0.5);
+	//float p = (VISIBLE_WIDTH - levelMarginX*GameUtils::getLevelScale() * 7) /2;
+
+	float constStartPositionX = VISIBLE_WIDTH * 0.5 - levelMarginX*GameUtils::getLevelScale() * (g_EachLineCount / 2 -0.1);
+	float startPositionX = constStartPositionX;
+	float topStartPositionY = VISIBLE_HEIGHT * 0.5 + levelMarginY*GameUtils::getLevelScale() * (g_EachPageCount / g_EachLineCount / 2);
 
 	for (int i = 0 + page * eachPageItemCount; i < eachPageItemCount + page * eachPageItemCount; i++){
 		if (i < g_maxLevel){
 			int lineCount = g_EachLineCount;
 			if (i != (0 + page * eachPageItemCount) && i % lineCount == 0){
 				startPositionX = constStartPositionX;
-				topStartPositionY = topStartPositionY - levelMarginY;
+				topStartPositionY = topStartPositionY - levelMarginY*GameUtils::getLevelScale();
 			}
 
 			int levelCount = i + 1;
 			auto oneLevelItem = LevelSelectItem::create(levelCount);
 			_levelMenu->addChild(oneLevelItem);
 			oneLevelItem->setPosition(startPositionX, topStartPositionY);
-			startPositionX += levelMarginX;
+			startPositionX += levelMarginX*GameUtils::getLevelScale();
 		}
 	}
 
