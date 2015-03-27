@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
+
+#include "AudioProxy.h"
 #include "HelloWorldScene.h"
-#include "Audio.h"
 #include "MenuScene.h"
 
 USING_NS_CC;
@@ -44,7 +45,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     director->runWithScene(scene);
-	Audio::getInstance()->prepare();
+	AudioProxy::getInstance()->prepare();
     return true;
 }
 

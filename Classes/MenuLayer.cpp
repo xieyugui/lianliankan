@@ -1,5 +1,6 @@
 #include "MenuLayer.h"
-#include "Audio.h"
+
+#include "AudioProxy.h"
 #include "GameUtils.h"
 #include "GameData.h"
 #include "LevelSelectLayer.h"
@@ -15,13 +16,13 @@ bool MenuLayer::init() {
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	
-	// ³õÊ¼»¯±³¾°
+	// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	auto background = Sprite::create("background.png");
 	background->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 	log("GameUtil1 %f", VISIBLE_WIDTH);
 	this->addChild(background, -1);
 
-	//³õÊ¼»¯²Ëµ¥
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ëµï¿½
 	startBtn = MenuItemImage::create("menu_adventure.png", "menu_adventure.png", CC_CALLBACK_0(MenuLayer::startGame, this));
 	startBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 

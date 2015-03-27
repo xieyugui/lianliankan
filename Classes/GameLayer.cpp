@@ -1,9 +1,10 @@
 #include "GameLayer.h"
 #include "GameData.h"
 #include "GameUtils.h"
-#include "Audio.h"
 #include "ui/CocosGUI.h"
 #include "cocos-ext.h"
+
+#include "AudioProxy.h"
 #include "FloatWord.h"
 #include "MenuScene.h"
 #include "LevelSelectLayer.h"
@@ -66,15 +67,15 @@ void GameLayer::initData()
 	SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("icon1.plist");
 	SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("common.plist");
 
-	//Ìí¼Ótouch¼àÌý
+	//ï¿½ï¿½ï¿½touchï¿½ï¿½ï¿½ï¿½
 	//	Director::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
 	auto _eventDispatcher = Director::getInstance()->getEventDispatcher();
 	auto touchListener = EventListenerTouchOneByOne::create();
-	touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);//´¥Ãþ¿ªÊ¼
-	//touchListener->onTouchMoved = CC_CALLBACK_2(MapLayer::onTouchMoved, this);//´¥ÃþÒÆ¶¯
-	touchListener->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this);//´¥Ãþ½áÊø
+	touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼
+	//touchListener->onTouchMoved = CC_CALLBACK_2(MapLayer::onTouchMoved, this);//ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
+	touchListener->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	touchListener->setSwallowTouches(true);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);//×¢²á·Ö·¢Æ÷
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);//×¢ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 
 	prePoint = CCPointMake(-1, -1);
 
@@ -94,7 +95,7 @@ void GameLayer::initImgSpriteSize()
 void GameLayer::initUI()
 {
 	//auto spriteScale = this->getSpriteS();
-	//²¼¾Ösprite
+	//ï¿½ï¿½ï¿½ï¿½sprite
 	int wIndex = 0;
 	for (int index = 0; index < total_x *total_y; index++)    {
 		log("image file name %d", index);
@@ -102,7 +103,7 @@ void GameLayer::initUI()
 		{
 
 			auto *sprite = Sprite::createWithSpriteFrameName(this->imageFilename(index)->getCString());
-			//auto rectInsets = CCRectMake(0, 0, img_w, img_h); //left£¬right£¬width£¬height	
+			//auto rectInsets = CCRectMake(0, 0, img_w, img_h); //leftï¿½ï¿½rightï¿½ï¿½widthï¿½ï¿½height	
 			//sprite->setTextureRect(rectInsets);
 			wIndex = index;
 			if (index > total_x) {
@@ -131,23 +132,23 @@ void GameLayer::initUI()
 //}
 
 void GameLayer::pauseGame() {
-	Audio::getInstance()->playButtonClick();
-	//µÃµ½´°¿ÚµÄ´óÐ¡  
+	AudioProxy::getInstance()->playButtonClick();
+	//ï¿½Ãµï¿½ï¿½ï¿½ï¿½ÚµÄ´ï¿½Ð¡  
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	CCRenderTexture *renderTexture = CCRenderTexture::create(visibleSize.width, visibleSize.height);
 
-	//±éÀúµ±Ç°ÀàµÄËùÓÐ×Ó½ÚµãÐÅÏ¢£¬»­ÈërenderTextureÖÐ¡£  
-	//ÕâÀïÀàËÆ½ØÍ¼¡£  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½renderTextureï¿½Ð¡ï¿½  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½Í¼ï¿½ï¿½  
 	renderTexture->begin();
 	this->getParent()->visit();
 	renderTexture->end();
 
-	//½«ÓÎÏ·½çÃæÔÝÍ££¬Ñ¹Èë³¡¾°¶ÑÕ»¡£²¢ÇÐ»»µ½GamePause½çÃæ  
+	//ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ñ¹ï¿½ë³¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½GamePauseï¿½ï¿½ï¿½ï¿½  
 	CCDirector::sharedDirector()->pushScene(PauseLayer::scene(renderTexture));
 }
 
 
-//»ñÈ¡Í¼Æ¬
+//ï¿½ï¿½È¡Í¼Æ¬
 String* GameLayer::imageFilename(int index)
 {
 	if (index < 0 || index >= mapArray->count()) {
@@ -166,7 +167,7 @@ String* GameLayer::imageFilename(int index)
 
 
 
-//ÆÁÄ»×ø±ê×ª»»³ÉµØÍ¼×ø±ê
+//ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Éµï¿½Í¼ï¿½ï¿½ï¿½ï¿½
 Vec2 GameLayer::pointOfView(Vec2 point)
 {
 
@@ -181,13 +182,13 @@ Vec2 GameLayer::pointOfView(Vec2 point)
 }
 
 
-//ÊÇ·ñÔÚÓÐÐ§·¶Î§ÄÚ
+//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Î§ï¿½ï¿½
 bool GameLayer::isValiableNode(Vec2 point)
 {
 	return point.x >= 0 && point.x < total_x && point.y >= 0 && point.y < total_y;
 }
 
-//ÊÇ·ñÊÇ¿ÕµÄ×ø±êµã
+//ï¿½Ç·ï¿½ï¿½Ç¿Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 bool GameLayer::isEmptyNode(Vec2 point)
 {
 	int index = this->indexFromPoint(point);
@@ -199,7 +200,7 @@ bool GameLayer::isEmptyNode(Vec2 point)
 	return (node->imgid == 0);
 }
 
-//Ã¿¸öspriteµÄindex
+//Ã¿ï¿½ï¿½spriteï¿½ï¿½index
 int GameLayer::indexFromPoint(Vec2 point)
 {
 	return point.y * total_x + point.x;
@@ -207,14 +208,14 @@ int GameLayer::indexFromPoint(Vec2 point)
 }
 
 
-//ÊÇ·ñÊÇÏàÍ¬µÄµã
+//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½Äµï¿½
 bool GameLayer::isSamePoints(Vec2 p1, Vec2 p2)
 {
 	return (p1.x == p2.x && p1.y == p2.y);
 }
 
 
-//Çå³ý
+//ï¿½ï¿½ï¿½
 void GameLayer::clearNode(Vec2 point)
 {
 	int index = this->indexFromPoint(point);
@@ -224,7 +225,7 @@ void GameLayer::clearNode(Vec2 point)
 	node->imgid = 0;
 }
 
-//ÅÐ¶ÏÁ½¸öÊÇ·ñ¿ÉÒÔÏû³ý
+//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 bool GameLayer::canClearTwo(Vec2 pointpre, Vec2 pointcurrent)
 {
 	bool bMatch = false;
@@ -242,7 +243,7 @@ bool GameLayer::canClearTwo(Vec2 pointpre, Vec2 pointcurrent)
 }
 
 
-//·Å´óËõÐ¡¶¯»­
+//ï¿½Å´ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
 void GameLayer::scaleAnimation(cocos2d::Sprite* sprite)
 {
 
@@ -261,7 +262,7 @@ bool GameLayer::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 
 	auto location = Director::sharedDirector()->convertToGL(pTouch->getLocationInView());
 
-	//ÔÚÕâ¸ö²ãÇøÓòÄÚ·µ»Øtrue
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½true
 	if (this->boundingBox().containsPoint(location))
 	{
 
@@ -270,7 +271,7 @@ bool GameLayer::onTouchBegan(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 
 	}
 
-	//·ñÔò·µ»Øfalse,×èÖ¹½ÓÏÂÀ´µÄtouchº¯Êý
+	//ï¿½ï¿½ï¿½ò·µ»ï¿½false,ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½touchï¿½ï¿½ï¿½ï¿½
 	return false;
 }
 
@@ -304,7 +305,7 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 
 
 	//SimpleAudioEngine::sharedEngine()->playEffect("12.wav");
-	Audio::getInstance()->playSprite();
+	AudioProxy::getInstance()->playSprite();
 
 	if (prePoint.x == -1 && prePoint.y == -1) {
 		prePoint = location;
@@ -316,7 +317,7 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 		return;
 	}
 
-	//µã»÷µ±Ç°¾«Áé
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
 	auto *spritecurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE + this->indexFromPoint(location));
 	spritecurrent->setScale(1.1);
 
@@ -324,7 +325,7 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 	if (this->isValiableNode(prePoint) && !this->isEmptyNode(prePoint))
 	{
 		CCLOG("%d", this->indexFromPoint(location));
-		//Ç°Ò»¸ö
+		//Ç°Ò»ï¿½ï¿½
 		auto *spritepre = (Sprite *)this->getChildByTag(TAG_START_SPRITE + this->indexFromPoint(prePoint));
 		//auto *spriteLine = (Sprite *)this->getChildByTag(TAG_START_SPRITE * 2 + this->indexFromPoint(prePoint));//by xie
 
@@ -332,7 +333,7 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 		{
 
 			//SimpleAudioEngine::sharedEngine()->playEffect("4.wav");
-			Audio::getInstance()->playEliminate();
+			AudioProxy::getInstance()->playEliminate();
 			this->clearNode(location);
 			this->clearNode(prePoint);
 			prePoint = Vec2(-1,-1);
@@ -361,8 +362,8 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 
 
 
-//ÈýÖÖÆ¥ÅäËã·¨
-//Ò»Ö±Ïß
+//ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½ã·¨
+//Ò»Ö±ï¿½ï¿½
 bool GameLayer::match_direct(Vec2 a, Vec2 b)
 {
 	if (!(a.x == b.x || a.y == b.y)) {
@@ -415,7 +416,7 @@ bool GameLayer::match_direct(Vec2 a, Vec2 b)
 	return match_x || match_y;
 }
 
-//Ò»¸ö¹ÕµãµÄ
+//Ò»ï¿½ï¿½ï¿½Õµï¿½ï¿½
 bool GameLayer::match_one_corner(Vec2 a, Vec2 b)
 {
 	auto point = CCPointMake(b.x, a.y);
@@ -432,7 +433,7 @@ bool GameLayer::match_one_corner(Vec2 a, Vec2 b)
 	return false;
 }
 
-//Á½¸ö¹ÕµãµÄ
+//ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½
 bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 {
 	for (int i = a.x - 1; i >= 0; --i) {
