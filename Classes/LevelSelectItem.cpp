@@ -27,8 +27,11 @@ LevelSelectItem* LevelSelectItem::create(int level){
 
 
 	auto normalSprite = Sprite::createWithSpriteFrameName(ret->getFrameNameByType(ret->_type));
+	normalSprite->setScale(GameUtils::getLevelScale());
 	auto selectedSprite = Sprite::createWithSpriteFrameName(ret->getFrameNameByType(ret->_type));
+	selectedSprite->setScale(GameUtils::getLevelScale());
 	auto disabledSprite = Sprite::createWithSpriteFrameName(ret->getFrameNameByType(ret->_type));
+	disabledSprite->setScale(GameUtils::getLevelScale());
 	ret->initWithNormalSprite(normalSprite, selectedSprite, disabledSprite, callback);
 	ret->extraInit();
 	ret->autorelease();
@@ -61,9 +64,10 @@ void LevelSelectItem::extraInit(){
 		else if (_type == kNotPassYet){
 			valueLabel = Label::createWithBMFont("fonts/whiteLevel.fnt", levelBuffer);
 		}
+		valueLabel->setScale(GameUtils::getLevelScale());
 		this->addChild(valueLabel);
 		auto size = this->getContentSize();
-		valueLabel->setPosition(size.width * 0.5, size.height * 0.5);
+		valueLabel->setPosition(size.width *GameUtils::getLevelScale() * 0.5, size.height*GameUtils::getLevelScale() * 0.5);
 
 	}
 

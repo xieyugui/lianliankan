@@ -52,6 +52,14 @@ float GameUtils::getVisibleHeight(){
 	return visibleSize.height;
 }
 
+float GameUtils::getLevelScale() {
+
+	float scaleRate =  levelMarginX * (g_EachLineCount+2)/ VISIBLE_WIDTH;
+	if (scaleRate > 1.0) 
+		scaleRate = VISIBLE_WIDTH / (levelMarginX * (g_EachLineCount+2)*1.0);
+	return scaleRate;
+}
+
 
 
 

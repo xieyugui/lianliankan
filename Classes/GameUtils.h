@@ -13,6 +13,7 @@ public:
 	static float getPainSpriteXScaleRate(Sprite* sprite);
 	static float getVisibleWidth();
 	static float getVisibleHeight();
+	static float getLevelScale();
 
 	static Animation* getAnimationByKeyAndFrameName(const std::string& aniKey, const std::string& frameName, const int& frameCount, float delay);
 	static Animation* getAnimationByKeyAndFileName(const std::string& aniKey, const std::string& fileName, const int& frameCount, float delay);

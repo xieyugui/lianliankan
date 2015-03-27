@@ -32,6 +32,7 @@ public:
 	/*当前等级*/
 	CC_SYNTHESIZE(int, cur_level, CurLevel);//定义了get set //varType, varName, funName
 	CC_SYNTHESIZE(int, choose_level, ChooseLevel);
+	CC_SYNTHESIZE(bool,is_pause, isPause);
 	//CC_SYNTHESIZE(int, next_level, NextLevel);
 
 	void saveUserPassLevel();
@@ -40,9 +41,12 @@ public:
 	int getLevelCount();
 
 	void initLevelData();
+
+	void playOrStopMusic();
 	
 	void getLevelXY(int &x, int &y, int &score,int level);
 	Array* getLevelData(int level);
+
 
 private:
 	GameData();

@@ -34,8 +34,20 @@ bool LevelSelectLayer::init(){
 	}
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("startUI.plist", "startUI.png");
 
-	auto colorLayer = LayerColor::create(Color4B(0x24, 0x2c, 0x3c, 255));
-	this->addChild(colorLayer, 0);
+
+	auto gameBg = Sprite::create("game_bg.png");
+	float wBg = gameBg->getContentSize().width;
+	if (VISIBLE_WIDTH > wBg) {
+		wBg = VISIBLE_WIDTH - (VISIBLE_WIDTH - wBg) / 2;
+	}
+
+	auto rect = Rect(((VISIBLE_WIDTH - wBg) / 2) / wBg, 1, wBg, VISIBLE_HEIGHT);   //图片的大小
+	gameBg->setTextureRect(rect);
+	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
+	this->addChild(gameBg, -1);
+
+	//auto colorLayer = LayerColor::create(Color4B(0x24, 0x2c, 0x3c, 255));
+	//this->addChild(colorLayer, 0);
 
 
 	initAllLevels();
@@ -45,24 +57,31 @@ bool LevelSelectLayer::init(){
 }
 
 
-
-//初始化导航
+//初始化导航  
 void LevelSelectLayer::initNavigation(){
 
 
 	auto leftMenuSpriteNor = Sprite::createWithSpriteFrameName("prePage.png");
+	leftMenuSpriteNor->setScale(GameUtils::getLevelScale());
 	auto leftMenuSpritePre = Sprite::createWithSpriteFrameName("prePagePre.png");
+	leftMenuSpritePre->setScale(GameUtils::getLevelScale());
 	auto leftMenuItem = MenuItemSprite::create(leftMenuSpriteNor, leftMenuSpritePre, CC_CALLBACK_1(LevelSelectLayer::prePageBack, this));
 	_leftMenu = Menu::create(leftMenuItem, NULL);
+	//_leftMenu->setScale(GameUtils::getLevelScale());
 	this->addChild(_leftMenu);
-	_leftMenu->setPosition(100, VISIBLE_HEIGHT * 0.5);
+	_leftMenu->setPosition(levelMarginX*GameUtils::getLevelScale()/2+10 , VISIBLE_HEIGHT * 0.5);
 
 	auto rightMenuSpriteNor = Sprite::createWithSpriteFrameName("nextPage.png");
+	rightMenuSpriteNor->setScale(GameUtils::getLevelScale());
 	auto rightMenuSpritePre = Sprite::createWithSpriteFrameName("nextPagePre.png");
+	rightMenuSpritePre->setScale(GameUtils::getLevelScale());
 	auto rightMenuItem = MenuItemSprite::create(rightMenuSpriteNor, rightMenuSpritePre, CC_CALLBACK_1(LevelSelectLayer::nextPageBack, this));
 	_rightMenu = Menu::create(rightMenuItem, NULL);
+	//_rightMenu->setScale(GameUtils::getLevelScale());
+	log("levelScale %f",GameUtils::getLevelScale());
 	this->addChild(_rightMenu);
-	_rightMenu->setPosition(VISIBLE_WIDTH - 100, VISIBLE_HEIGHT * 0.5);
+	log("leftMenu %f",_rightMenu->getContentSize().width);
+	_rightMenu->setPosition(VISIBLE_WIDTH - levelMarginX*GameUtils::getLevelScale()/2+10 , VISIBLE_HEIGHT * 0.5);
 
 	if (_currentPage == 0){
 		_leftMenu->setVisible(false);
