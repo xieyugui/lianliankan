@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 
-#include "AudioProxy.h"
+#include "Audio.h"
 #include "HelloWorldScene.h"
 #include "MenuScene.h"
 
