@@ -1,6 +1,5 @@
 #include "MenuLayer.h"
 
-#include "AudioProxy.h"
 #include "GameUtils.h"
 #include "GameData.h"
 #include "LevelSelectLayer.h"

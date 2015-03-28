@@ -45,7 +45,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // run
     director->runWithScene(scene);
-	AudioProxy::getInstance()->prepare();
+	Audio::getInstance()->prepare();
     return true;
 }
 

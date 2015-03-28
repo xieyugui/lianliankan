@@ -1,6 +1,6 @@
 #include "TopMenu.h"
 
-#include "AudioProxy.h"
+#include "Audio.h"
 #include "GameUtils.h"
 #include "GameData.h"
 #include "PauseLayer.h"
@@ -29,7 +29,7 @@ void TopMenu::refresh(){
 }
 
 void TopMenu::pauseGame() {
-	AudioProxy::getInstance()->playButtonClick();
+	Audio::getInstance()->playButtonClick();
 	//�õ����ڵĴ�С  
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	CCRenderTexture *renderTexture = CCRenderTexture::create(visibleSize.width, visibleSize.height);

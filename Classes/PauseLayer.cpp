@@ -9,7 +9,7 @@
 #include "PauseLayer.h"
 #include "SimpleAudioEngine.h"
 
-#include "AudioProxy.h"
+#include "Audio.h"
 #include "MenuLayer.h"
 #include "GameUtils.h"
 #include "LevelSelectLayer.h"
@@ -96,7 +96,7 @@ bool PauseLayer::init()
 void PauseLayer::menuContinueCallback()
 {
 	
-	AudioProxy::getInstance()->playButtonClick();
+	Audio::getInstance()->playButtonClick();
 	CCDirector::sharedDirector()->popScene();
 	//removeFromParentAndCleanup(true);
 	CCDirector::sharedDirector()->resume();
@@ -106,7 +106,7 @@ void PauseLayer::menuContinueCallback()
 //���¿�ʼ��Ϸ  
 void  PauseLayer::menuRestart()
 {
-	AudioProxy::getInstance()->playButtonClick();
+	Audio::getInstance()->playButtonClick();
 	//removeFromParentAndCleanup(true);
 	CCDirector::sharedDirector()->popScene();
 	CCDirector::sharedDirector()->resume();
@@ -115,7 +115,7 @@ void  PauseLayer::menuRestart()
 //��������  
 void  PauseLayer::menuLogin()
 {
-	AudioProxy::getInstance()->playButtonClick();
+	Audio::getInstance()->playButtonClick();
 	CCDirector::sharedDirector()->popScene();
 	//removeFromParentAndCleanup(true);
 	Director::sharedDirector()->resume();

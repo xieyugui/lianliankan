@@ -4,7 +4,7 @@
 #include "ExtensionMacros.h"
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
-#include "AudioProxy.h"
+#include "Audio.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;
@@ -13,7 +13,7 @@ bool MenuScene::init() {
 	if (!Scene::init()) {
 		return false;
 	}
-	AudioProxy::getInstance()->playBGM();
+	Audio::getInstance()->playBGM();
 	this->addChild(MenuLayer::create());
 	return true;
 }

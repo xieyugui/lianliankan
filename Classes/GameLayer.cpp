@@ -4,7 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "cocos-ext.h"
 
-#include "AudioProxy.h"
+#include "Audio.h"
 #include "FloatWord.h"
 #include "MenuScene.h"
 #include "LevelSelectLayer.h"
@@ -100,7 +100,7 @@ void GameLayer::initUI()
 		wBg = VISIBLE_WIDTH - (VISIBLE_WIDTH - wBg) / 2;
 	}
 
-	auto rect = Rect(((VISIBLE_WIDTH - wBg) / 2) / wBg, 1, wBg, VISIBLE_HEIGHT);   //ͼƬ�Ĵ�С
+	auto rect = Rect(((VISIBLE_WIDTH - wBg) / 2) / wBg, 1, wBg, VISIBLE_HEIGHT);   //ͼƬ�Ĵ�С
 	gameBg->setTextureRect(rect);
 	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 	this->addChild(gameBg, -1);
@@ -142,7 +142,7 @@ void GameLayer::initUI()
 //}
 
 void GameLayer::pauseGame() {
-	AudioProxy::getInstance()->playButtonClick();
+	Audio::getInstance()->playButtonClick();
 	//�õ����ڵĴ�С  
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	CCRenderTexture *renderTexture = CCRenderTexture::create(visibleSize.width, visibleSize.height);
@@ -315,7 +315,7 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 
 
 	//SimpleAudioEngine::sharedEngine()->playEffect("12.wav");
-	AudioProxy::getInstance()->playSprite();
+	Audio::getInstance()->playSprite();
 
 	if (prePoint.x == -1 && prePoint.y == -1) {
 		prePoint = location;
@@ -343,7 +343,7 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 		{
 
 			//SimpleAudioEngine::sharedEngine()->playEffect("4.wav");
-			AudioProxy::getInstance()->playEliminate();
+			Audio::getInstance()->playEliminate();
 			this->clearNode(location);
 			this->clearNode(prePoint);
 			prePoint = Vec2(-1,-1);
