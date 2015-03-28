@@ -26,15 +26,17 @@ LevelSelectItem* LevelSelectItem::create(int level){
 	auto callback = CC_CALLBACK_1(LevelSelectItem::selectCallBack, ret);
 
 
-	auto normalSprite = Sprite::createWithSpriteFrameName(ret->getFrameNameByType(ret->_type));
-	normalSprite->setScale(GameUtils::getLevelScale());
-	auto selectedSprite = Sprite::createWithSpriteFrameName(ret->getFrameNameByType(ret->_type));
-	selectedSprite->setScale(GameUtils::getLevelScale());
-	auto disabledSprite = Sprite::createWithSpriteFrameName(ret->getFrameNameByType(ret->_type));
-	disabledSprite->setScale(GameUtils::getLevelScale());
+	auto normalSprite = Sprite::create(ret->getFrameNameByType(ret->_type));
+	//normalSprite->setScale(GameData::getInstance()->getlevelSacle());
+
+	auto selectedSprite = Sprite::create(ret->getFrameNameByType(ret->_type));
+	//selectedSprite->setScale(GameData::getInstance()->getlevelSacle());
+	auto disabledSprite = Sprite::create(ret->getFrameNameByType(ret->_type));
+	//disabledSprite->setScale(GameData::getInstance()->getlevelSacle());
 	ret->initWithNormalSprite(normalSprite, selectedSprite, disabledSprite, callback);
 	ret->extraInit();
 	ret->autorelease();
+	ret->setScale(GameData::getInstance()->getlevelSacle());
 	return ret;
 }
 
@@ -58,16 +60,18 @@ void LevelSelectItem::extraInit(){
 		sprintf(levelBuffer, "%d", _level);
 		Label* valueLabel = nullptr;
 		if (_type == kAlreadyPass){
-			valueLabel = Label::createWithBMFont("fonts/blueLevel.fnt", levelBuffer);
+			//valueLabel = Label::createWithBMFont("fonts/blueLevel.fnt", levelBuffer);
+			valueLabel =  Label::createWithTTF(levelBuffer, "fonts/Marker Felt.ttf", 36);
 
 		}
 		else if (_type == kNotPassYet){
-			valueLabel = Label::createWithBMFont("fonts/whiteLevel.fnt", levelBuffer);
+			valueLabel =  Label::createWithTTF(levelBuffer, "fonts/Marker Felt.ttf", 36);
+			//valueLabel = Label::createWithBMFont("fonts/whiteLevel.fnt", levelBuffer);
 		}
-		valueLabel->setScale(GameUtils::getLevelScale());
+		//valueLabel->setScale(GetXScaleRate);
+		
+		valueLabel->setPosition(this->boundingBox().size.width /2, this->boundingBox().size.height /2);
 		this->addChild(valueLabel);
-		auto size = this->getContentSize();
-		valueLabel->setPosition(size.width *GameUtils::getLevelScale() * 0.5, size.height*GameUtils::getLevelScale() * 0.5);
 
 	}
 
@@ -93,6 +97,6 @@ std::string LevelSelectItem::getFrameNameByType(const LevelItemType& type)
 	}
 		break;
 	default:
-		break;
+		return "lockLevel.png";
 	}
 }

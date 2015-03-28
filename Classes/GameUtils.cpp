@@ -11,8 +11,20 @@ Vec2 GameUtils::pointOffsetCenter(float x, float y){
 
 float GameUtils::getXScaleRate(){
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	return visibleSize.width / 960;
+	if(visibleSize.width < size_width) {
+		return visibleSize.width / size_width;
+	}
+	return 1.0;
 }
+
+float GameUtils::getYScaleRate() {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	if( visibleSize.height < size_height) {
+		return visibleSize.height / size_height;
+	}
+	return 1.0;
+}
+
 
 float GameUtils::getSpriteXScaleRate(Sprite* sprite){
 	float spriteWidth = sprite->getContentSize().width;
@@ -52,12 +64,25 @@ float GameUtils::getVisibleHeight(){
 	return visibleSize.height;
 }
 
-float GameUtils::getLevelScale() {
+float GameUtils::getLevelScale(Sprite* sprite) {
+	//两端各空10  元素之间空10
+	//float spaceSize = GameData::getInstance()->getlevelSpace();
+	float scaleRate = (VISIBLE_WIDTH - level_space * 2- g_EachLineCount *2*level_space)/(sprite->getContentSize().width * g_EachLineCount);
 
-	float scaleRate =  levelMarginX * (g_EachLineCount+2)/ VISIBLE_WIDTH;
-	if (scaleRate > 1.0) 
-		scaleRate = VISIBLE_WIDTH / (levelMarginX * (g_EachLineCount+2)*1.0);
 	return scaleRate;
+}
+
+float GameUtils::getPageScale(Sprite* page,Sprite* sprite) {
+
+	float pagePer = (page->getContentSize().width * 2)/(page->getContentSize().width*2 + sprite->getContentSize().width * 5);
+
+	float scaleRate = (VISIBLE_WIDTH * 0.8 * pagePer)/(sprite->getContentSize().width * 2);
+
+	return scaleRate;
+}
+
+float GameUtils::getSpaceSizeRate(int spCount){
+	return VISIBLE_WIDTH * 0.1/((spCount)*2);
 }
 
 

@@ -11,13 +11,12 @@ public:
 	void startGame();
 
 	void menuQuit();
-	void menuSetting();
+	void menuMore();
 
 	void menuMusicCallback();
 
 private:
 	MenuItemImage *startBtn;
-	MenuItemImage *pSetting;
 	MenuItemImage *moreBtn;
 	MenuItemImage *soundBtn;
 

@@ -1,13 +1,16 @@
 #include "LevelSelectLayer.h"
 #include "GameUtils.h"
 #include "GameData.h"
+#include "MenuScene.h"
 
 LevelSelectLayer::LevelSelectLayer() :_currentPage(0){//初始化
 	float maxPage = g_maxLevel / g_EachPageCount;// 总的关卡数  每一页的关卡数   float
 	_maxPage = g_maxLevel / g_EachPageCount;//int类型
+	log("yeshu =%f, =%d",maxPage,_maxPage);
 	if (maxPage > _maxPage){//比较大小
 		_maxPage = _maxPage + 1;
 	}
+	
 }
 LevelSelectLayer::~LevelSelectLayer(){
 
@@ -32,22 +35,32 @@ bool LevelSelectLayer::init(){
 	if (!Layer::init()){
 		return false;
 	}
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("startUI.plist", "startUI.png");
 
 
-	auto gameBg = Sprite::create("game_bg.png");
-	float wBg = gameBg->getContentSize().width;
-	if (VISIBLE_WIDTH > wBg) {
-		wBg = VISIBLE_WIDTH - (VISIBLE_WIDTH - wBg) / 2;
-	}
+	auto gameBg = Sprite::create("bg.png");
+	//float wBg = gameBg->getContentSize().width;
+	//Rect rect;
+	//if (VISIBLE_WIDTH >= size_width) {
+	//	rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //图片的大小
+	//}else {
+	//	rect = Rect((wBg - size_width)/2, 1, size_width, size_height);   //图片的大小
+	//	
+	//}
 
-	auto rect = Rect(((VISIBLE_WIDTH - wBg) / 2) / wBg, 1, wBg, VISIBLE_HEIGHT);   //图片的大小
-	gameBg->setTextureRect(rect);
+	//gameBg->setTextureRect(rect);
+	gameBg->setScaleX(GetXScaleRate);
+	gameBg->setScaleY(GetYScaleRate);
 	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 	this->addChild(gameBg, -1);
 
-	//auto colorLayer = LayerColor::create(Color4B(0x24, 0x2c, 0x3c, 255));
-	//this->addChild(colorLayer, 0);
+	//返回
+	pBack = MenuItemImage::create("btn_back.png", "btn_back.png",CC_CALLBACK_0(LevelSelectLayer::menuBackMainMenu, this));
+	pBack->setScaleX(GetXScaleRate);
+	pBack->setScaleY(GetYScaleRate);
+	pBack->setPosition(Vec2(pBack->boundingBox().size.width / 2 + 10 , VISIBLE_HEIGHT - pBack->boundingBox().size.height / 2 - 10));
+	pMenu = Menu::create(pBack, NULL);
+	pMenu->setPosition(Vec2::ZERO);
+	this->addChild(pMenu);
 
 
 	initAllLevels();
@@ -59,35 +72,32 @@ bool LevelSelectLayer::init(){
 
 //初始化导航  
 void LevelSelectLayer::initNavigation(){
+	float alreadyUseH = pBack->boundingBox().size.height + level_space*2  + (g_EachPageCount/g_EachLineCount)*(GameData::getInstance()->getlevelSpriteW() +level_space*2);
 
+	leftMenuSpritePre = MenuItemImage::create("page_pre.png", "page_pre.png", CC_CALLBACK_0(LevelSelectLayer::prePageBack, this));
+	log("changdu %f,%f",leftMenuSpritePre->getContentSize().width,leftMenuSpritePre->getContentSize().height);
+	leftMenuSpritePre->setScaleX(GetXScaleRate);
+	leftMenuSpritePre->setScaleY(GetYScaleRate);
+	float leftW = leftMenuSpritePre->boundingBox().size.width;
+	float leftH = leftMenuSpritePre->boundingBox().size.height;
+	leftMenuSpritePre->setPosition(VISIBLE_WIDTH*0.5 - leftW ,VISIBLE_HEIGHT -(alreadyUseH+leftH/2));
 
-	auto leftMenuSpriteNor = Sprite::createWithSpriteFrameName("prePage.png");
-	leftMenuSpriteNor->setScale(GameUtils::getLevelScale());
-	auto leftMenuSpritePre = Sprite::createWithSpriteFrameName("prePagePre.png");
-	leftMenuSpritePre->setScale(GameUtils::getLevelScale());
-	auto leftMenuItem = MenuItemSprite::create(leftMenuSpriteNor, leftMenuSpritePre, CC_CALLBACK_1(LevelSelectLayer::prePageBack, this));
-	_leftMenu = Menu::create(leftMenuItem, NULL);
-	//_leftMenu->setScale(GameUtils::getLevelScale());
-	this->addChild(_leftMenu);
-	_leftMenu->setPosition(levelMarginX*GameUtils::getLevelScale()/2+10 , VISIBLE_HEIGHT * 0.5);
+	rightMenuSpritePre = MenuItemImage::create("page_next.png", "page_next.png", CC_CALLBACK_0(LevelSelectLayer::nextPageBack, this));
+	rightMenuSpritePre->setScaleX(GetXScaleRate);
+	rightMenuSpritePre->setScaleY(GetYScaleRate);
+	float rightW = rightMenuSpritePre->boundingBox().size.width;
+	float rightH = rightMenuSpritePre->boundingBox().size.height;
+	rightMenuSpritePre->setPosition(VISIBLE_WIDTH*0.5 + rightW ,VISIBLE_HEIGHT -(alreadyUseH+leftH/2));
 
-	auto rightMenuSpriteNor = Sprite::createWithSpriteFrameName("nextPage.png");
-	rightMenuSpriteNor->setScale(GameUtils::getLevelScale());
-	auto rightMenuSpritePre = Sprite::createWithSpriteFrameName("nextPagePre.png");
-	rightMenuSpritePre->setScale(GameUtils::getLevelScale());
-	auto rightMenuItem = MenuItemSprite::create(rightMenuSpriteNor, rightMenuSpritePre, CC_CALLBACK_1(LevelSelectLayer::nextPageBack, this));
-	_rightMenu = Menu::create(rightMenuItem, NULL);
-	//_rightMenu->setScale(GameUtils::getLevelScale());
-	log("levelScale %f",GameUtils::getLevelScale());
-	this->addChild(_rightMenu);
-	log("leftMenu %f",_rightMenu->getContentSize().width);
-	_rightMenu->setPosition(VISIBLE_WIDTH - levelMarginX*GameUtils::getLevelScale()/2+10 , VISIBLE_HEIGHT * 0.5);
+	pageMenu = Menu::create(leftMenuSpritePre,rightMenuSpritePre, NULL);
+	pageMenu->setPosition(Vec2::ZERO);
+	this->addChild(pageMenu);
 
 	if (_currentPage == 0){
-		_leftMenu->setVisible(false);
+		leftMenuSpritePre->setVisible(false);
 	}
 	if (_currentPage == (_maxPage - 1)){
-		_rightMenu->setVisible(false);
+		rightMenuSpritePre->setVisible(false);
 	}
 }
 
@@ -108,33 +118,40 @@ void LevelSelectLayer::initAllLevels(){
 	if (_currentPage >= _maxPage){
 		_currentPage = _maxPage - 1;
 	}
-	levelSelectContent->initAllLevels(_currentPage);//初始化这页的关卡
+	levelSelectContent->initAllLevels(_currentPage,pBack->boundingBox().size.height + level_space*2);//初始化这页的关卡
+}
+
+void LevelSelectLayer::menuBackMainMenu()
+{
+	Scene *pScene = Scene::create();
+	pScene->addChild(MenuScene::create());
+	Director::getInstance()->replaceScene(pScene);
 }
 
 
 
-void LevelSelectLayer::nextPageBack(Ref* sender){
+void LevelSelectLayer::nextPageBack(){
 	if (_currentPage < _maxPage - 1){
 		_currentPage = _currentPage + 1;
 
-		levelSelectContent->initAllLevels(_currentPage);
+		levelSelectContent->initAllLevels(_currentPage,pBack->boundingBox().size.height + level_space*2);
 
 		if (_currentPage == (_maxPage - 1)){
-			_rightMenu->setVisible(false);
+			rightMenuSpritePre->setVisible(false);
 		}
-		_leftMenu->setVisible(true);
+		leftMenuSpritePre->setVisible(true);
 	}
 }
-void LevelSelectLayer::prePageBack(Ref* sender){
+void LevelSelectLayer::prePageBack(){
 	if (_currentPage >= 1){
 		_currentPage = _currentPage - 1;
 
-		levelSelectContent->initAllLevels(_currentPage);
+		levelSelectContent->initAllLevels(_currentPage,pBack->boundingBox().size.height + level_space*2);
 
 		if (_currentPage == 0){
-			_leftMenu->setVisible(false);
+			leftMenuSpritePre->setVisible(false);
 		}
-		_rightMenu->setVisible(true);
+		rightMenuSpritePre->setVisible(true);
 	}
 }
 
