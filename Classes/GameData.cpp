@@ -1,5 +1,6 @@
 #include "GameData.h"
 #include "Audio.h"
+#include "GameUtils.h"
 
 USING_NS_CC;
 
@@ -21,6 +22,21 @@ void GameData::init() {
 	//读取等级配置数据
 	this->initLevelData();
 	is_pause = false;
+	//初始化等级关卡一些参数
+	this->initLevelScale();
+}
+
+void GameData::initLevelScale() {
+	//SpriteFrameCache::getInstance()->addSpriteFramesWithFile("startUI.plist", "startUI.png");
+	//auto leftMenuSpriteNor = Sprite::create("page_pre.png");
+	auto locte = Sprite::create("lockLevel.png");
+	//locte->autorelease();
+	//page_scale = GameUtils::getPageScale(leftMenuSpriteNor,normalSprite);
+	level_scale = GameUtils::getLevelScale(locte);
+	level_sprite_w = locte->getContentSize().width*level_scale;
+	//level_space = GameUtils::getSpaceSizeRate(2+g_EachLineCount);
+	//log("init level Data =%f,=%f,=%f",page_scale,level_scale,level_space);
+
 }
 
 void GameData::initUserPassLevel() {

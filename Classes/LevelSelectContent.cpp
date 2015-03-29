@@ -22,7 +22,7 @@ void LevelSelectContent::contentFadeOut(){//内容渐渐消失
 	this->runAction(fadeAction);
 }
 
-void LevelSelectContent::initAllLevels(int page){//初始化当前page 的关卡
+void LevelSelectContent::initAllLevels(int page,float topH){//初始化当前page 的关卡
 	this->removeAllChildren();
 
 
@@ -30,26 +30,30 @@ void LevelSelectContent::initAllLevels(int page){//初始化当前page 的关卡
 
 	_levelMenu = Menu::create();//创建关卡菜单
 	this->addChild(_levelMenu);
-
-	//float p = (VISIBLE_WIDTH - levelMarginX*GameUtils::getLevelScale() * 7) /2;
-
-	float constStartPositionX = VISIBLE_WIDTH * 0.5 - levelMarginX*GameUtils::getLevelScale() * (g_EachLineCount / 2 -0.1);
+	
+	auto levelSp = Sprite::create("lockLevel.png");
+	float levelW = levelSp->getContentSize().width*GameData::getInstance()->getlevelSacle();
+	float space = level_space;
+	//float constStartPositionX = levelW/2+space*2;
+	float constStartPositionX = VISIBLE_WIDTH * 0.5 - (levelW+space*2)*(g_EachLineCount / 2 )+levelW/2+space;
+	log("rizhi=%f,=%f,=%f",levelW,VISIBLE_WIDTH * 0.5,constStartPositionX);
 	float startPositionX = constStartPositionX;
-	float topStartPositionY = VISIBLE_HEIGHT * 0.5 + levelMarginY*GameUtils::getLevelScale() * (g_EachPageCount / g_EachLineCount / 2);
+	float topStartPositionY = VISIBLE_HEIGHT - topH - levelW/2;
 
 	for (int i = 0 + page * eachPageItemCount; i < eachPageItemCount + page * eachPageItemCount; i++){
 		if (i < g_maxLevel){
 			int lineCount = g_EachLineCount;
 			if (i != (0 + page * eachPageItemCount) && i % lineCount == 0){
 				startPositionX = constStartPositionX;
-				topStartPositionY = topStartPositionY - levelMarginY*GameUtils::getLevelScale();
+				topStartPositionY = topStartPositionY - levelW -space *2;
 			}
 
 			int levelCount = i + 1;
 			auto oneLevelItem = LevelSelectItem::create(levelCount);
 			_levelMenu->addChild(oneLevelItem);
+			log("jiba = %f, =%f,=%f",oneLevelItem->getContentSize().width,oneLevelItem->getContentSize().height,GameData::getInstance()->getlevelSacle());
 			oneLevelItem->setPosition(startPositionX, topStartPositionY);
-			startPositionX += levelMarginX*GameUtils::getLevelScale();
+			startPositionX += levelW+space*2;
 		}
 	}
 

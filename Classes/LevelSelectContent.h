@@ -12,7 +12,7 @@ public:
 	virtual bool init();
 	CREATE_FUNC(LevelSelectContent);
 	void contentFadeOut();
-	void initAllLevels(int page);
+	void initAllLevels(int page,float topH);
 private:
 	Menu* _levelMenu;
 

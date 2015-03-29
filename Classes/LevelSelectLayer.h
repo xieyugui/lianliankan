@@ -18,13 +18,17 @@ private:
 	LevelSelectContent* levelSelectContent;//等级内容
 	int _currentPage;//当前页
 	int _maxPage;//最大页数
-	Menu* _leftMenu;
-	Menu* _rightMenu;
+	MenuItemImage* leftMenuSpritePre;
+	MenuItemImage* rightMenuSpritePre;
+	Menu* pageMenu;
+	MenuItemImage* pBack;
+	Menu* pMenu;
 
 	void initNavigation();//初始化导航
 	void initAllLevels();//初始化所有等级
-	void nextPageBack(Ref* sender);//下一页
-	void prePageBack(Ref* sender);//前一页
+	void nextPageBack();//下一页
+	void prePageBack();//前一页
+	void menuBackMainMenu();
 };
 
 

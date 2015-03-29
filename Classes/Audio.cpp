@@ -39,15 +39,14 @@ void Audio::playEliminate() {
 void Audio::playButtonClick() {
 	if (GameData::getInstance()->getisPause())
 		return;
-	SimpleAudioEngine::getInstance()->playEffect("wav/button_click_menu.mp3");
+	SimpleAudioEngine::getInstance()->playEffect("music/button_click_menu.mp3");
 }
 
 void Audio::prepare() {
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/class.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/12.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/4.wav");
-	SimpleAudioEngine::getInstance()->preloadEffect(
-			"wav/button_click_menu.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("music/button_click_menu.mp3");
 }
 
 void Audio::pauseAllEffects() {

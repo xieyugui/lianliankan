@@ -3,6 +3,7 @@
 #include "Audio.h"
 #include "HelloWorldScene.h"
 #include "MenuScene.h"
+#include "GameData.h"
 
 USING_NS_CC;
 
@@ -33,7 +34,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::create("Lian Lian Kan");
         director->setOpenGLView(glview);
     }
-	glview->setDesignResolutionSize(640, 960, ResolutionPolicy::SHOW_ALL);
+	glview->setDesignResolutionSize(680, 960, ResolutionPolicy::SHOW_ALL);
     // turn on display FPS
     director->setDisplayStats(true);
 

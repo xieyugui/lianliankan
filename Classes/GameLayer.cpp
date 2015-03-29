@@ -94,14 +94,18 @@ void GameLayer::initImgSpriteSize()
 
 void GameLayer::initUI()
 {
-	auto gameBg = Sprite::create("game_bg.png");
+	auto gameBg = Sprite::create("bg.png");
 	float wBg = gameBg->getContentSize().width;
-	if (VISIBLE_WIDTH > wBg) {
-		wBg = VISIBLE_WIDTH - (VISIBLE_WIDTH - wBg) / 2;
+	Rect rect;
+	if (VISIBLE_WIDTH >= size_width) {
+		rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //ͼƬ�Ĵ�С
+	}else {
+		rect = Rect((wBg - size_width)/2, 1, size_width, size_height);   //ͼƬ�Ĵ�С
 	}
 
-	auto rect = Rect(((VISIBLE_WIDTH - wBg) / 2) / wBg, 1, wBg, VISIBLE_HEIGHT);   //ͼƬ�Ĵ�С
 	gameBg->setTextureRect(rect);
+	gameBg->setScaleX(GetXScaleRate);
+	gameBg->setScaleY(GetYScaleRate);
 	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 	this->addChild(gameBg, -1);
 	//auto spriteScale = this->getSpriteS();
