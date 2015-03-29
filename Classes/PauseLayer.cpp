@@ -8,38 +8,39 @@
 
 #include "PauseLayer.h"
 #include "SimpleAudioEngine.h"
+
+#include "Audio.h"
 #include "MenuLayer.h"
 #include "GameUtils.h"
-#include "Audio.h"
 #include "LevelSelectLayer.h"
 #include "GameScene.h"
 
 USING_NS_CC;
 
-//´«ÈëÒ»¸öCCrenderTexture   
-//Ïàµ±ÓÚÒ»¸öÕýÔÚÔËÐÐµÄÓÎÏ·µÄ½ØÍ¼×÷ÎªÕâ¸öÔÝÍ£¶Ô»°¿òµÄ±³¾°   
-//ÕâÑù¾Í¿´ÆðÀ´ÏñÊÇ¶Ô»°¿òÔÚÓÎÏ·½çÃæÖ®ÉÏ£¬Ò»°ãÓÎÏ·µ±ÖÐ¶¼ÊÇÕâÑù×ÓÐ´µÄ¡£  
+//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½CCrenderTexture   
+//ï¿½àµ±ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ï·ï¿½Ä½ï¿½Í¼ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½Ô»ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½   
+//ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½Ö®ï¿½Ï£ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ä¡ï¿½  
 CCScene* PauseLayer::scene(CCRenderTexture* sqr)
 {
 	CCScene *scene = CCScene::create();
 	PauseLayer *layer = PauseLayer::create();
-	scene->addChild(layer, 1);//°ÑÓÎÏ·²ã·ÅÉÏÃæ£¬ÎÒÃÇ»¹ÒªÔÚÕâÉÏÃæ·Å°´Å¥  
+	scene->addChild(layer, 1);//ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½Ç»ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½Å¥  
 
 
-	//Ôö¼Ó²¿·Ö£ºÊ¹ÓÃGame½çÃæÖÐ½ØÍ¼µÄsqrÎÆÀíÍ¼Æ¬´´½¨Sprite  
-	//²¢½«SpriteÌí¼Óµ½GamePause³¡¾°²ãÖÐ  
-	//µÃµ½´°¿ÚµÄ´óÐ¡  
+	//ï¿½ï¿½ï¿½Ó²ï¿½ï¿½Ö£ï¿½Ê¹ï¿½ï¿½Gameï¿½ï¿½ï¿½ï¿½ï¿½Ð½ï¿½Í¼ï¿½ï¿½sqrï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Sprite  
+	//ï¿½ï¿½ï¿½ï¿½Spriteï¿½ï¿½Óµï¿½GamePauseï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
+	//ï¿½Ãµï¿½ï¿½ï¿½ï¿½ÚµÄ´ï¿½Ð¡  
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	CCSprite *back_spr = CCSprite::createWithTexture(sqr->getSprite()->getTexture());
-	back_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //·ÅÖÃÎ»ÖÃ,Õâ¸öÏà¶ÔÓÚÖÐÐÄÎ»ÖÃ¡£  
-	back_spr->setFlipY(true);            //·­×ª£¬ÒòÎªUI×ø±êºÍOpenGL×ø±ê²»Í¬  
-	back_spr->setColor(Color3B::GRAY); //Í¼Æ¬ÑÕÉ«±ä»ÒÉ«  
+	back_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã¡ï¿½  
+	back_spr->setFlipY(true);            //ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ÎªUIï¿½ï¿½ï¿½ï¿½ï¿½OpenGLï¿½ï¿½ï¿½ê²»Í¬  
+	back_spr->setColor(Color3B::GRAY); //Í¼Æ¬ï¿½ï¿½É«ï¿½ï¿½ï¿½É«  
 	scene->addChild(back_spr);
 
 
-	//Ìí¼ÓÓÎÏ·ÔÝÍ£±³¾°Ð¡Í¼£¬ÓÃÀ´·Å°´Å¥  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½Ð¡Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½Å¥  
 	CCSprite *back_small_spr = CCSprite::create("back_pause.png");
-	back_small_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //·ÅÖÃÎ»ÖÃ,Õâ¸öÏà¶ÔÓÚÖÐÐÄÎ»ÖÃ¡£  
+	back_small_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã¡ï¿½  
 	scene->addChild(back_small_spr);
 
 
@@ -53,12 +54,12 @@ bool PauseLayer::init()
 	{
 		return false;
 	}
-	//µÃµ½´°¿ÚµÄ´óÐ¡  
+	//ï¿½Ãµï¿½ï¿½ï¿½ï¿½ÚµÄ´ï¿½Ð¡  
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-	//Ô­µã×ø±ê  
+	//Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 	CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
-	//¼ÌÐøÓÎÏ·°´Å¥  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½Å¥  
 	CCMenuItemImage *pContinueItem = CCMenuItemImage::create(
 		"pause_continue.png",
 		"pause_continue.png",
@@ -66,7 +67,7 @@ bool PauseLayer::init()
 
 	pContinueItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 + 30));
 
-	//ÖØÐÂ¿ªÊ¼ÓÎÏ·°´Å¥  
+	//ï¿½ï¿½ï¿½Â¿ï¿½Ê¼ï¿½ï¿½Ï·ï¿½ï¿½Å¥  
 	CCMenuItemImage *pRestartItem = CCMenuItemImage::create(
 		"pause_restart.png",
 		"pause_restart.png",
@@ -74,7 +75,7 @@ bool PauseLayer::init()
 
 	pRestartItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 - 20));
 
-	//»ØÖ÷½çÃæ  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 	CCMenuItemImage *pLoginItem = CCMenuItemImage::create(
 		"pause_login.png",
 		"pause_login.png",
@@ -102,7 +103,7 @@ void PauseLayer::menuContinueCallback()
 
 }
 
-//ÖØÐÂ¿ªÊ¼ÓÎÏ·  
+//ï¿½ï¿½ï¿½Â¿ï¿½Ê¼ï¿½ï¿½Ï·  
 void  PauseLayer::menuRestart()
 {
 	Audio::getInstance()->playButtonClick();
@@ -111,7 +112,7 @@ void  PauseLayer::menuRestart()
 	CCDirector::sharedDirector()->resume();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, GameScene::create()));
 }
-//»ØÖ÷½çÃæ  
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 void  PauseLayer::menuLogin()
 {
 	Audio::getInstance()->playButtonClick();

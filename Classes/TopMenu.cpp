@@ -1,7 +1,8 @@
 #include "TopMenu.h"
+
+#include "Audio.h"
 #include "GameUtils.h"
 #include "GameData.h"
-#include "Audio.h"
 #include "PauseLayer.h"
 
 bool TopMenu::init(){
@@ -29,16 +30,16 @@ void TopMenu::refresh(){
 
 void TopMenu::pauseGame() {
 	Audio::getInstance()->playButtonClick();
-	//µÃµ½´°¿ÚµÄ´óÐ¡  
+	//ï¿½Ãµï¿½ï¿½ï¿½ï¿½ÚµÄ´ï¿½Ð¡  
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
 	CCRenderTexture *renderTexture = CCRenderTexture::create(visibleSize.width, visibleSize.height);
 
-	//±éÀúµ±Ç°ÀàµÄËùÓÐ×Ó½ÚµãÐÅÏ¢£¬»­ÈërenderTextureÖÐ¡£  
-	//ÕâÀïÀàËÆ½ØÍ¼¡£  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½renderTextureï¿½Ð¡ï¿½  
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½Í¼ï¿½ï¿½  
 	renderTexture->begin();
 	this->getParent()->visit();
 	renderTexture->end();
 
-	//½«ÓÎÏ·½çÃæÔÝÍ££¬Ñ¹Èë³¡¾°¶ÑÕ»¡£²¢ÇÐ»»µ½GamePause½çÃæ  
+	//ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ñ¹ï¿½ë³¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½GamePauseï¿½ï¿½ï¿½ï¿½  
 	CCDirector::sharedDirector()->pushScene(PauseLayer::scene(renderTexture));
 }

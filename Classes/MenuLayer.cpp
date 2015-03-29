@@ -1,5 +1,5 @@
 #include "MenuLayer.h"
-#include "Audio.h"
+
 #include "GameUtils.h"
 #include "GameData.h"
 #include "LevelSelectLayer.h"
@@ -12,15 +12,15 @@ bool MenuLayer::init() {
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 	
-	// ³õÊ¼»¯±³¾°
+	// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	auto background = Sprite::create("title_bg.png");
 	//float wBg = background->getContentSize().width;
 	
 	//Rect rect;
 	//if (VISIBLE_WIDTH >= 680) {
-	//	rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //Í¼Æ¬µÄ´óÐ¡
+	//	rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //Í¼Æ¬ï¿½Ä´ï¿½Ð¡
 	//}else {
-	//	rect = Rect((wBg - 680)/2, 1, 680, 960);   //Í¼Æ¬µÄ´óÐ¡
+	//	rect = Rect((wBg - 680)/2, 1, 680, 960);   //Í¼Æ¬ï¿½Ä´ï¿½Ð¡
 	//}
 
 	//background->setTextureRect(rect);
@@ -30,20 +30,21 @@ bool MenuLayer::init() {
 	log("GameUtil1 %f", VISIBLE_WIDTH);
 	this->addChild(background, -1);
 
-	//³õÊ¼»¯²Ëµ¥
+
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ëµï¿½
 	startBtn = MenuItemImage::create("btn_start.png", "btn_start.png", CC_CALLBACK_0(MenuLayer::startGame, this));
 	startBtn->setScaleX(GetXScaleRate);
 	startBtn->setScaleY(GetYScaleRate);
 	startBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 
-	//³õÊ¼»¯more ºÍ¾²Òô°´Å¥
+	//ï¿½ï¿½Ê¼ï¿½ï¿½more ï¿½Í¾ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
 	moreBtn = MenuItemImage::create("btn_more.png", "btn_more.png",CC_CALLBACK_0(MenuLayer::menuMore, this));
 	moreBtn->setScaleX(GetXScaleRate);
 	moreBtn->setScaleY(GetYScaleRate);
 	moreBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - moreBtn->boundingBox().size.height - 20));
 	log("morebtn = %f, = %f",moreBtn->getContentSize().height,moreBtn->boundingBox().size.height);
 
-	// Ìí¼Ó ÉùÒô  µÄ¿ª¹Ø°´Å¥
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  ï¿½Ä¿ï¿½ï¿½Ø°ï¿½Å¥
 	MenuItemImage *_turnOn, *_turnOff;
 	_turnOn = MenuItemImage::create(
 		"music_p.png",

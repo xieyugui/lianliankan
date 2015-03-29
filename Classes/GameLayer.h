@@ -12,8 +12,8 @@ public:
 	virtual bool onTouchBegan(Touch *pTouch, Event *pEvent);
 	virtual void onTouchEnded(Touch *pTouch, Event *pEvent);
 	CREATE_FUNC(GameLayer);
-	GameLayer::GameLayer();
-	GameLayer::~GameLayer();
+	GameLayer();
+	~GameLayer();
 private:
 	void initUI(void);
 
@@ -56,7 +56,7 @@ private:
 
 	void pauseGame();
 
-	//Ç°Ò»¸öµã×ø±ê
+	//Ç°Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	Vec2 prePoint;
 
 	Array *mapArray;

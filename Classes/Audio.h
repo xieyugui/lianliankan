@@ -6,13 +6,15 @@
 class Audio {
 public:
 	static Audio* getInstance();
-	void playBGM(); //±³¾°ÒôÀÖ  class.mp3
-	void playSprite();//µã»÷Í¼±êÒôÀÖ 12.wav
-	void playEliminate();// Ïû³ıÒôÀÖ 4.wav
+	void playBGM(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  class.mp3
+	void playSprite();//ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 12.wav
+	void playEliminate();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4.wav
 	void prepare();
 	void playButtonClick();
-	void pauseAllEffects(); //ÔİÍ£ËùÓĞÒôĞ§
-	void resumeAllEffects();//»Ö¸´ËùÓĞÒôĞ§
+	void pauseAllEffects(); //ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
+	void resumeAllEffects();//ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
+
+	Audio();
 private:
 	static Audio* m_instance;
 
