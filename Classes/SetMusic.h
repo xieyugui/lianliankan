@@ -1,4 +1,4 @@
-#ifndef _LIANLIANKANX_SETMUSIC_H_
+﻿#ifndef _LIANLIANKANX_SETMUSIC_H_
 #define _LIANLIANKANX_SETMUSIC_H_
 
 #include "cocos2d.h"

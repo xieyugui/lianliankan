@@ -1,4 +1,4 @@
-#ifndef _LIANLIANKANX_AUDIO_H_
+ï»¿#ifndef _LIANLIANKANX_AUDIO_H_
 #define _LIANLIANKANX_AUDIO_H_
 
 #include "cocos2d.h"
@@ -6,13 +6,15 @@
 class Audio {
 public:
 	static Audio* getInstance();
-	void playBGM(); //±³¾°ÒôÀÖ  class.mp3
-	void playSprite();//µã»÷Í¼±êÒôÀÖ 12.wav
-	void playEliminate();// Ïû³ıÒôÀÖ 4.wav
+	void playBGM(); //èƒŒæ™¯éŸ³ä¹
+	void playSprite();//ç‚¹å‡»å›¾æ ‡éŸ³ä¹ 12.wav
+	void playEliminate();// æ¶ˆé™¤éŸ³ä¹ 4.wav
 	void prepare();
 	void playButtonClick();
-	void pauseAllEffects(); //ÔİÍ£ËùÓĞÒôĞ§
-	void resumeAllEffects();//»Ö¸´ËùÓĞÒôĞ§
+	void pauseAllEffects(); //æš‚åœæ‰€æœ‰éŸ³ä¹
+	void resumeAllEffects();//æ¢å¤æ‰€æœ‰éŸ³ä¹
+
+	Audio();
 private:
 	static Audio* m_instance;
 

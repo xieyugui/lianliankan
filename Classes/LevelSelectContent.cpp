@@ -1,4 +1,4 @@
-#include "LevelSelectContent.h"
+ï»¿#include "LevelSelectContent.h"
 #include "GameUtils.h"
 
 LevelSelectContent::LevelSelectContent(){
@@ -17,18 +17,18 @@ bool LevelSelectContent::init(){
 	return true;
 }
 
-void LevelSelectContent::contentFadeOut(){//ÄÚÈÝ½¥½¥ÏûÊ§
+void LevelSelectContent::contentFadeOut(){//å†…å®¹æ¸æ¸æ¶ˆå¤±
 	auto fadeAction = FadeOut::create(0.2);
 	this->runAction(fadeAction);
 }
 
-void LevelSelectContent::initAllLevels(int page,float topH){//³õÊ¼»¯µ±Ç°page µÄ¹Ø¿¨
+void LevelSelectContent::initAllLevels(int page,float topH){//åˆå§‹åŒ–å½“å‰page çš„å…³å¡
 	this->removeAllChildren();
 
 
 	const int eachPageItemCount = g_EachPageCount;
 
-	_levelMenu = Menu::create();//´´½¨¹Ø¿¨²Ëµ¥
+	_levelMenu = Menu::create();//åˆ›å»ºå…³å¡èœå•
 	this->addChild(_levelMenu);
 	
 	auto levelSp = Sprite::create("lockLevel.png");

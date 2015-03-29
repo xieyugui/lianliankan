@@ -1,4 +1,4 @@
-#include "GameData.h"
+ï»¿#include "GameData.h"
 #include "Audio.h"
 #include "GameUtils.h"
 
@@ -17,12 +17,12 @@ GameData* GameData::getInstance() {
 }
 
 void GameData::init() {
-	//¶ÁÈ¡ÓÃ»§µ±Ç°µÈ¼¶
+	//è¯»å–ç”¨æˆ·å½“å‰ç­‰çº§
 	this->initUserPassLevel();
-	//¶ÁÈ¡µÈ¼¶ÅäÖÃÊý¾Ý
+	//è¯»å–ç­‰çº§é…ç½®æ•°æ®
 	this->initLevelData();
 	is_pause = false;
-	//³õÊ¼»¯µÈ¼¶¹Ø¿¨Ò»Ð©²ÎÊý
+	//åˆå§‹åŒ–ç­‰çº§å…³å¡ä¸€äº›å‚æ•°
 	this->initLevelScale();
 }
 
@@ -70,25 +70,25 @@ void GameData::passCurrentUserLevel() {
 }
 
 /*
-auto find_sp = sp_map.find("10");//Í¨¹ýfind()²éÕÒkeyÎª¡°10¡±µÄpairÀàÐÍ¡£
-auto sp3 = find_sp->second;//¼ü¶ÔÓ¦µÄ¶ÔÏó
-std::string find_str = find_sp->first;//¼ü
-CCLOG("sp6 key value is %s",find_str.c_str());//´òÓ¡³ö¼ü
+auto find_sp = sp_map.find("10");//é€šè¿‡find()æŸ¥æ‰¾keyä¸ºâ€œ10â€çš„pairç±»åž‹ã€‚
+auto sp3 = find_sp->second;//é”®å¯¹åº”çš„å¯¹è±¡
+std::string find_str = find_sp->first;//é”®
+CCLOG("sp6 key value is %s",find_str.c_str());//æ‰“å°å‡ºé”®
 
-auto sp2=sp_map.at("sp1");//Í¨¹ýkeyÈ¡³ösp1
-sp_map.insert("11",sp2);//ÔÙ½«sp1ÒÔÈý¸ökeyÖµµÄ·½Ê½´æÈëmap
+auto sp2=sp_map.at("sp1");//é€šè¿‡keyå–å‡ºsp1
+sp_map.insert("11",sp2);//å†å°†sp1ä»¥ä¸‰ä¸ªkeyå€¼çš„æ–¹å¼å­˜å…¥map
 sp_map.insert("22",sp2);
 sp_map.insert("33",sp2);
-auto _key=sp_map.keys(sp1);//»ñµÃsp1¶ÔÓ¦µÄkeyÖµ
+auto _key=sp_map.keys(sp1);//èŽ·å¾—sp1å¯¹åº”çš„keyå€¼
 for(const auto&e : _key)
 {
-CCLOG("_key is %s",e.c_str());//Êä³ösp1¶ÔÓ¦µÄkeyÖµ£¨ÓÐËÄ¸ö£¬·Ö±ðÊÇ£ºsp1,11,22,33£©
+CCLOG("_key is %s",e.c_str());//è¾“å‡ºsp1å¯¹åº”çš„keyå€¼ï¼ˆæœ‰å››ä¸ªï¼Œåˆ†åˆ«æ˜¯ï¼šsp1,11,22,33ï¼‰
 }
 
 */
-//³õÊ¼»¯ÓÎÏ·Êý¾ÝÅäÖÃ
+//åˆå§‹åŒ–æ¸¸æˆæ•°æ®é…ç½®
 void GameData::initLevelData() {
-	//¶ÁÈ¡plistÊý¾ÝÎÄ¼þ
+	//è¯»å–plistæ•°æ®æ–‡ä»¶
 	std::string plistPath = FileUtils::sharedFileUtils()->fullPathFromRelativeFile("levelinfo.plist", "levelinfo.plist");
 	level_data.clear();
 	xy_data.clear();

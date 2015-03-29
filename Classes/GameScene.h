@@ -1,4 +1,4 @@
-#ifndef _LIANLIANKANX_GAMESCENE_H_
+﻿#ifndef _LIANLIANKANX_GAMESCENE_H_
 #define _LIANLIANKANX_GAMESCENE_H_
 
 #include "cocos2d.h"

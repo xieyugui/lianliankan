@@ -1,4 +1,4 @@
-#include "GameUtils.h"
+ï»¿#include "GameUtils.h"
 #include "GameData.h"
 #include "GameScene.h"
 USING_NS_CC;
@@ -65,7 +65,7 @@ float GameUtils::getVisibleHeight(){
 }
 
 float GameUtils::getLevelScale(Sprite* sprite) {
-	//Á½¶Ë¸÷¿Õ10  ÔªËØÖ®¼ä¿Õ10
+	//ä¸¤ç«¯å„ç©º10  å…ƒç´ ä¹‹é—´ç©º10
 	//float spaceSize = GameData::getInstance()->getlevelSpace();
 	float scaleRate = (VISIBLE_WIDTH - level_space * 2- g_EachLineCount *2*level_space)/(sprite->getContentSize().width * g_EachLineCount);
 

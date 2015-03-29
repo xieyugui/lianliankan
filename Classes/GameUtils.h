@@ -1,4 +1,4 @@
-#ifndef __LIANLIANKANX__GMEUTILS__
+﻿#ifndef __LIANLIANKANX__GMEUTILS__
 #define __LIANLIANKANX__GMEUTILS__
 
 #include "cocos2d.h"

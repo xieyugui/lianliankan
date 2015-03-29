@@ -1,4 +1,4 @@
-#include "Audio.h"
+﻿#include "Audio.h"
 #include "SimpleAudioEngine.h"
 #include "GameData.h"
 
@@ -13,31 +13,33 @@ Audio* Audio::getInstance() {
 	return m_instance;
 }
 
+Audio::Audio() :
+		isPause(false) {
+}
+
 void Audio::playBGM() {
-	if(GameData::getInstance()->getisPause())
+	if (GameData::getInstance()->getisPause())
 		return;
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/bg_music.mp3", true);
 }
 
-
 void Audio::playSprite() {
-	if(GameData::getInstance()->getisPause())
+	if (GameData::getInstance()->getisPause())
 		return;
 	SimpleAudioEngine::getInstance()->playEffect("music/12.wav");
 }
 
-void Audio::playEliminate(){
-	if(GameData::getInstance()->getisPause())
+void Audio::playEliminate() {
+	if (GameData::getInstance()->getisPause())
 		return;
 	SimpleAudioEngine::getInstance()->playEffect("music/4.wav");
 }
 
 void Audio::playButtonClick() {
-	if(GameData::getInstance()->getisPause())
+	if (GameData::getInstance()->getisPause())
 		return;
 	SimpleAudioEngine::getInstance()->playEffect("music/button_click_menu.mp3");
 }
-
 
 void Audio::prepare(){
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/bg_music.mp3");
@@ -52,6 +54,6 @@ void Audio::pauseAllEffects() {
 }
 
 void Audio::resumeAllEffects() {
-	 SimpleAudioEngine::getInstance()->resumeAllEffects();
-	 SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+	SimpleAudioEngine::getInstance()->resumeAllEffects();
+	SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

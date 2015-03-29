@@ -1,4 +1,4 @@
-#ifndef _LIANLIANKANX_MENULAYER_H_
+﻿#ifndef _LIANLIANKANX_MENULAYER_H_
 #define _LIANLIANKANX_MENULAYER_H_
 #include "cocos2d.h"
 

@@ -1,4 +1,4 @@
-#ifndef _LIANLIANKANX_FLOATWORD_H_
+﻿#ifndef _LIANLIANKANX_FLOATWORD_H_
 #define _LIANLIANKANX_FLOATWORD_H_
 #include "cocos2d.h"
 USING_NS_CC;

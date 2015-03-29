@@ -1,4 +1,4 @@
-#ifndef _TOPMENU_H_
+﻿#ifndef _TOPMENU_H_
 #define _TOPMENU_H_
 #include "cocos2d.h"
 

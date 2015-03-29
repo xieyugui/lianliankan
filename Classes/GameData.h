@@ -1,4 +1,4 @@
-#ifndef _LIANLIANKANX_GAMEDATA_H_
+ï»¿#ifndef _LIANLIANKANX_GAMEDATA_H_
 #define _LIANLIANKANX_GAMEDATA_H_
 
 #include "cocos2d.h"
@@ -31,19 +31,19 @@ const float level_space = 10;
 class GameData{
 public:
 	static GameData* getInstance();
-	/*µ±Ç°µÈ¼¶*/
-	CC_SYNTHESIZE(int, cur_level, CurLevel);//¶¨ÒåÁËget set //varType, varName, funName
+	/*å½“å‰ç­‰çº§*/
+	CC_SYNTHESIZE(int, cur_level, CurLevel);//å®šä¹‰äº†get set //varType, varName, funName
 	CC_SYNTHESIZE(int, choose_level, ChooseLevel);
 	CC_SYNTHESIZE(bool,is_pause, isPause);
 	CC_SYNTHESIZE(float,page_scale, pageSacle);
 	CC_SYNTHESIZE(float,level_scale, levelSacle);
-	CC_SYNTHESIZE(float,level_sprite_w,levelSpriteW);//Ëõ·ÅÖ®ºóµÄ´óĞ¡
+	CC_SYNTHESIZE(float,level_sprite_w,levelSpriteW);//ç¼©æ”¾ä¹‹åçš„å¤§å°
 
 	//CC_SYNTHESIZE(int, next_level, NextLevel);
 
 	void saveUserPassLevel();
 	void initUserPassLevel();
-	void passCurrentUserLevel();//µ±Ç°¹Ø¿¨ÒÑ¹ı
+	void passCurrentUserLevel();//å½“å‰å…³å¡å·²è¿‡
 	int getLevelCount();
 
 	void initLevelData();

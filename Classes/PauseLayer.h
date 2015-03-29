@@ -1,4 +1,4 @@
-//
+ï»¿//
 //  PauseScene.h
 //  MR_BOMB
 //
@@ -24,11 +24,11 @@ public:
 	static cocos2d::CCScene* scene(CCRenderTexture* sqr);
 
 	CREATE_FUNC(PauseLayer);
-	//¼ÌĞøÓÎÏ·  
+	//ç»§ç»­æ¸¸æˆ  
 	void menuContinueCallback();
-	//ÖØĞÂ¿ªÊ¼ÓÎÏ·  
+	//é‡æ–°å¼€å§‹æ¸¸æˆ  
 	void menuRestart();
-	//»ØÖ÷½çÃæ  
+	//å›ä¸»ç•Œé¢  
 	void menuLogin();
 	//void updateAll(float dt);
 	//void restart();

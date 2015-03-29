@@ -1,7 +1,8 @@
-#include "TopMenu.h"
+ï»¿#include "TopMenu.h"
+
+#include "Audio.h"
 #include "GameUtils.h"
 #include "GameData.h"
-#include "Audio.h"
 #include "PauseLayer.h"
 
 bool TopMenu::init(){
@@ -36,16 +37,14 @@ void TopMenu::refresh(){
 
 void TopMenu::pauseGame() {
 	Audio::getInstance()->playButtonClick();
-	//µÃµ½´°¿ÚµÄ´óÐ¡  
+	
 	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-	CCRenderTexture *renderTexture = CCRenderTexture::create(visibleSize.width, visibleSize.height);
-
-	//±éÀúµ±Ç°ÀàµÄËùÓÐ×Ó½ÚµãÐÅÏ¢£¬»­ÈërenderTextureÖÐ¡£  
-	//ÕâÀïÀàËÆ½ØÍ¼¡£  
+	CCRenderTexture *renderTexture = CCRenderTexture::create(VISIBLE_WIDTH, VISIBLE_HEIGHT);
+ 
 	renderTexture->begin();
 	this->getParent()->visit();
 	renderTexture->end();
 
-	//½«ÓÎÏ·½çÃæÔÝÍ££¬Ñ¹Èë³¡¾°¶ÑÕ»¡£²¢ÇÐ»»µ½GamePause½çÃæ  
+	//æš‚åœé¡µé¢
 	CCDirector::sharedDirector()->pushScene(PauseLayer::scene(renderTexture));
 }

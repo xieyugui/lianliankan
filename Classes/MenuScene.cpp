@@ -1,10 +1,10 @@
-#include "MenuScene.h"
+﻿#include "MenuScene.h"
 #include "MenuLayer.h"
-#include "Audio.h"
 #include "cocos-ext.h"
 #include "ExtensionMacros.h"
 #include "ui/CocosGUI.h"
 #include "cocostudio/CocoStudio.h"
+#include "Audio.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;

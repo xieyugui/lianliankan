@@ -1,4 +1,4 @@
-//
+ï»¿//
 //  PauseScene.mm
 //  MR_BOMB
 //
@@ -8,38 +8,36 @@
 
 #include "PauseLayer.h"
 #include "SimpleAudioEngine.h"
+
+#include "Audio.h"
 #include "MenuLayer.h"
 #include "GameUtils.h"
-#include "Audio.h"
 #include "LevelSelectLayer.h"
 #include "GameScene.h"
 
 USING_NS_CC;
 
-//´«ÈëÒ»¸öCCrenderTexture   
-//Ïàµ±ÓÚÒ»¸öÕýÔÚÔËÐÐµÄÓÎÏ·µÄ½ØÍ¼×÷ÎªÕâ¸öÔÝÍ£¶Ô»°¿òµÄ±³¾°   
-//ÕâÑù¾Í¿´ÆðÀ´ÏñÊÇ¶Ô»°¿òÔÚÓÎÏ·½çÃæÖ®ÉÏ£¬Ò»°ãÓÎÏ·µ±ÖÐ¶¼ÊÇÕâÑù×ÓÐ´µÄ¡£  
+//ä¼ å…¥ä¸€ä¸ªCCrenderTexture   
+//ç›¸å½“äºŽä¸€ä¸ªæ­£åœ¨è¿è¡Œçš„æ¸¸æˆçš„æˆªå›¾ä½œä¸ºè¿™ä¸ªæš‚åœå¯¹è¯æ¡†çš„èƒŒæ™¯   
+//è¿™æ ·å°±çœ‹èµ·æ¥åƒæ˜¯å¯¹è¯æ¡†åœ¨æ¸¸æˆç•Œé¢ä¹‹ä¸Šï¼Œä¸€èˆ¬æ¸¸æˆå½“ä¸­éƒ½æ˜¯è¿™æ ·å­å†™çš„ã€‚  
 CCScene* PauseLayer::scene(CCRenderTexture* sqr)
 {
 	CCScene *scene = CCScene::create();
 	PauseLayer *layer = PauseLayer::create();
-	scene->addChild(layer, 1);//°ÑÓÎÏ·²ã·ÅÉÏÃæ£¬ÎÒÃÇ»¹ÒªÔÚÕâÉÏÃæ·Å°´Å¥  
+	scene->addChild(layer, 1); 
 
-
-	//Ôö¼Ó²¿·Ö£ºÊ¹ÓÃGame½çÃæÖÐ½ØÍ¼µÄsqrÎÆÀíÍ¼Æ¬´´½¨Sprite  
-	//²¢½«SpriteÌí¼Óµ½GamePause³¡¾°²ãÖÐ  
-	//µÃµ½´°¿ÚµÄ´óÐ¡  
-	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	//å¢žåŠ éƒ¨åˆ†ï¼šä½¿ç”¨Gameç•Œé¢ä¸­æˆªå›¾çš„sqrçº¹ç†å›¾ç‰‡åˆ›å»ºSprite  
+    //å¹¶å°†Spriteæ·»åŠ åˆ°GamePauseåœºæ™¯å±‚ä¸­  
+    //å¾—åˆ°çª—å£çš„å¤§å°  
 	CCSprite *back_spr = CCSprite::createWithTexture(sqr->getSprite()->getTexture());
-	back_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //·ÅÖÃÎ»ÖÃ,Õâ¸öÏà¶ÔÓÚÖÐÐÄÎ»ÖÃ¡£  
-	back_spr->setFlipY(true);            //·­×ª£¬ÒòÎªUI×ø±êºÍOpenGL×ø±ê²»Í¬  
-	back_spr->setColor(Color3B::GRAY); //Í¼Æ¬ÑÕÉ«±ä»ÒÉ«  
+	back_spr->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2)); //æ”¾ç½®ä½ç½®,è¿™ä¸ªç›¸å¯¹äºŽä¸­å¿ƒä½ç½®ã€‚  
+	back_spr->setFlipY(true);           //ç¿»è½¬ï¼Œå› ä¸ºUIåæ ‡å’ŒOpenGLåæ ‡ä¸åŒ  
+	back_spr->setColor(Color3B::GRAY); //å›¾ç‰‡é¢œè‰²å˜ç°è‰²  
 	scene->addChild(back_spr);
 
 
-	//Ìí¼ÓÓÎÏ·ÔÝÍ£±³¾°Ð¡Í¼£¬ÓÃÀ´·Å°´Å¥  
 	CCSprite *back_small_spr = CCSprite::create("back_pause.png");
-	back_small_spr->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2)); //·ÅÖÃÎ»ÖÃ,Õâ¸öÏà¶ÔÓÚÖÐÐÄÎ»ÖÃ¡£  
+	back_small_spr->setPosition(ccp(VISIBLE_WIDTH /2 , VISIBLE_HEIGHT / 2)); 
 	scene->addChild(back_small_spr);
 
 
@@ -53,34 +51,32 @@ bool PauseLayer::init()
 	{
 		return false;
 	}
-	//µÃµ½´°¿ÚµÄ´óÐ¡  
-	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-	//Ô­µã×ø±ê  
-	CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+	
+	CCPoint origin = CCDirector::getInstance()->getVisibleOrigin();
 
-	//¼ÌÐøÓÎÏ·°´Å¥  
+	
 	CCMenuItemImage *pContinueItem = CCMenuItemImage::create(
 		"pause_continue.png",
 		"pause_continue.png",
 		CC_CALLBACK_0(PauseLayer::menuContinueCallback,this));
 
-	pContinueItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 + 30));
+	pContinueItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 + 30));
 
-	//ÖØÐÂ¿ªÊ¼ÓÎÏ·°´Å¥  
+	
 	CCMenuItemImage *pRestartItem = CCMenuItemImage::create(
 		"pause_restart.png",
 		"pause_restart.png",
 		CC_CALLBACK_0(PauseLayer::menuRestart, this));
 
-	pRestartItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 - 20));
+	pRestartItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - 20));
 
-	//»ØÖ÷½çÃæ  
+
 	CCMenuItemImage *pLoginItem = CCMenuItemImage::create(
 		"pause_login.png",
 		"pause_login.png",
 		CC_CALLBACK_0(PauseLayer::menuLogin, this));
 
-	pLoginItem->setPosition(ccp(visibleSize.width / 2, visibleSize.height / 2 - 70));
+	pLoginItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - 70));
 
 
 	// create menu, it's an autorelease object  
@@ -102,7 +98,7 @@ void PauseLayer::menuContinueCallback()
 
 }
 
-//ÖØÐÂ¿ªÊ¼ÓÎÏ·  
+
 void  PauseLayer::menuRestart()
 {
 	Audio::getInstance()->playButtonClick();
@@ -111,7 +107,7 @@ void  PauseLayer::menuRestart()
 	CCDirector::sharedDirector()->resume();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, GameScene::create()));
 }
-//»ØÖ÷½çÃæ  
+
 void  PauseLayer::menuLogin()
 {
 	Audio::getInstance()->playButtonClick();

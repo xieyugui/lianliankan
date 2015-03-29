@@ -1,13 +1,13 @@
-#include "LevelSelectItem.h"
+ï»¿#include "LevelSelectItem.h"
 #include "HelloWorldScene.h"
 #include "GameUtils.h"
 #include "GameData.h"
 #include "GameScene.h"
 
-LevelSelectItem::LevelSelectItem(int level) :_level(level), _type(kLockLevel){//³õÊ¼»¯µÈ¼¶£¬ÒÔ¼°¸Ã°´Å¥µÄÊôĞÔ
+LevelSelectItem::LevelSelectItem(int level) :_level(level), _type(kLockLevel){//åˆå§‹åŒ–ç­‰çº§ï¼Œä»¥åŠè¯¥æŒ‰é’®çš„å±æ€§
 	int g_passLevelCount = GameData::getInstance()->getCurLevel();
 	if (level > (g_passLevelCount + 1)){
-		this->setEnabled(false);//ÉèÖÃ°´Å¥ÊÇ·ñ¿ÉÓÃ
+		this->setEnabled(false);//è®¾ç½®æŒ‰é’®æ˜¯å¦å¯ç”¨
 		_type = kLockLevel;
 	}
 	else if (level == (g_passLevelCount + 1)){
@@ -22,7 +22,7 @@ LevelSelectItem::LevelSelectItem(int level) :_level(level), _type(kLockLevel){//
 
 
 LevelSelectItem* LevelSelectItem::create(int level){
-	LevelSelectItem *ret = new LevelSelectItem(level);//´´½¨
+	LevelSelectItem *ret = new LevelSelectItem(level);//åˆ›å»º
 	auto callback = CC_CALLBACK_1(LevelSelectItem::selectCallBack, ret);
 
 
@@ -48,7 +48,7 @@ void LevelSelectItem::selectCallBack(Ref* sender){
 		//auto scene = HelloWorld::createScene();
 		GameUtils::startGameByLevel(_level);
 		//Director::getInstance()->replaceScene(TransitionFade::create(0.5, GameScene::create()));
-		//´´½¨ÓÎÏ·
+		//åˆ›å»ºæ¸¸æˆ
 	}
 }
 

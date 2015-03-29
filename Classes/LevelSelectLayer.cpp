@@ -1,13 +1,13 @@
-#include "LevelSelectLayer.h"
+ï»¿#include "LevelSelectLayer.h"
 #include "GameUtils.h"
 #include "GameData.h"
 #include "MenuScene.h"
 
-LevelSelectLayer::LevelSelectLayer() :_currentPage(0){//³õÊ¼»¯
-	float maxPage = g_maxLevel / g_EachPageCount;// ×ÜµÄ¹Ø¿¨Êı  Ã¿Ò»Ò³µÄ¹Ø¿¨Êı   float
-	_maxPage = g_maxLevel / g_EachPageCount;//intÀàĞÍ
+LevelSelectLayer::LevelSelectLayer() :_currentPage(0){//åˆå§‹åŒ–
+	float maxPage = g_maxLevel / g_EachPageCount;// æ€»çš„å…³å¡æ•°  æ¯ä¸€é¡µçš„å…³å¡æ•°   float
+	_maxPage = g_maxLevel / g_EachPageCount;//intç±»å‹
 	log("yeshu =%f, =%d",maxPage,_maxPage);
-	if (maxPage > _maxPage){//±È½Ï´óĞ¡
+	if (maxPage > _maxPage){//æ¯”è¾ƒå¤§å°
 		_maxPage = _maxPage + 1;
 	}
 	
@@ -41,9 +41,9 @@ bool LevelSelectLayer::init(){
 	//float wBg = gameBg->getContentSize().width;
 	//Rect rect;
 	//if (VISIBLE_WIDTH >= size_width) {
-	//	rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //Í¼Æ¬µÄ´óĞ¡
+	//	rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //å›¾ç‰‡çš„å¤§å°
 	//}else {
-	//	rect = Rect((wBg - size_width)/2, 1, size_width, size_height);   //Í¼Æ¬µÄ´óĞ¡
+	//	rect = Rect((wBg - size_width)/2, 1, size_width, size_height);   //å›¾ç‰‡çš„å¤§å°
 	//	
 	//}
 
@@ -53,7 +53,7 @@ bool LevelSelectLayer::init(){
 	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 	this->addChild(gameBg, -1);
 
-	//·µ»Ø
+	//è¿”å›
 	pBack = MenuItemImage::create("btn_back.png", "btn_back.png",CC_CALLBACK_0(LevelSelectLayer::menuBackMainMenu, this));
 	pBack->setScaleX(GetXScaleRate);
 	pBack->setScaleY(GetYScaleRate);
@@ -70,7 +70,7 @@ bool LevelSelectLayer::init(){
 }
 
 
-//³õÊ¼»¯µ¼º½  
+//åˆå§‹åŒ–å¯¼èˆª  
 void LevelSelectLayer::initNavigation(){
 	float alreadyUseH = pBack->boundingBox().size.height + level_space*2  + (g_EachPageCount/g_EachLineCount)*(GameData::getInstance()->getlevelSpriteW() +level_space*2);
 
@@ -104,7 +104,7 @@ void LevelSelectLayer::initNavigation(){
 
 void LevelSelectLayer::initAllLevels(){
 	//UserDefault *save = UserDefault::getInstance();
-	//g_passLevelCount = save->getIntegerForKey(PlayerPassLevelCountKey, 0);//»ñÈ¡ÓÃ»§µ±Ç°µÄ¹Ø¿¨µÈ¼¶
+	//g_passLevelCount = save->getIntegerForKey(PlayerPassLevelCountKey, 0);//è·å–ç”¨æˆ·å½“å‰çš„å…³å¡ç­‰çº§
 	//log("g_passLevelCount:%d", g_passLevelCount);
 
 	//just for test, in real game, comment the below code
@@ -112,13 +112,13 @@ void LevelSelectLayer::initAllLevels(){
 	int g_passLevelCount = GameData::getInstance()->getCurLevel();
 	log("g_passLevelCount:%d", g_passLevelCount);
 
-	levelSelectContent = LevelSelectContent::create();//¹Ø¿¨µÈ¼¶Ñ¡Ïî
+	levelSelectContent = LevelSelectContent::create();//å…³å¡ç­‰çº§é€‰é¡¹
 	this->addChild(levelSelectContent);
-	_currentPage = g_passLevelCount / g_EachPageCount;//¸ù¾İÓÃ»§µ±Ç°µÄ¹Ø¿¨µÈ¼¶£¬Ëã³öµ±Ç°Ò³Êı
+	_currentPage = g_passLevelCount / g_EachPageCount;//æ ¹æ®ç”¨æˆ·å½“å‰çš„å…³å¡ç­‰çº§ï¼Œç®—å‡ºå½“å‰é¡µæ•°
 	if (_currentPage >= _maxPage){
 		_currentPage = _maxPage - 1;
 	}
-	levelSelectContent->initAllLevels(_currentPage,pBack->boundingBox().size.height + level_space*2);//³õÊ¼»¯ÕâÒ³µÄ¹Ø¿¨
+	levelSelectContent->initAllLevels(_currentPage,pBack->boundingBox().size.height + level_space*2);//åˆå§‹åŒ–è¿™é¡µçš„å…³å¡
 }
 
 void LevelSelectLayer::menuBackMainMenu()

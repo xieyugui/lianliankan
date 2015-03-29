@@ -1,4 +1,4 @@
-#ifndef __LIANLIANKANX__LevelSelectContent__
+﻿#ifndef __LIANLIANKANX__LevelSelectContent__
 #define __LIANLIANKANX__LevelSelectContent__
 
 #include "cocos2d.h"

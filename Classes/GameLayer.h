@@ -56,7 +56,7 @@ private:
 
 	void pauseGame();
 
-	//前一个点坐标
+	//鍓嶄竴涓偣鍧愭爣
 	Vec2 prePoint;
 
 	Array *mapArray;

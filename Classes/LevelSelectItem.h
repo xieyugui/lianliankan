@@ -1,4 +1,4 @@
-#ifndef __LIANLIANKANX__LevelSelectItem__
+ï»¿#ifndef __LIANLIANKANX__LevelSelectItem__
 #define __LIANLIANKANX__LevelSelectItem__
 
 #include "cocos2d.h"
@@ -8,11 +8,11 @@ USING_NS_CC;
 
 
 class LevelSelectItem : public MenuItemSprite{
-	CC_SYNTHESIZE(int, _level, Level);//¶¨ÒåÁËget set //varType, varName, funName ¿ÉÒÔ½âæiµÄµÈ¼‰
+	CC_SYNTHESIZE(int, _level, Level);//å®šä¹‰äº†get set //varType, varName, funName å¯ä»¥è§£é–çš„ç­‰ç´š
 	CC_SYNTHESIZE(LevelItemType, _type, Type);
 public:
-	LevelSelectItem(int level);//¹¹Ôìº¯Êı
-	static LevelSelectItem* create(int level); //´´½¨±¾Éí
+	LevelSelectItem(int level);//æ„é€ å‡½æ•°
+	static LevelSelectItem* create(int level); //åˆ›å»ºæœ¬èº«
 private:
 	void selectCallBack(Ref* sender);
 	void extraInit();

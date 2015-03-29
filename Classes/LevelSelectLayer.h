@@ -1,4 +1,4 @@
-#ifndef __LIANLIANKANX__LEVELSELECTLAYER__
+ï»¿#ifndef __LIANLIANKANX__LEVELSELECTLAYER__
 #define __LIANLIANKANX__LEVELSELECTLAYER__
 
 #include "cocos2d.h"
@@ -15,19 +15,19 @@ public:
 	static Scene* createScene();
 
 private:
-	LevelSelectContent* levelSelectContent;//µÈ¼¶ÄÚÈİ
-	int _currentPage;//µ±Ç°Ò³
-	int _maxPage;//×î´óÒ³Êı
+	LevelSelectContent* levelSelectContent;//ç­‰çº§å†…å®¹
+	int _currentPage;//å½“å‰é¡µ
+	int _maxPage;//æœ€å¤§é¡µæ•°
 	MenuItemImage* leftMenuSpritePre;
 	MenuItemImage* rightMenuSpritePre;
 	Menu* pageMenu;
 	MenuItemImage* pBack;
 	Menu* pMenu;
 
-	void initNavigation();//³õÊ¼»¯µ¼º½
-	void initAllLevels();//³õÊ¼»¯ËùÓĞµÈ¼¶
-	void nextPageBack();//ÏÂÒ»Ò³
-	void prePageBack();//Ç°Ò»Ò³
+	void initNavigation();//åˆå§‹åŒ–å¯¼èˆª
+	void initAllLevels();//åˆå§‹åŒ–æ‰€æœ‰ç­‰çº§
+	void nextPageBack();//ä¸‹ä¸€é¡µ
+	void prePageBack();//å‰ä¸€é¡µ
 	void menuBackMainMenu();
 };
 

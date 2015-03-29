@@ -1,4 +1,4 @@
-#include "SetMusic.h"
+ï»¿#include "SetMusic.h"
 #include "MenuScene.h"
 #include "SimpleAudioEngine.h"
 #include <string>
@@ -9,7 +9,7 @@ using namespace std;
 
 SetMusic::SetMusic()
 {
-	// Ä¬ÈÏµÄÒôÀÖºÍÒôĞ§¶¼ÊÇ¿ª×Å
+	// é»˜è®¤çš„éŸ³ä¹å’ŒéŸ³æ•ˆéƒ½æ˜¯å¼€ç€
 	bMusic = true;
 	bSoundEffect = true;
 }
