@@ -9,11 +9,14 @@ public:
 	virtual bool init();
 	CREATE_FUNC(TopMenu);
 	void refresh();
+	void overGame();
 private:
 	void pauseGame();
 	
 
 	Label* level;
 	Sprite* header_bg;
+	Menu* menu;
+	MenuItemImage* startBtn;
 };
 #endif

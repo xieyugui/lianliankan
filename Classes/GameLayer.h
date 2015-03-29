@@ -53,6 +53,7 @@ private:
 	void gotoNextLevel(int nexeLevel);
 
 	void gameOverSettlement();
+	void gameOverLayOut();
 
 	void pauseGame();
 

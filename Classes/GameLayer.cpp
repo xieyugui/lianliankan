@@ -10,6 +10,7 @@
 #include "LevelSelectLayer.h"
 #include "MapNode.h"
 #include "PauseLayer.h"
+#include "OverLayer.h"
 
 USING_NS_CC_EXT;
 USING_NS_CC;
@@ -359,7 +360,8 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 			log("current_score  %d", current_score);
 			log("need_socre %d", need_score);
 			if (current_score >= need_score) {
-				this->gameOverSettlement();
+				this->gameOverLayOut();
+				//this->gameOverSettlement();
 			}
 		}
 		else
@@ -552,6 +554,11 @@ void GameLayer::gameOverSettlement()
 	else {
 		this->gotoGameOver();
 	}
+}
+
+void GameLayer::gameOverLayOut()
+{
+	menu->overGame();
 }
 
 

@@ -1,4 +1,4 @@
-﻿#include "PauseLayer.h"
+﻿#include "OverLayer.h"
 #include "SimpleAudioEngine.h"
 
 #include "Audio.h"
@@ -9,17 +9,13 @@
 
 USING_NS_CC;
 
-PauseLayer::~PauseLayer() {
-
-}
-
 //传入一个CCrenderTexture   
 //相当于一个正在运行的游戏的截图作为这个暂停对话框的背景   
 //这样就看起来像是对话框在游戏界面之上，一般游戏当中都是这样子写的。  
-CCScene* PauseLayer::scene(CCRenderTexture* sqr)
+CCScene* OverLayer::scene(CCRenderTexture* sqr)
 {
 	CCScene *scene = CCScene::create();
-	PauseLayer *layer = PauseLayer::create();
+	OverLayer *layer = OverLayer::create();
 	scene->addChild(layer, 1); 
 
 	//增加部分：使用Game界面中截图的sqr纹理图片创建Sprite  
@@ -42,7 +38,7 @@ CCScene* PauseLayer::scene(CCRenderTexture* sqr)
 	return scene;
 }
 
-bool PauseLayer::init()
+bool OverLayer::init()
 {
 
 	if (!CCLayer::init())
@@ -52,37 +48,31 @@ bool PauseLayer::init()
 	
 	CCPoint origin = CCDirector::getInstance()->getVisibleOrigin();
 
-		
-	CCMenuItemImage *pRestartItem = CCMenuItemImage::create(
-		"pause_again.png",
-		"pause_again.png",
-		CC_CALLBACK_0(PauseLayer::menuRestart, this));
-	pRestartItem->setScaleX(GetXScaleRate);
-	pRestartItem->setScaleX(GetYScaleRate);
-	pRestartItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
-	
-
 	CCMenuItemImage *pContinueItem = CCMenuItemImage::create(
 		"pause_play.png",
 		"pause_play.png",
-		CC_CALLBACK_0(PauseLayer::menuContinueCallback,this));
+		CC_CALLBACK_0(OverLayer::menuContinueCallback,this));
 	pContinueItem->setScaleX(GetXScaleRate);
 	pContinueItem->setScaleX(GetYScaleRate);
-	pContinueItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 + pRestartItem->boundingBox().size.height + level_space));
+	pContinueItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 ));
 
-
+	Sprite* winSp = Sprite::create("pause_win.png");
+	winSp->setScaleX(GetXScaleRate);
+	winSp->setScaleX(GetYScaleRate);
+	winSp->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 + pContinueItem->boundingBox().size.height + level_space));
+	this->addChild(winSp,1000);
 
 	CCMenuItemImage *pLoginItem = CCMenuItemImage::create(
 		"pause_level.png",
 		"pause_level.png",
-		CC_CALLBACK_0(PauseLayer::menuLogin, this));
+		CC_CALLBACK_0(OverLayer::menuLogin, this));
 	pLoginItem->setScaleX(GetXScaleRate);
 	pLoginItem->setScaleX(GetYScaleRate);
-	pLoginItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - pRestartItem->boundingBox().size.height - level_space));
+	pLoginItem->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - pContinueItem->boundingBox().size.height - level_space));
 
 
 	// create menu, it's an autorelease object  
-	CCMenu* pMenu = CCMenu::create(pContinueItem, pRestartItem, pLoginItem, NULL);
+	CCMenu* pMenu = CCMenu::create(pContinueItem, pLoginItem, NULL);
 	pMenu->setPosition(Vec2::ZERO);
 	this->addChild(pMenu, 1000);
 
@@ -90,31 +80,31 @@ bool PauseLayer::init()
 
 	return true;
 }
-void PauseLayer::menuContinueCallback()
+void OverLayer::menuContinueCallback()
 {
 	
-	Audio::getInstance()->playButtonClick();
+	//Audio::getInstance()->playButtonClick();
 	CCDirector::sharedDirector()->popScene();
-	removeFromParentAndCleanup(true);
 	CCDirector::sharedDirector()->resume();
+
+	GameData::getInstance()->passCurrentUserLevel();
+	int nextLevel = GameData::getInstance()->getChooseLevel() + 1;
+	//removeFromParentAndCleanup(true);
+	if (GameData::getInstance()->getLevelCount() >= nextLevel) {
+		GameUtils::startGameByLevel(nextLevel);
+	}
+	else {
+		Director::getInstance()->replaceScene(LevelSelectLayer::createScene());
+	}
 
 }
 
 
-void  PauseLayer::menuRestart()
+void  OverLayer::menuLogin()
 {
 	Audio::getInstance()->playButtonClick();
 	CCDirector::sharedDirector()->popScene();
-	removeFromParentAndCleanup(true);
-	CCDirector::sharedDirector()->resume();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, GameScene::create()));
-}
-
-void  PauseLayer::menuLogin()
-{
-	Audio::getInstance()->playButtonClick();
-	CCDirector::sharedDirector()->popScene();
-	removeFromParentAndCleanup(true);
+	//removeFromParentAndCleanup(true);
 	Director::sharedDirector()->resume();
 	Director::getInstance()->replaceScene(LevelSelectLayer::createScene());
 }
