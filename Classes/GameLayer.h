@@ -12,8 +12,8 @@ public:
 	virtual bool onTouchBegan(Touch *pTouch, Event *pEvent);
 	virtual void onTouchEnded(Touch *pTouch, Event *pEvent);
 	CREATE_FUNC(GameLayer);
-	GameLayer::GameLayer();
-	GameLayer::~GameLayer();
+	GameLayer();
+	~GameLayer();
 private:
 	void initUI(void);
 

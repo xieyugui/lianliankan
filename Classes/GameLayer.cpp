@@ -38,13 +38,11 @@ bool GameLayer::init()
 
 	this->initUI();
 
-	menu = TopMenu::create();
-	this->addChild(menu);
-	//this->initTopMenuUI();
-
 	return true;
 
 }
+
+
 
 
 void GameLayer::initData()
@@ -94,19 +92,23 @@ void GameLayer::initImgSpriteSize()
 void GameLayer::initUI()
 {
 	auto gameBg = Sprite::create("bg.png");
-	float wBg = gameBg->getContentSize().width;
-	Rect rect;
-	if (VISIBLE_WIDTH >= size_width) {
-		rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //图片的大小
-	}else {
-		rect = Rect((wBg - size_width)/2, 1, size_width, size_height);   //图片的大小
-	}
+	//float wBg = gameBg->getContentSize().width;
+	//Rect rect;
+	//if (VISIBLE_WIDTH >= size_width) {
+	//	rect = Rect((wBg - VISIBLE_WIDTH)/2, 1, VISIBLE_WIDTH, VISIBLE_HEIGHT);   //图片的大小
+	//}else {
+	//	rect = Rect((wBg - size_width)/2, 1, size_width, size_height);   //图片的大小
+	//}
 
-	gameBg->setTextureRect(rect);
+	//gameBg->setTextureRect(rect);
 	gameBg->setScaleX(GetXScaleRate);
 	gameBg->setScaleY(GetYScaleRate);
 	gameBg->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 	this->addChild(gameBg, -1);
+
+	//top Menu
+	menu = TopMenu::create();
+	this->addChild(menu);
 	//auto spriteScale = this->getSpriteS();
 	//布局sprite
 	int wIndex = 0;

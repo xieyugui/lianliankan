@@ -14,5 +14,6 @@ private:
 	
 
 	Label* level;
+	Sprite* header_bg;
 };
 #endif

@@ -16,7 +16,7 @@ Audio* Audio::getInstance() {
 void Audio::playBGM() {
 	if(GameData::getInstance()->getisPause())
 		return;
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/class.mp3", true);
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("music/bg_music.mp3", true);
 }
 
 
@@ -40,7 +40,7 @@ void Audio::playButtonClick() {
 
 
 void Audio::prepare(){
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/class.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("music/bg_music.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/12.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/4.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("music/button_click_menu.mp3");
