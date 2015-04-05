@@ -12,18 +12,26 @@
 #include "PauseLayer.h"
 #include "OverLayer.h"
 
+#include <algorithm>
+using std::random_shuffle;
+
 USING_NS_CC_EXT;
 USING_NS_CC;
 
-GameLayer::GameLayer() :current_score(0), prePoint(Vec2(-1,-1))
+GameLayer::GameLayer()
 {
-
+	prePoint = Vec2(-1,-1);
+	current_score = 0;
+	fill_count = 0;
+	preIndex = 0;
+	curIndex = 0;
 }
 
 GameLayer::~GameLayer()
 {
 	//CC_SAFE_RELEASE(mapArray);//CC_SAFE_DELETE_ARRAY(mapArray);
-	mapArray->release();
+	//mapArray->release();
+	mapArray.clear();
 	//mapArray = NULL;
 }
 
@@ -49,22 +57,37 @@ bool GameLayer::init()
 
 void GameLayer::initData()
 {
-	GameData::getInstance()->getLevelXY(total_x, total_y, need_score,0);
-	log("initData %d,%d,%d", total_x, total_y, need_score);
-	this->initImgSpriteSize();
-	mapArray = Array::create();
-	auto levelArr = GameData::getInstance()->getLevelData(0);
-	mapArray->retain();
-	for (int index = 0; index < levelArr->count(); index++) {
+	//GameData::getInstance()->getLevelXY( need_score,0);
+	//log("initData %d", need_score);
+	//this->initImgSpriteSize();
+	//mapArray = Array::create();
+	//auto levelArr = GameData::getInstance()->getLevelData(0);
+	//mapArray->retain();
+	this->initFillBlock();
+	mapArray = Vector<MapNode*>(x_count*y_count);
+	for (int index = 0; index < x_count*y_count; index++) {
 		MapNode *node = new MapNode();
 		node->autorelease();
-		node->imgid = ((String *)(levelArr->objectAtIndex(index)))->intValue();
-		log("initData = %d", node->imgid);
-		mapArray->addObject(node);
+		node->imgid = 0;
+
+		MapNode *node1 = new MapNode();
+		node1->autorelease();
+		node1->imgid = 0;
+
+		if(index < fill_count) {
+			srand( (unsigned)time( NULL ) + index*rand()%1000 );
+			node->imgid = rand() % block_count + 1;
+			node1->imgid = node->imgid;
+			log("initData imgid = %d", node->imgid);
+		}
+		mapArray.pushBack(node);
+		mapArray.pushBack(node1);
+		index++;
+		log("initData index= %d", index);
 	}
 
-	SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("icon1.plist");
-	SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("common.plist");
+	//SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("icon1.plist");
+	//SpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("common.plist");
 
 	//添加touch监听
 	//	Director::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 1, true);
@@ -83,10 +106,10 @@ void GameLayer::initData()
 
 void GameLayer::initImgSpriteSize()
 {
-	img_w = this->getContentSize().width / total_x;
-	img_h = this->getContentSize().height / total_y;
-	log("image all w %f", img_w);
-	log("image  all h %f", img_h);
+	//img_w = this->getContentSize().width / total_x;
+	//img_h = this->getContentSize().height / total_y;
+	//log("image all w %f", img_w);
+	//log("image  all h %f", img_h);
 
 }
 
@@ -111,76 +134,52 @@ void GameLayer::initUI()
 	//top Menu
 	menu = TopMenu::create();
 	this->addChild(menu);
-	//auto spriteScale = this->getSpriteS();
-	//布局sprite
+
+	srand( (unsigned)time(NULL));
+	random_shuffle(mapArray.begin(),mapArray.end());
+	block_top = Sprite::create("block/block_top.png");
+	block_top->setScale(GameData::getInstance()->getblockScale());
+	block_w = block_top->boundingBox().size.width;
+	block_h = block_top->boundingBox().size.height;
+	int block_index = 0;
 	int wIndex = 0;
-	for (int index = 0; index < total_x *total_y; index++)    {
-		log("image file name %d", index);
-		if (this->imageFilename(index))
-		{
-
-			auto *sprite = Sprite::createWithSpriteFrameName(this->imageFilename(index)->getCString());
-			//auto rectInsets = CCRectMake(0, 0, img_w, img_h); //left锟斤拷right锟斤拷width锟斤拷height	
-			//sprite->setTextureRect(rectInsets);
-			wIndex = index;
-			if (index > total_x) {
-				wIndex = index - int(index / total_x) * total_x;
-			}
-			sprite->setPosition(ccp((img_w / 2) + wIndex*img_w, (img_h / 2) + int(index / total_x)*img_h));
-			log("y=%d", int(index / total_x));
-
-			this->addChild(sprite, 1, TAG_START_SPRITE + index);
-
+	for (Vector<MapNode*>::const_iterator it = mapArray.begin(); it != mapArray.end(); ++it)  {
+		MapNode* mapNode = *it;
+		Sprite* sprite;
+		auto* topSprite = Sprite::create("block/block_top.png");
+		topSprite->setVisible(false);
+		if(mapNode->imgid) {
+			sprite = Sprite::create(String::createWithFormat("block/block_%d.png", mapNode->imgid)->getCString());
+			sprite->setScale(GameData::getInstance()->getblockScale());
+		}else {
+			sprite = Sprite::create("block/block_touming.png");
+			sprite->setScale(GameData::getInstance()->getblockScale());
 		}
-
+		wIndex = block_index;
+		if (block_index >= x_count) {
+				wIndex = block_index - int(block_index / x_count) * x_count;
+				log("windex = %d,= %d",wIndex,int(block_index / x_count));
+		}
+			
+		sprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h));
+		topSprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h));
+		log("init = %f, = %f",(block_w / 2) + block_w * wIndex+level_space,(block_h / 2) + int(block_index / x_count)*block_h);
+		this->addChild(sprite, 2, TAG_START_SPRITE + block_index);
+		this->addChild(topSprite, 1, TAG_START_SPRITE *2 + block_index);
+		block_index++;
 	}
 }
 
-//void GameLayer::initTopMenuUI(){
-//	level = Label::create(String::create("Level: ")->_string + String::createWithFormat("%d", GameData::getInstance()->getChooseLevel())->_string,"Arial", 30);
-//	level->setPosition(100, VISIBLE_HEIGHT - 50);
-//	this->addChild(level, 1);
-//
-//	auto startBtn = MenuItemImage::create("pause.png", "pause.png", CC_CALLBACK_0(GameLayer::pauseGame, this));
-//	auto menu = Menu::create(startBtn, NULL);
-//	menu->alignItemsVertically();
-//	menu->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT - 50));
-//	this->addChild(menu, 1);
-//}
-
-void GameLayer::pauseGame() {
-	Audio::getInstance()->playButtonClick();
-	//锟矫碉拷锟斤拷锟节的达拷小  
-	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
-	CCRenderTexture *renderTexture = CCRenderTexture::create(visibleSize.width, visibleSize.height);
-
-	//锟斤拷锟斤拷锟斤拷前锟斤拷锟斤拷锟斤拷锟斤拷咏诘锟斤拷锟较拷锟斤拷锟斤拷锟絩enderTexture锟叫★拷  
-	//锟斤拷锟斤拷锟斤拷锟狡斤拷图锟斤拷  
-	renderTexture->begin();
-	this->getParent()->visit();
-	renderTexture->end();
-
-	//锟斤拷锟斤拷戏锟斤拷锟斤拷锟斤拷停锟斤拷压锟诫场锟斤拷锟斤拷栈锟斤拷锟斤拷锟叫伙拷锟斤拷GamePause锟斤拷锟斤拷  
-	CCDirector::sharedDirector()->pushScene(PauseLayer::scene(renderTexture));
+//根据当前等级生成随机数
+void GameLayer::initFillBlock() {
+	//计算要填充的个数，根据等级
+	int level = GameData::getInstance()->getChooseLevel();
+	fill_count = 4+(level/10)*2;
+	int all_count = x_count* y_count - 5;
+	if (fill_count > all_count)
+		fill_count = all_count;
+	need_score = fill_count/2;
 }
-
-
-//获取图片
-String* GameLayer::imageFilename(int index)
-{
-	if (index < 0 || index >= mapArray->count()) {
-		return NULL;
-	}
-
-	int n = ((MapNode *)(mapArray->objectAtIndex(index)))->imgid;
-	if (n >= 1) {
-		log("imageFilename = %d", n);
-		return String::createWithFormat("%d.png", n);
-	}
-	return NULL;
-
-}
-
 
 
 
@@ -190,11 +189,11 @@ Vec2 GameLayer::pointOfView(Vec2 point)
 
 	int x = -1;
 	int y = -1;
-	if (point.x > 0 && point.x < total_x * img_w)
-		x = (point.x) / (img_w );
-	if (point.y > 0 && point.y < total_y * img_h)
-		y = (point.y) / (img_h );
-
+	if (point.x > 0 && point.x < (x_count * block_w+level_space))
+		x = (point.x-level_space) / (block_w);
+	if (point.y > 0 && point.y < y_count * block_h)
+		y = (point.y) / (block_h );
+	log("debug %f,%f",point.x,point.y);
 	return Vec2(x, y);
 }
 
@@ -202,25 +201,25 @@ Vec2 GameLayer::pointOfView(Vec2 point)
 //是否在有效范围内
 bool GameLayer::isValiableNode(Vec2 point)
 {
-	return point.x >= 0 && point.x < total_x && point.y >= 0 && point.y < total_y;
+	return point.x >= 0 && point.x < x_count && point.y >= 0 && point.y < y_count;
 }
 
 //是否是空的坐标点
 bool GameLayer::isEmptyNode(Vec2 point)
 {
 	int index = this->indexFromPoint(point);
-	if (index >= mapArray->count()) {
+	if (index >= mapArray.size()) {
 		return true;
 	}
-	MapNode *node = (MapNode *)mapArray->objectAtIndex(index);
-	log("isEmptyNode %d", node->imgid);
+	MapNode *node = (MapNode *)mapArray.at(index);
+	log("isEmptyNode %d, index= %d", node->imgid,index);
 	return (node->imgid == 0);
 }
 
 //每个sprite的index
 int GameLayer::indexFromPoint(Vec2 point)
 {
-	return point.y * total_x + point.x;
+	return point.y * x_count + point.x;
 
 }
 
@@ -237,7 +236,7 @@ void GameLayer::clearNode(Vec2 point)
 {
 	int index = this->indexFromPoint(point);
 
-	MapNode *node = (MapNode *)mapArray->objectAtIndex(index);
+	MapNode *node = (MapNode *)mapArray.at(index);
 
 	node->imgid = 0;
 }
@@ -248,8 +247,8 @@ bool GameLayer::canClearTwo(Vec2 pointpre, Vec2 pointcurrent)
 	bool bMatch = false;
 	int pre = this->indexFromPoint(pointpre);
 	int current = this->indexFromPoint(pointcurrent);
-	int p = ((MapNode *)(mapArray->objectAtIndex(pre)))->imgid;
-	int c = ((MapNode *)(mapArray->objectAtIndex(current)))->imgid;
+	int p = ((MapNode *)(mapArray.at(pre)))->imgid;
+	int c = ((MapNode *)(mapArray.at(current)))->imgid;
 
 	if (p == c && this->match(pointcurrent, pointpre))
 	{
@@ -323,8 +322,11 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 
 	//SimpleAudioEngine::sharedEngine()->playEffect("12.wav");
 	Audio::getInstance()->playSprite();
+	
 
 	if (prePoint.x == -1 && prePoint.y == -1) {
+		auto tmcurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(location));
+		tmcurrent->setVisible(true);
 		prePoint = location;
 		return ;
 	}
@@ -335,39 +337,38 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 	}
 
 	//点击当前精灵
-	auto *spritecurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE + this->indexFromPoint(location));
-	spritecurrent->setScale(1.1);
+	
+	auto spritecurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE + this->indexFromPoint(location));
+	auto tmcurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(location));
+	tmcurrent->setVisible(true);
+	//spritecurrent->setScale(1.1);
 
 
 	if (this->isValiableNode(prePoint) && !this->isEmptyNode(prePoint))
 	{
 		CCLOG("%d", this->indexFromPoint(location));
 		//前一个
-		auto *spritepre = (Sprite *)this->getChildByTag(TAG_START_SPRITE + this->indexFromPoint(prePoint));
+		
+		auto spritepre = (Sprite *)this->getChildByTag(TAG_START_SPRITE + this->indexFromPoint(prePoint));
+		auto tmpre = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(prePoint));
 		//auto *spriteLine = (Sprite *)this->getChildByTag(TAG_START_SPRITE * 2 + this->indexFromPoint(prePoint));//by xie
-
+		//tmpre->setVisible(true);
 		if (this->canClearTwo(prePoint, location))
 		{
-
-			//SimpleAudioEngine::sharedEngine()->playEffect("4.wav");
+			curIndex = this->indexFromPoint(location);
+			preIndex = this->indexFromPoint(prePoint);
 			Audio::getInstance()->playEliminate();
 			this->clearNode(location);
 			this->clearNode(prePoint);
 			prePoint = Vec2(-1,-1);
-			spritecurrent->setVisible(false);
-			spritepre->setVisible(false);
-			current_score++;
-			log("current_score  %d", current_score);
-			log("need_socre %d", need_score);
-			if (current_score >= need_score) {
-				this->gameOverLayOut();
-				//this->gameOverSettlement();
-			}
+			this->scheduleOnce(schedule_selector(GameLayer::clearAnimation),0.1f);
+
 		}
 		else
 		{
-			spritepre->setScale(0.9);
-			this->scaleAnimation(spritepre);
+			tmpre->setVisible(false);
+			//spritepre->setScale(0.9);
+			//this->scaleAnimation(spritepre);
 			//spriteLine->setVisible(true);//by xie
 
 		}
@@ -376,6 +377,30 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 
 	prePoint = location;
 
+}
+
+void GameLayer::clearAnimation(float dt)
+{
+	auto spritecurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE + curIndex);
+	auto tmcurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + curIndex);
+	auto spritepre = (Sprite *)this->getChildByTag(TAG_START_SPRITE + preIndex);
+	auto tmpre = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + preIndex);
+
+	spritecurrent->setVisible(false);
+	tmcurrent->setVisible(false);
+	spritepre->setVisible(false);
+	tmpre->setVisible(false);
+
+	preIndex = 0;
+	curIndex = 0;
+	current_score++;
+	log("current_score  %d", current_score);
+	log("need_socre %d", need_score);
+	if (current_score >= need_score) {
+		this->gameOverLayOut();
+		//this->gameOverSettlement();
+	}
+    //CCLOG("call oneUpdate once");
 }
 
 
@@ -466,7 +491,7 @@ bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 		}
 	}
 
-	for (int i = a.x + 1; i < total_x; ++i) {
+	for (int i = a.x + 1; i < x_count; ++i) {
 		auto point = CCPointMake(i, a.y);
 		if (!this->isValiableNode(point) || !this->isEmptyNode(point)) {
 			break;
@@ -490,7 +515,7 @@ bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 		}
 	}
 
-	for (int i = a.y + 1; i < total_y; ++i) {
+	for (int i = a.y + 1; i < y_count; ++i) {
 		auto point = CCPointMake(a.x, i);
 		if (!this->isValiableNode(point) || !this->isEmptyNode(point)) {
 			break;

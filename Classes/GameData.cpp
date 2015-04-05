@@ -36,6 +36,8 @@ void GameData::initLevelScale() {
 	level_sprite_w = locte->getContentSize().width*level_scale;
 	//level_space = GameUtils::getSpaceSizeRate(2+g_EachLineCount);
 	//log("init level Data =%f,=%f,=%f",page_scale,level_scale,level_space);
+	auto block = Sprite::create("block/block_top.png");
+	block_scale = GameUtils::getBlockScale(block);
 
 }
 
@@ -61,7 +63,7 @@ void GameData::saveUserPassLevel() {
 
 void GameData::passCurrentUserLevel() {
 	if (this->getChooseLevel() > this->getCurLevel()) {
-		if (this->getCurLevel() >= level_data.size()) {
+		if (this->getCurLevel() >= g_maxLevel) {
 			return;
 		}
 		this->setCurLevel(this->getCurLevel() + 1);
@@ -123,14 +125,12 @@ void GameData::initLevelData() {
 }
 
 
-void GameData::getLevelXY(int &x, int &y,int &score,int level) {
+void GameData::getLevelXY(int &score,int level) {
 	if (level == 0) {
 		level = this->getChooseLevel();
 	}
 	log("getLevelXY %d", level);
 	auto xyArr = (Array* )xy_data.at(level);
-	x = ((String *)xyArr->objectAtIndex(0))->intValue();
-	y = ((String *)xyArr->objectAtIndex(1))->intValue();
 	score = ((String *)xyArr->objectAtIndex(2))->intValue();
 }
 
@@ -144,8 +144,9 @@ Array* GameData::getLevelData(int level) {
 	return (Array*)level_data.at(level);
 }
 
-int GameData::getLevelCount() {
-	return level_data.size();
+float GameData::getLevelCount() {
+	//return level_data.size();
+	return g_maxLevel;
 }
 
 void GameData::playOrStopMusic() {

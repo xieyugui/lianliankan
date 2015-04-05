@@ -19,7 +19,7 @@ typedef enum{
 
 const char PlayerPassLevelCountKey[] = "LianLianKanByXie";
 
-const float g_maxLevel = 40;
+const float g_maxLevel = 50;
 const int g_EachPageCount = 16;
 const float g_EachLineCount = 4;
 
@@ -27,6 +27,13 @@ const float size_width = 768;
 const float size_height = 1136;
 
 const float level_space = 10;
+
+const float x_count = 8;//设置x block 个数
+const float y_count = 10;// 设置y block 的个数
+
+const int block_count = 17; //图标的个数
+
+const float banner_height = 100; //广告条的高度 
 
 class GameData{
 public:
@@ -38,20 +45,21 @@ public:
 	CC_SYNTHESIZE(float,page_scale, pageSacle);
 	CC_SYNTHESIZE(float,level_scale, levelSacle);
 	CC_SYNTHESIZE(float,level_sprite_w,levelSpriteW);//缩放之后的大小
+	CC_SYNTHESIZE(float,block_scale,blockScale);
 
 	//CC_SYNTHESIZE(int, next_level, NextLevel);
 
 	void saveUserPassLevel();
 	void initUserPassLevel();
 	void passCurrentUserLevel();//当前关卡已过
-	int getLevelCount();
+	float getLevelCount();
 
 	void initLevelData();
 	void initLevelScale();
 
 	void playOrStopMusic();
 	
-	void getLevelXY(int &x, int &y, int &score,int level);
+	void getLevelXY(int &score,int level);
 	Array* getLevelData(int level);
 
 

@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "TopMenu.h"
 #include "PauseLayer.h"
+#include "MapNode.h"
 USING_NS_CC;
 
 class GameLayer :public Layer{
@@ -14,12 +15,14 @@ public:
 	CREATE_FUNC(GameLayer);
 	GameLayer();
 	~GameLayer();
+
+	CC_SYNTHESIZE(float,block_w,blockW);//缩放之后的大小
+	CC_SYNTHESIZE(float,block_h,blockH);
 private:
 	void initUI(void);
 
 	void initData(void);
 
-	//void initTopMenuUI();
 
 	cocos2d::String* imageFilename(int index);
 
@@ -55,26 +58,30 @@ private:
 	void gameOverSettlement();
 	void gameOverLayOut();
 
-	void pauseGame();
+	void initFillBlock();
 
-	//前一个点坐标
-	Vec2 prePoint;
+	void  clearAnimation(float dt);
 
-	Array *mapArray;
+	Vec2 prePoint; //前一个点坐标
+	Vec2 location; //当前点坐标
+	int preIndex;//前一个index
+	int curIndex;//当前的index
 
 
-	int total_x;
-	int total_y;
+
+
+	//Array *mapArray;
+	Vector<MapNode *> mapArray;
+
 	int need_score;
 	int current_score;
 
-	float img_w;
-	float img_h;
-
 	Label* level;
+	int fill_count;
 	//PauseLayer *pauseLayer;
 
 	TopMenu* menu;
+	Sprite* block_top;
 
 
 };
