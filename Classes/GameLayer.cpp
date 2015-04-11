@@ -151,9 +151,11 @@ void GameLayer::initUI()
 		if(mapNode->imgid) {
 			sprite = Sprite::create(String::createWithFormat("block/block_%d.png", mapNode->imgid)->getCString());
 			sprite->setScale(GameData::getInstance()->getblockScale());
+			sprite->setName(String::createWithFormat("block_%d.png", mapNode->imgid)->getCString());
 		}else {
 			sprite = Sprite::create("block/block_touming.png");
 			sprite->setScale(GameData::getInstance()->getblockScale());
+			//sprite->setName("block_touming.png");
 		}
 		wIndex = block_index;
 		if (block_index >= x_count) {
@@ -353,6 +355,7 @@ void GameLayer::onTouchEnded(cocos2d::Touch *pTouch, cocos2d::Event *pEvent)
 		auto tmpre = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(prePoint));
 		//auto *spriteLine = (Sprite *)this->getChildByTag(TAG_START_SPRITE * 2 + this->indexFromPoint(prePoint));//by xie
 		//tmpre->setVisible(true);
+		linePoints.clear();
 		if (this->canClearTwo(prePoint, location))
 		{
 			curIndex = this->indexFromPoint(location);
@@ -385,11 +388,28 @@ void GameLayer::clearAnimation(float dt)
 	auto tmcurrent = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + curIndex);
 	auto spritepre = (Sprite *)this->getChildByTag(TAG_START_SPRITE + preIndex);
 	auto tmpre = (Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + preIndex);
+	std::string fileName = spritecurrent->getName();
 
-	spritecurrent->setVisible(false);
 	tmcurrent->setVisible(false);
-	spritepre->setVisible(false);
 	tmpre->setVisible(false);
+
+	//spritecurrent->setVisible(false);
+	spritecurrent->runAction(this->getSpecialEffectsAnimation());
+	//spritepre->setVisible(false);
+	spritepre->runAction(this->getSpecialEffectsAnimation());
+
+	for (int i = 0; i < linePoints.size(); i++) {
+				
+		auto point = linePoints[i];
+		auto sprite = Sprite::create("block/"+fileName);
+		sprite->setScale(GameData::getInstance()->getblockScale());
+		sprite->setPosition(ccp((block_w / 2) + block_w * point.x+level_space, (block_h / 2) + point.y*block_h));
+		this->addChild(sprite, 3, TAG_START_SPRITE*4 + i);
+		sprite->runAction(this->getSpecialEffectsAnimation());
+	}
+	linePoints.clear();
+
+	
 
 	preIndex = 0;
 	curIndex = 0;
@@ -397,24 +417,80 @@ void GameLayer::clearAnimation(float dt)
 	log("current_score  %d", current_score);
 	log("need_socre %d", need_score);
 	if (current_score >= need_score) {
-		this->gameOverLayOut();
+		this->scheduleOnce(schedule_selector(GameLayer::gameOverLayOut),0.5);
+		//this->gameOverLayOut();
 		//this->gameOverSettlement();
 	}
     //CCLOG("call oneUpdate once");
 }
 
+//旋转特效
+FiniteTimeAction* GameLayer::getSpecialEffectsAnimation()
+{
+	//作用创建一个旋转的动作
+	//参数1：旋转的时间  参数2：旋转饿角度  0 - 360
+    ActionInterval * rotateby = CCRotateBy::create(0.4, 360);
+    //CCActionInterval*  actionByBack = actionBy->reverse();                            //回复
+	ActionInterval * scaleto = CCScaleTo ::create(0, 0.3);
+	//    作用：创建一个渐变消失的动作
+    //    参数是时间
+    //    CCActionInterval * fadeout = CCFadeOut::create(2);
+    //    sp->runAction(fadeout);
+	ActionInterval * fadeout = FadeOut::create(0);
+	return Sequence::create(scaleto,rotateby,fadeout,NULL);
+	//FiniteTimeAction * spawn =Sequence::create(scaleto,rotateby,fadeout,NULL);
+	//sprite->runAction(spawn);
+	//sprite->setVisible(false);
+}
+
+
+void GameLayer::addLinePoints(Vec2 a, Vec2 b,bool X)
+{
+	log("print a.x=%f,a.y=%f,b.x=%f,b.y=%f",a.x,a.y,b.x,b.y);
+	if (!(a.x == b.x || a.y == b.y)) {
+		return;
+	}
+
+	int i;
+	if (X) {
+
+		if (a.y > b.y) {
+			for (i = a.y ; i >= b.y; --i) {
+				linePoints.push_back(Vec2(a.x, i));
+			}
+		}else {
+			for (i = b.y ; i >= a.y; --i) {
+				linePoints.push_back(Vec2(a.x, i));
+			}
+		}
+	}
+	else {
+		if (a.x > b.x) {
+			for (i = a.x ; i >= b.x; --i) {
+				linePoints.push_back(Vec2(i, a.y));
+			}
+		}else {
+			for (i = b.x ; i >= a.x; --i) {
+				linePoints.push_back(Vec2(i, a.y));
+			}
+		}
+
+	}
+}
 
 
 //三种匹配算法
 //一直线
-bool GameLayer::match_direct(Vec2 a, Vec2 b)
+// 1 代表x轴相同  0 代表Y轴相同 -1 代表都不同
+int GameLayer::match_direct(Vec2 a, Vec2 b)
 {
 	if (!(a.x == b.x || a.y == b.y)) {
-		return false;
+		return -1;
 	}
 
 	int i;
 	bool match_x = false;
+	
 	if (a.x == b.x) {
 		match_x = true;
 		if (a.y > b.y) {
@@ -424,8 +500,8 @@ bool GameLayer::match_direct(Vec2 a, Vec2 b)
 					match_x = false;
 				}
 			}
-		}
-		if (b.y > a.y) {
+
+		} else {
 			for (i = b.y - 1; i > a.y; --i) {
 				Vec2 point = CCPointMake(a.x, i);
 				if (!this->isValiableNode(point) || !this->isEmptyNode(point)) {
@@ -433,10 +509,16 @@ bool GameLayer::match_direct(Vec2 a, Vec2 b)
 				}
 			}
 		}
-	}
-
+		
+		if (match_x)
+		{
+			return 1;
+			//this->addLinePoints(a, b,true);
+			//return true;
+		}
+	} 
 	bool match_y = false;
-	if (a.y == b.y) {
+	if(a.y == b.y) {
 		match_y = true;
 		if (a.x > b.x) {
 			for (i = a.x - 1; i > b.x; --i) {
@@ -445,8 +527,8 @@ bool GameLayer::match_direct(Vec2 a, Vec2 b)
 					match_y = false;
 				}
 			}
-		}
-		if (b.x > a.x) {
+
+		}else{
 			for (i = b.x - 1; i > a.x; --i) {
 				Vec2 point = CCPointMake(i, a.y);
 				if (!this->isValiableNode(point) || !this->isEmptyNode(point)) {
@@ -454,22 +536,39 @@ bool GameLayer::match_direct(Vec2 a, Vec2 b)
 				}
 			}
 		}
+		
+
+		if (match_y)
+		{
+			return 0;
+			//this->addLinePoints(a, b,false);
+			//return true;
+		}
 	}
 
-	return match_x || match_y;
+	return -1;
+
+	//return match_x || match_y;
 }
 
 //一个拐点的
 bool GameLayer::match_one_corner(Vec2 a, Vec2 b)
 {
 	auto point = CCPointMake(b.x, a.y);
-
-	if (this->isValiableNode(point) && this->isEmptyNode(point) && this->match_direct(a, point) && this->match_direct(b, point)){
+	int bxaLineStats = this->match_direct(a, point);
+	int bxbLineStats = this->match_direct(b, point);
+	if (this->isValiableNode(point) && this->isEmptyNode(point) && bxaLineStats >= 0 && bxbLineStats >= 0){
+		this->addLinePoints(a, point,bool(bxaLineStats));
+		this->addLinePoints(point, b,bool(bxbLineStats));
 		return true;
 	}
 
 	point = CCPointMake(a.x, b.y);
-	if (this->isValiableNode(point) && this->isEmptyNode(point) && this->match_direct(a, point) && this->match_direct(b, point)){
+	int axaLineStats = this->match_direct(a, point);
+	int axbLineStats = this->match_direct(b, point);
+	if (this->isValiableNode(point) && this->isEmptyNode(point) && axaLineStats>= 0  && axbLineStats>= 0){
+		this->addLinePoints(a, point,bool(axaLineStats));
+		this->addLinePoints(point,b,bool(axbLineStats));
 		return true;
 	}
 
@@ -479,13 +578,14 @@ bool GameLayer::match_one_corner(Vec2 a, Vec2 b)
 //两个拐点的
 bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 {
-	for (int i = a.x - 1; i >= 0; --i) {
+	for (int i = a.x - 1; i >= 0; --i) { //y 轴相等
 		auto point = CCPointMake(i, a.y);
 		if (!this->isValiableNode(point) || !this->isEmptyNode(point)) {
 			break;
 		}
 		else {
 			if (this->match_one_corner(point, b)) {
+				this->addLinePoints(a, point,false);
 				return true;
 			}
 		}
@@ -498,6 +598,7 @@ bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 		}
 		else {
 			if (this->match_one_corner(point, b)) {
+				this->addLinePoints(a, point,false);
 				return true;
 			}
 		}
@@ -510,6 +611,7 @@ bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 		}
 		else {
 			if (this->match_one_corner(point, b)) {
+				this->addLinePoints(a, point,true);
 				return true;
 			}
 		}
@@ -522,6 +624,7 @@ bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 		}
 		else {
 			if (this->match_one_corner(point, b)) {
+				this->addLinePoints(a, point,true);
 				return true;
 			}
 		}
@@ -533,7 +636,9 @@ bool GameLayer::match_two_corner(Vec2 a, Vec2 b)
 
 bool GameLayer::match(Vec2 a, Vec2 b)
 {
-	if (this->match_direct(a, b)) {
+	int lineState = this->match_direct(a, b);
+	if (lineState >= 0) {
+		this->addLinePoints(a, b,bool(lineState));
 		return true;
 	}
 	if (this->match_one_corner(a, b)) {
@@ -581,7 +686,7 @@ void GameLayer::gameOverSettlement()
 	}
 }
 
-void GameLayer::gameOverLayOut()
+void GameLayer::gameOverLayOut(float dt)
 {
 	menu->overGame();
 }

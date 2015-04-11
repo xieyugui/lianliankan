@@ -42,7 +42,7 @@ private:
 	void clearNode(Vec2 point);
 
 
-	bool match_direct(Vec2 a, Vec2 b);
+	int match_direct(Vec2 a, Vec2 b);
 	bool match_one_corner(Vec2 a, Vec2 b);
 	bool match_two_corner(Vec2 a, Vec2 b);
 	bool match(Vec2 a, Vec2 b);
@@ -56,16 +56,20 @@ private:
 	void gotoNextLevel(int nexeLevel);
 
 	void gameOverSettlement();
-	void gameOverLayOut();
+	void gameOverLayOut(float dt);
 
 	void initFillBlock();
 
 	void  clearAnimation(float dt);
+	FiniteTimeAction* getSpecialEffectsAnimation();
+
+	void addLinePoints(Vec2 a, Vec2 b,bool X);
 
 	Vec2 prePoint; //前一个点坐标
 	Vec2 location; //当前点坐标
 	int preIndex;//前一个index
 	int curIndex;//当前的index
+	std::vector<Vec2> linePoints;
 
 
 
