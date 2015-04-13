@@ -55,6 +55,8 @@ bool MenuLayer::init() {
 	toggleItem->setScaleX(GetXScaleRate);
 	toggleItem->setScaleY(GetYScaleRate);
 	toggleItem->setPosition(Vec2(VISIBLE_WIDTH - _turnOn->boundingBox().size.width / 2 - 10 , VISIBLE_HEIGHT - _turnOn->boundingBox().size.height / 2 - 10));
+	if(GameData::getInstance()->getisPause())
+		toggleItem->setSelectedIndex(1);
 
 	pMenu = Menu::create(moreBtn,toggleItem,startBtn, NULL);
 	pMenu->setPosition(Vec2::ZERO);
