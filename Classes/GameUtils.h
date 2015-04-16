@@ -15,7 +15,7 @@ public:
 	static float getVisibleWidth();
 	static float getVisibleHeight();
 	static float getLevelScale(Sprite* sprite);
-	static float getBlockScale(Sprite* sprite);
+	static float getBlockScale(Sprite* sprite,float x_count);
 	static float getPageScale(Sprite* page,Sprite* sprite);
 	static float getSpaceSizeRate(int spCount);
 

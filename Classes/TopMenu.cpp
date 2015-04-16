@@ -17,10 +17,12 @@ bool TopMenu::init(){
 	header_bg->setPosition(VISIBLE_WIDTH/2,VISIBLE_HEIGHT-header_bg->boundingBox().size.height/2);
 	this->addChild(header_bg,1);
 
+	//block_h = block_top->boundingBox().size.height;
+
 	float topH = VISIBLE_HEIGHT-header_bg->boundingBox().size.height/2;
 
-	level = Label::create(String::create("Level: ")->_string + String::createWithFormat("%d", GameData::getInstance()->getChooseLevel())->_string, "Verdana-Bold", 30);
-	level->setPosition(100, topH);
+	level = Label::create(String::createWithFormat("%d", GameData::getInstance()->getChooseLevel())->_string, "Verdana-Bold",45*GetXScaleRate,Size(85*GetXScaleRate,65*GetYScaleRate),TextHAlignment::CENTER,TextVAlignment::TOP);
+	level->setPosition(206 * GetXScaleRate+ 85*GetXScaleRate/2, topH);
 	this->addChild(level,2);
 
 	startBtn = MenuItemImage::create("btn_pause.png", "btn_pause.png", CC_CALLBACK_0(TopMenu::pauseGame, this));

@@ -87,6 +87,11 @@ private:
 	TopMenu* menu;
 	Sprite* block_top;
 
+	float x_count;
+	float y_count;
+	int grid_count;
+	int scope;
+
 
 };
 

@@ -36,8 +36,6 @@ void GameData::initLevelScale() {
 	level_sprite_w = locte->getContentSize().width*level_scale;
 	//level_space = GameUtils::getSpaceSizeRate(2+g_EachLineCount);
 	//log("init level Data =%f,=%f,=%f",page_scale,level_scale,level_space);
-	auto block = Sprite::create("block/block_top.png");
-	block_scale = GameUtils::getBlockScale(block);
 
 }
 
@@ -63,7 +61,7 @@ void GameData::saveUserPassLevel() {
 
 void GameData::passCurrentUserLevel() {
 	if (this->getChooseLevel() > this->getCurLevel()) {
-		if (this->getCurLevel() >= g_maxLevel) {
+		if (this->getCurLevel() >= this->getLevelCount()) {
 			return;
 		}
 		this->setCurLevel(this->getCurLevel() + 1);
@@ -93,60 +91,65 @@ void GameData::initLevelData() {
 	//读取plist数据文件
 	std::string plistPath = FileUtils::sharedFileUtils()->fullPathFromRelativeFile("levelinfo.plist", "levelinfo.plist");
 	level_data.clear();
-	xy_data.clear();
 	auto allkeys = Array::create();
 	//level_data = dynamic_cast<Array *>(Dictionary::createWithContentsOfFile(plistPath.c_str()));
 	auto plistDic = Dictionary::createWithContentsOfFile(plistPath.c_str());
-	allkeys = dynamic_cast<Array *> (plistDic->allKeys());
-	for (unsigned i = 0; i < allkeys->count(); i++) {
-		auto key = (String *)allkeys->objectAtIndex(i);
-		log("idKey=%s", key->getCString());
-		auto levelDic = dynamic_cast<Dictionary *> (plistDic->objectForKey(key->getCString()));
-		//Array* imgArr = Array::create();
-		Array* xyArr = Array::create();
-		//xyArr->retain();
-		xyArr->addObject(dynamic_cast<String *>(levelDic->objectForKey("total_x")));
-		xyArr->addObject(dynamic_cast<String *>(levelDic->objectForKey("total_y")));
-		xyArr->addObject(dynamic_cast<String *>(levelDic->objectForKey("score")));
-		auto xString = (String *)xyArr->objectAtIndex(0);
-		log("xyArr x=%s", xString->getCString());
-		xy_data.insert(key->intValue(), xyArr);
-		auto imgArr = dynamic_cast<Array *>(levelDic->objectForKey("imageidarr"));
-		level_data.insert(key->intValue(), imgArr);
-		for (unsigned imgCount = 0; imgCount < imgArr->count(); imgCount++) {
-			auto idString = (String *)(imgArr->objectAtIndex(imgCount));
-			log("idString imgid=%d", idString->intValue());
-		}
-	}
-	auto xie = xy_data.at(1);
-	auto xString = (String *)xie->objectAtIndex(0);
-	log("xie x=%s", xString->getCString());
+	auto block_count= dynamic_cast<String *> (plistDic->objectForKey("block_count"));
+	this->setblockCount(block_count->intValue());
+	log("block_count=%s", block_count->getCString());
+	//7,7,10,10;7,8,12,17
+	auto level_info = dynamic_cast<String *> (plistDic->objectForKey("level_info"));
+	level_data = this->split(level_info->getCString(),";");
+	//log("level_info=%s", level_info->getCString());
 
 }
 
+//字符串分割函数  
+std::vector<std::string> GameData::split(std::string str,std::string pattern)  
+{  
+    std::string::size_type pos;  
+    std::vector<std::string> result;  
+    str+=pattern;//扩展字符串以方便操作  
+    int size=str.size();  
+  
+    for(int i=0; i<size; i++)  
+    {  
+        pos=str.find(pattern,i);  
+        if(pos<size)  
+        {  
+            std::string s=str.substr(i,pos-i);  
+            result.push_back(s);  
+            i=pos+pattern.size()-1;  
+        }  
+    }  
+    return result;  
+} 
 
-void GameData::getLevelXY(int &score,int level) {
-	if (level == 0) {
-		level = this->getChooseLevel();
-	}
-	log("getLevelXY %d", level);
-	auto xyArr = (Array* )xy_data.at(level);
-	score = ((String *)xyArr->objectAtIndex(2))->intValue();
-}
 
-Array* GameData::getLevelData(int level) {
+
+void GameData::getLevelData(int level,float &x_count,float &y_count, int &grid_count,int &scope) {
 	if (level > this->getLevelCount()) {
-		return NULL;
+		return;
 	}
 	if (level == 0) {
 		level = this->getChooseLevel();
 	}
-	return (Array*)level_data.at(level);
+	std::string levels = level_data.at(level-1);
+	std::vector<std::string> linfo = this->split(levels,",");
+	x_count = 7.0;
+	y_count = 9.0;
+	grid_count = 10;
+	scope = 10;
+	if (linfo.size() == 4) {
+		x_count = atof(linfo.at(0).c_str());
+		y_count = atof(linfo.at(1).c_str());
+		grid_count = atoi(linfo.at(2).c_str());
+		scope = atoi(linfo.at(3).c_str());
+	}
 }
 
 float GameData::getLevelCount() {
-	//return level_data.size();
-	return g_maxLevel;
+	return level_data.size();
 }
 
 void GameData::playOrStopMusic() {

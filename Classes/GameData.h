@@ -19,7 +19,7 @@ typedef enum{
 
 const char PlayerPassLevelCountKey[] = "LianLianKanByXie";
 
-const float g_maxLevel = 50;
+//const float g_maxLevel = 50;
 const int g_EachPageCount = 16;
 const float g_EachLineCount = 4;
 
@@ -28,10 +28,10 @@ const float size_height = 1136;
 
 const float level_space = 10;
 
-const float x_count = 8;//设置x block 个数
-const float y_count = 10;// 设置y block 的个数
+//const float x_count = 8;//设置x block 个数
+//const float y_count = 10;// 设置y block 的个数
 
-const int block_count = 17; //图标的个数
+//const int block_count = 17; //图标的个数
 
 const float banner_height = 100; //广告条的高度 
 
@@ -46,6 +46,7 @@ public:
 	CC_SYNTHESIZE(float,level_scale, levelSacle);
 	CC_SYNTHESIZE(float,level_sprite_w,levelSpriteW);//缩放之后的大小
 	CC_SYNTHESIZE(float,block_scale,blockScale);
+	CC_SYNTHESIZE(int,block_count,blockCount);
 
 	//CC_SYNTHESIZE(int, next_level, NextLevel);
 
@@ -58,9 +59,8 @@ public:
 	void initLevelScale();
 
 	void playOrStopMusic();
-	
-	void getLevelXY(int &score,int level);
-	Array* getLevelData(int level);
+	void getLevelData(int level,float &x_count,float &y_count, int &grid_count,int &scope);
+	std::vector<std::string> split(std::string str,std::string pattern);
 
 
 private:
@@ -72,8 +72,7 @@ private:
 	static GameData* _instance;
 	//int cur_level;
 	//Array* level_data;
-	Map<int, Array*> level_data;
-	Map<int, Array*> xy_data;
+	std::vector<std::string> level_data;
 	//int next_level;
 };
 

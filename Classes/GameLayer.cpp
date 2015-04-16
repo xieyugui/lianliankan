@@ -63,6 +63,10 @@ void GameLayer::initData()
 	//mapArray = Array::create();
 	//auto levelArr = GameData::getInstance()->getLevelData(0);
 	//mapArray->retain();
+	GameData::getInstance()->getLevelData(0,x_count,y_count,grid_count,scope);
+	auto block = Sprite::create("block/block_top.png");
+	GameData::getInstance()->setblockScale(GameUtils::getBlockScale(block,x_count));
+
 	this->initFillBlock();
 	mapArray = Vector<MapNode*>(x_count*y_count);
 	for (int index = 0; index < x_count*y_count; index++) {
@@ -74,9 +78,9 @@ void GameLayer::initData()
 		node1->autorelease();
 		node1->imgid = 0;
 
-		if(index < fill_count) {
+		if(index < grid_count*2) {
 			srand( (unsigned)time( NULL ) + index*rand()%1000 );
-			node->imgid = rand() % block_count + 1;
+			node->imgid = rand() % scope + 1;
 			node1->imgid = node->imgid;
 			log("initData imgid = %d", node->imgid);
 		}
@@ -150,13 +154,14 @@ void GameLayer::initUI()
 		topSprite->setVisible(false);
 		if(mapNode->imgid) {
 			sprite = Sprite::create(String::createWithFormat("block/block_%d.png", mapNode->imgid)->getCString());
-			sprite->setScale(GameData::getInstance()->getblockScale());
+			
 			sprite->setName(String::createWithFormat("block_%d.png", mapNode->imgid)->getCString());
 		}else {
 			sprite = Sprite::create("block/block_touming.png");
-			sprite->setScale(GameData::getInstance()->getblockScale());
 			//sprite->setName("block_touming.png");
 		}
+		sprite->setScale(GameData::getInstance()->getblockScale());
+		topSprite->setScale(GameData::getInstance()->getblockScale());
 		wIndex = block_index;
 		if (block_index >= x_count) {
 				wIndex = block_index - int(block_index / x_count) * x_count;
@@ -167,7 +172,7 @@ void GameLayer::initUI()
 		topSprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h));
 		log("init = %f, = %f",(block_w / 2) + block_w * wIndex+level_space,(block_h / 2) + int(block_index / x_count)*block_h);
 		this->addChild(sprite, 2, TAG_START_SPRITE + block_index);
-		this->addChild(topSprite, 1, TAG_START_SPRITE *2 + block_index);
+		this->addChild(topSprite, 3, TAG_START_SPRITE *2 + block_index);
 		block_index++;
 	}
 }
@@ -175,12 +180,9 @@ void GameLayer::initUI()
 //根据当前等级生成随机数
 void GameLayer::initFillBlock() {
 	//计算要填充的个数，根据等级
-	int level = GameData::getInstance()->getChooseLevel();
-	fill_count = 4+(level/10)*2;
-	int all_count = x_count* y_count - 5;
-	if (fill_count > all_count)
-		fill_count = all_count;
-	need_score = fill_count/2;
+	//int level = GameData::getInstance()->getChooseLevel();
+	//fill_count = 4+(level/10)*2;
+	need_score = grid_count;
 }
 
 

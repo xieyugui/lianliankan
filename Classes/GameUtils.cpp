@@ -73,7 +73,7 @@ float GameUtils::getLevelScale(Sprite* sprite) {
 }
 
 //根据block 实际像素大小和屏幕大小，算出要缩放的比例
-float GameUtils::getBlockScale(Sprite* sprite) {
+float GameUtils::getBlockScale(Sprite* sprite,float x_count) {
 	return (VISIBLE_WIDTH - level_space * 2)/(sprite->getContentSize().width * x_count);
 }
 
