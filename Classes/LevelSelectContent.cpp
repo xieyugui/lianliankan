@@ -41,7 +41,7 @@ void LevelSelectContent::initAllLevels(int page,float topH){//初始化当前pag
 	float topStartPositionY = VISIBLE_HEIGHT - topH - levelW/2;
 
 	for (int i = 0 + page * eachPageItemCount; i < eachPageItemCount + page * eachPageItemCount; i++){
-		if (i < GameData::getInstance()->getLevelCount()){
+		if (i < GameData::getInstance()->getmaxLevel()){
 			int lineCount = g_EachLineCount;
 			if (i != (0 + page * eachPageItemCount) && i % lineCount == 0){
 				startPositionX = constStartPositionX;

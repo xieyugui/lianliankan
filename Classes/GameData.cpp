@@ -61,7 +61,7 @@ void GameData::saveUserPassLevel() {
 
 void GameData::passCurrentUserLevel() {
 	if (this->getChooseLevel() > this->getCurLevel()) {
-		if (this->getCurLevel() >= this->getLevelCount()) {
+		if (this->getCurLevel() >= max_level) {
 			return;
 		}
 		this->setCurLevel(this->getCurLevel() + 1);
@@ -97,6 +97,8 @@ void GameData::initLevelData() {
 	auto block_count= dynamic_cast<String *> (plistDic->objectForKey("block_count"));
 	this->setblockCount(block_count->intValue());
 	log("block_count=%s", block_count->getCString());
+	auto game_levels= dynamic_cast<String *> (plistDic->objectForKey("levels"));
+	this->setmaxLevel(game_levels->floatValue());
 	//7,7,10,10;7,8,12,17
 	auto level_info = dynamic_cast<String *> (plistDic->objectForKey("level_info"));
 	level_data = this->split(level_info->getCString(),";");
@@ -128,11 +130,14 @@ std::vector<std::string> GameData::split(std::string str,std::string pattern)
 
 
 void GameData::getLevelData(int level,float &x_count,float &y_count, int &grid_count,int &scope) {
-	if (level > this->getLevelCount()) {
+	if (level > max_level) {
 		return;
 	}
 	if (level == 0) {
 		level = this->getChooseLevel();
+	}
+	if(level > level_data.size()) {
+		level = level_data.size();
 	}
 	std::string levels = level_data.at(level-1);
 	std::vector<std::string> linfo = this->split(levels,",");
@@ -146,10 +151,6 @@ void GameData::getLevelData(int level,float &x_count,float &y_count, int &grid_c
 		grid_count = atoi(linfo.at(2).c_str());
 		scope = atoi(linfo.at(3).c_str());
 	}
-}
-
-float GameData::getLevelCount() {
-	return level_data.size();
 }
 
 void GameData::playOrStopMusic() {

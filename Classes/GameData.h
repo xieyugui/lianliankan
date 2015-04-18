@@ -47,13 +47,13 @@ public:
 	CC_SYNTHESIZE(float,level_sprite_w,levelSpriteW);//缩放之后的大小
 	CC_SYNTHESIZE(float,block_scale,blockScale);
 	CC_SYNTHESIZE(int,block_count,blockCount);
+	CC_SYNTHESIZE(float,max_level,maxLevel);
 
 	//CC_SYNTHESIZE(int, next_level, NextLevel);
 
 	void saveUserPassLevel();
 	void initUserPassLevel();
 	void passCurrentUserLevel();//当前关卡已过
-	float getLevelCount();
 
 	void initLevelData();
 	void initLevelScale();

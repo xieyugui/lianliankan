@@ -90,7 +90,7 @@ void OverLayer::menuContinueCallback()
 	GameData::getInstance()->passCurrentUserLevel();
 	int nextLevel = GameData::getInstance()->getChooseLevel() + 1;
 	//removeFromParentAndCleanup(true);
-	if (GameData::getInstance()->getLevelCount() >= nextLevel) {
+	if (GameData::getInstance()->getmaxLevel() >= nextLevel) {
 		GameUtils::startGameByLevel(nextLevel);
 	}
 	else {

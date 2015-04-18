@@ -680,7 +680,7 @@ void GameLayer::gameOverSettlement()
 {
 	GameData::getInstance()->passCurrentUserLevel();
 	int nextLevel = GameData::getInstance()->getChooseLevel() + 1;
-	if (GameData::getInstance()->getLevelCount() >= nextLevel) {
+	if (GameData::getInstance()->getmaxLevel() >= nextLevel) {
 		this->gotoNextLevel(nextLevel);
 	}
 	else {

@@ -4,8 +4,8 @@
 #include "MenuScene.h"
 
 LevelSelectLayer::LevelSelectLayer() :_currentPage(0){//初始化
-	float maxPage = GameData::getInstance()->getLevelCount() / g_EachPageCount;// 总的关卡数  每一页的关卡数   float
-	_maxPage = GameData::getInstance()->getLevelCount() / g_EachPageCount;//int类型
+	float maxPage = GameData::getInstance()->getmaxLevel() / g_EachPageCount;// 总的关卡数  每一页的关卡数   float
+	_maxPage = GameData::getInstance()->getmaxLevel() / g_EachPageCount;//int类型
 	log("yeshu =%f, =%d",maxPage,_maxPage);
 	if (maxPage > _maxPage){//比较大小
 		_maxPage = _maxPage + 1;
