@@ -5,6 +5,7 @@
 USING_NS_CC;
 using namespace CocosDenshion;
 
+
 Audio* Audio::m_instance = nullptr;
 Audio* Audio::getInstance() {
 	if (m_instance == nullptr) {
