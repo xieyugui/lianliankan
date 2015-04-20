@@ -1,4 +1,4 @@
-﻿#ifndef _LIANLIANKANX_GAMEDATA_H_
+#ifndef _LIANLIANKANX_GAMEDATA_H_
 #define _LIANLIANKANX_GAMEDATA_H_
 
 #include "cocos2d.h"
