@@ -193,10 +193,10 @@ Vec2 GameLayer::pointOfView(Vec2 point)
 
 	int x = -1;
 	int y = -1;
-	if (point.x > 0 && point.x < (x_count * block_w+level_space))
+	if (point.x > level_space && point.x < (x_count * block_w+level_space))
 		x = (point.x-level_space) / (block_w);
-	if (point.y > 0 && point.y < y_count * block_h)
-		y = (point.y) / (block_h );
+	if (point.y > banner_height && point.y < y_count * block_h+banner_height)
+		y = (point.y-banner_height) / (block_h );
 	log("debug %f,%f",point.x,point.y);
 	return Vec2(x, y);
 }
@@ -405,7 +405,7 @@ void GameLayer::clearAnimation(float dt)
 		auto point = linePoints[i];
 		auto sprite = Sprite::create("block/"+fileName);
 		sprite->setScale(GameData::getInstance()->getblockScale());
-		sprite->setPosition(ccp((block_w / 2) + block_w * point.x+level_space, (block_h / 2) + point.y*block_h));
+		sprite->setPosition(ccp((block_w / 2) + block_w * point.x+level_space, (block_h / 2) + point.y*block_h+banner_height));
 		this->addChild(sprite, 3, TAG_START_SPRITE*4 + i);
 		sprite->runAction(this->getSpecialEffectsAnimation());
 	}
