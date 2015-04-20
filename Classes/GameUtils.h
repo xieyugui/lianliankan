@@ -36,4 +36,4 @@ public:
 #define GetPageScaleRate(page,sprite) GameUtils::getPageScale(Sprite* page,Sprite* sprite)
 #define GetSpaceSize(spCount) GameUtils::getSpaceSizeRate(int spCount)
 
-#endif;
+#endif

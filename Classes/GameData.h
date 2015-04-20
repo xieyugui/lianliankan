@@ -33,7 +33,7 @@ const float level_space = 10;
 
 //const int block_count = 17; //图标的个数
 
-const float banner_height = 100; //广告条的高度 
+const float banner_height = 60; //广告条的高度 
 
 class GameData{
 public:

@@ -168,8 +168,8 @@ void GameLayer::initUI()
 				log("windex = %d,= %d",wIndex,int(block_index / x_count));
 		}
 			
-		sprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h));
-		topSprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h));
+		sprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+banner_height));
+		topSprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+banner_height));
 		log("init = %f, = %f",(block_w / 2) + block_w * wIndex+level_space,(block_h / 2) + int(block_index / x_count)*block_h);
 		this->addChild(sprite, 2, TAG_START_SPRITE + block_index);
 		this->addChild(topSprite, 3, TAG_START_SPRITE *2 + block_index);
