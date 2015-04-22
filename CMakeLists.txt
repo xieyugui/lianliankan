@@ -118,6 +118,7 @@ set(GAME_SRC
   Classes/HelloWorldScene.cpp
   Classes/Audio.cpp
   Classes/FloatWord.cpp
+  Classes/MyJniHelper.cpp
   Classes/GameData.cpp
   Classes/GameLayer.cpp
   Classes/GameScene.cpp
@@ -140,6 +141,7 @@ set(GAME_HEADERS
   Classes/HelloWorldScene.h
   Classes/Audio.h
   Classes/FloatWord.h
+  Classes/MyJniHelper.h
   Classes/GameData.h
   Classes/GameLayer.h
   Classes/GameScene.h

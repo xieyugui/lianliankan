@@ -11,6 +11,7 @@
 #include "MapNode.h"
 #include "PauseLayer.h"
 #include "OverLayer.h"
+#include "MyJniHelper.h"
 
 #include <algorithm>
 using std::random_shuffle;
@@ -47,6 +48,8 @@ bool GameLayer::init()
 
 
 	this->initUI();
+
+	MyJniHelper::showBan(0);
 
 	return true;
 

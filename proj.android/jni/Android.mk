@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 			  ../../Classes/AppDelegate.cpp \
 			  ../../Classes/HelloWorldScene.cpp \
 			  ../../Classes/Audio.cpp \
+			  ../../Classes/MyJniHelper.cpp \
 			  ../../Classes/FloatWord.cpp \
 			  ../../Classes/GameData.cpp \
 			  ../../Classes/GameLayer.cpp \

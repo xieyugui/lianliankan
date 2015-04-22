@@ -27,16 +27,23 @@ THE SOFTWARE.
 package org.cocos2dx.cpp;
 
 import org.cocos2dx.lianliankanx.R;
+import org.cocos2dx.lib.Cocos2dxActivity;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.unionsy.sdk.OnExitScreenListener;
@@ -49,14 +56,18 @@ import com.unionsy.sdk.SsjjExitScreenManager;
 import com.unionsy.sdk.SsjjFullScreenManager;
 import com.unionsy.sdk.SsjjPauseScreenManager;
 
-public class AppActivity extends Activity implements OnClickListener{
+public class AppActivity extends Cocos2dxActivity {
+	
 	private static final String TAG = "Ads_SDK_Demo_Main";
-
+	//private static Context mContext;
+	private static Handler handler;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);   
+		handler = new AdHandler();
+		initAds();
 		//setContentView(R.layout.activity_main);
-		bannerLayout = (LinearLayout) findViewById(R.id.layout_add_banner);// demo中为按钮"添加banner广告"的事件载体
+		//bannerLayout = (LinearLayout) findViewById(R.id.layout_add_banner);// demo中为按钮"添加banner广告"的事件载体
 		
 		//findViewById(R.id.btn_show_banner).setOnClickListener(this);       //按钮：添加 Banner 广告 
 		//findViewById(R.id.btn_show_pause_screen).setOnClickListener(this); //按钮：显示 插屏 广告
@@ -71,18 +82,42 @@ public class AppActivity extends Activity implements OnClickListener{
 		SsjjAdsManager.init(AppActivity.this); 
 	}
 	
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		
-		showBanner(); // Banner广告相关方法
+	   //初始化广告
+    public void initAds(){
 		SsjjPauseScreenManager.preLoad(AppActivity.this); // 预加载 插屏 广告
 		SsjjExitScreenManager.preLoad(AppActivity.this);  // 预加载 退出插屏广告
 		SsjjFullScreenManager.preLoad(AppActivity.this);  // 预加载 全屏 广告
-	}
-
-
+    }
+    
+    class AdHandler extends Handler {
+    	public void handleMessage(Message msg) {
+    		switch (msg.what) {
+    		default:
+    			SsjjPauseScreenManager.show(AppActivity.this, mOnSsjjAdsListener);
+    			break;
+    		}
+    		
+    	}
+    	//添加互动广告
+    	private LinearLayout getBannerAd() {
+    		// 互动广告
+    		LinearLayout adBannerLayout = new LinearLayout(AppActivity.this);
+    		adBannerLayout.setOrientation(LinearLayout.VERTICAL);
+    		FrameLayout.LayoutParams lp_banner = new FrameLayout.LayoutParams(
+    				FrameLayout.LayoutParams.WRAP_CONTENT,
+    				FrameLayout.LayoutParams.WRAP_CONTENT);
+    		// 设置adBannerLayout的悬浮位置,具体的位置开发者根据需要设置
+    		lp_banner.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+    		AppActivity.this.addContentView(adBannerLayout, lp_banner);
+    		
+    		LinearLayout bannerLayout = new LinearLayout(AppActivity.this);
+    		adBannerLayout.addView(bannerLayout);
+    		
+    		return bannerLayout;
+    	}
+    }
+    
+	
 	@Override
 	public void onBackPressed() {
 		// 退屏广告
@@ -106,48 +141,8 @@ public class AppActivity extends Activity implements OnClickListener{
 		super.onDestroy();
 	}
 	
-
-	@Override
-	public void onClick(View v) {
-		
-		switch (v.getId()) {
-		
-		//case R.id.btn_show_banner:
-			// 测试使用不同布局参数时banner广告的展示效果
-		//	addBanner(); 
-		//	break;
-			
-		//case R.id.btn_show_pause_screen:
-			// 设置超时不显示的超时时间 ,要在show之前调用[可选]
-			//SsjjPauseScreenManager.setTimeout(5000);
-			
-			// 显示插屏广告
-		//	SsjjPauseScreenManager.show(AppActivity.this, mOnSsjjAdsListener); 
-			
-			// 显示插屏广告，3秒后自动关闭,若小于3秒,则会自动设置为3秒
-//			SsjjPauseScreenManager.show(MainActivity.this, mOnSsjjAdsListener, 3 * 1000); 
-		//	break;
-			
-		//case R.id.btn_show_full_screen:
-			// 设置超时不显示的超时时间 ,要在show之前调用[可选]
-			//SsjjFullScreenManager.setTimeout(5000);
-			
-			// 显示全屏广告
-			//SsjjFullScreenManager.show(MainActivity.this, mOnSsjjAdsListener);
-			
-			// 显示全屏广告，3秒后自动关闭,若小于3秒,则会自动设置为3秒
-		//	SsjjFullScreenManager.show(AppActivity.this, mOnSsjjAdsListener, 3 * 1000);
-		//	break;
-			
-		//case R.id.btn_clear_cache:
-			// 清除广告缓存文件（积分墙除外）
-		//	SsjjAdsManager.clearCache(AppActivity.this); 
-		//	break;
-		}
-	}
 	
 	private SsjjAdsView mBanner; // banner广告
-	
 	private void showBanner() {
 		mBanner = (SsjjAdsView) findViewById(R.id.banner);
 		// 设置广告状态回调监听[可选]
@@ -182,34 +177,12 @@ public class AppActivity extends Activity implements OnClickListener{
 	}
 	
 	private LinearLayout bannerLayout; //本demo中放置banner广告的容器
-		
-	// 使用代码方式动态生成 banner广告
-	private void addBanner() {
-		
-		final SsjjAdsView banner = new SsjjAdsView(AppActivity.this);
-		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-		//bannerLayout为容纳banner的父view
-		bannerLayout.addView(banner, params); 
-		
-		// 监听获取到的广告图片的大小[自定义布局可参考使用]
-		banner.setOnGetAdsSizeListener(new OnGetAdsSizeListener() {
-			@Override
-			public void onGetAdsSize(SsjjAdsView view, int widthPx, int heightPx) {
-				// 得到广告图片的大小，这里可以进行重新设置布局 
-				float ratio = widthPx / heightPx; //计算获取的广告的宽高比
-				int widthDp = 300; // 自定义广告的宽度
-				banner.setSsjjAdsSize(widthDp, (int) (widthDp / ratio));
-			}
-		});
-		// 必须手动调用 show方法, banner广告才会显示
-//		banner.setTimeout(200);
-		banner.show(); 
-	}
+	
 	
 	/**
 	 *  广告的回调接口
 	 */
-	private OnSsjjAdsListener mOnSsjjAdsListener = new OnSsjjAdsListener() {
+	private static OnSsjjAdsListener mOnSsjjAdsListener = new OnSsjjAdsListener() {
 		@Override
 		public void onShow() {
 			//广告正常显示时回调
@@ -230,25 +203,6 @@ public class AppActivity extends Activity implements OnClickListener{
 
 	};
 	
-	/* ===================== 方便测试而使用的代码 ======================== */
-	
-	private void updataTitle(){
-		String idKey = "";
-		String appKey = "";
-		try {
-			ApplicationInfo appinfo = getPackageManager().getApplicationInfo(getPackageName(),
-					PackageManager.GET_META_DATA);
-			if(appinfo.metaData != null) {
-				idKey = "" + appinfo.metaData.getInt("IdKey");
-				appKey = "" + appinfo.metaData.getInt("AppKey");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		String str = "[appKey: " + appKey + "]";
-		setTitle("4399广告SDK " + SsjjAdsManager.VERSION + str); // 方便测试
-	}
-	
 	// dp 转 px
 	public int dip2px(float dpValue) {
 		final float scale = getResources().getDisplayMetrics().density;
@@ -260,6 +214,18 @@ public class AppActivity extends Activity implements OnClickListener{
 		final float scale = getResources().getDisplayMetrics().density;
 		return (int) (pxValue / scale + 0.5f);
 	}
-
+	
+	public static void showBan(int adTag) {
+		Message msg = handler.obtainMessage();
+		msg.what = adTag;
+		handler.sendMessage(msg);
+	    //调用广告SDK
+		//AppActivity appA = new AppActivity();
+		//appA.showBanner();
+	}
+	
 	
 }
+
+
+

@@ -146,8 +146,8 @@ void GameData::getLevelData(int level,float &x_count,float &y_count, int &grid_c
 	grid_count = 10;
 	scope = 10;
 	if (linfo.size() == 4) {
-		x_count = atof(linfo.at(0).c_str());
-		y_count = atof(linfo.at(1).c_str());
+		x_count = atoi(linfo.at(0).c_str())*1.0;
+		y_count = atoi(linfo.at(1).c_str())*1.0;
 		grid_count = atoi(linfo.at(2).c_str());
 		scope = atoi(linfo.at(3).c_str());
 	}

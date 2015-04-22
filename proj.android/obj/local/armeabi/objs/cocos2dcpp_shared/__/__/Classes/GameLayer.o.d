@@ -438,7 +438,9 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/GameLayer.o: \
  jni/../../Classes/Audio.h jni/../../Classes/FloatWord.h \
  jni/../../Classes/MenuScene.h jni/../../Classes/LevelSelectLayer.h \
  jni/../../Classes/LevelSelectContent.h \
- jni/../../Classes/LevelSelectItem.h jni/../../Classes/OverLayer.h
+ jni/../../Classes/LevelSelectItem.h jni/../../Classes/OverLayer.h \
+ jni/../../Classes/MyJniHelper.h \
+ jni/../../cocos2d/cocos/3d/../platform/android/jni/JniHelper.h
 
 jni/../../Classes/GameLayer.h:
 
@@ -1329,3 +1331,7 @@ jni/../../Classes/LevelSelectContent.h:
 jni/../../Classes/LevelSelectItem.h:
 
 jni/../../Classes/OverLayer.h:
+
+jni/../../Classes/MyJniHelper.h:
+
+jni/../../cocos2d/cocos/3d/../platform/android/jni/JniHelper.h:
