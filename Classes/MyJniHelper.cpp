@@ -6,7 +6,7 @@ void MyJniHelper::showBan(int adTag)
 		JniMethodInfo t;
 		if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showBan", "(I)V"))
 		{   
-			t.env->CallStaticVoidMethod(t.classID, t.methodID);  
+			t.env->CallStaticVoidMethod(t.classID, t.methodID,adTag);
 			t.env->DeleteLocalRef(t.classID);   
 		}  
 	#endif 

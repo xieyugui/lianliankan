@@ -49,7 +49,7 @@ bool GameLayer::init()
 
 	this->initUI();
 
-	MyJniHelper::showBan(0);
+	MyJniHelper::showBan(1);
 
 	return true;
 
@@ -86,10 +86,14 @@ void GameLayer::initData()
 			node->imgid = rand() % scope + 1;
 			node1->imgid = node->imgid;
 			log("initData imgid = %d", node->imgid);
+			mapArray.pushBack(node);
+			mapArray.pushBack(node1);
+			index++;
+		} else {
+			mapArray.pushBack(node);
 		}
-		mapArray.pushBack(node);
-		mapArray.pushBack(node1);
-		index++;
+
+
 		log("initData index= %d", index);
 	}
 
@@ -173,7 +177,6 @@ void GameLayer::initUI()
 			
 		sprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+banner_height));
 		topSprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+banner_height));
-		log("init = %f, = %f",(block_w / 2) + block_w * wIndex+level_space,(block_h / 2) + int(block_index / x_count)*block_h);
 		this->addChild(sprite, 2, TAG_START_SPRITE + block_index);
 		this->addChild(topSprite, 3, TAG_START_SPRITE *2 + block_index);
 		block_index++;
@@ -434,7 +437,7 @@ FiniteTimeAction* GameLayer::getSpecialEffectsAnimation()
 {
 	//作用创建一个旋转的动作
 	//参数1：旋转的时间  参数2：旋转饿角度  0 - 360
-    ActionInterval * rotateby = CCRotateBy::create(0.4, 360);
+    ActionInterval * rotateby = CCRotateBy::create(0.3, 360);
     //CCActionInterval*  actionByBack = actionBy->reverse();                            //回复
 	ActionInterval * scaleto = CCScaleTo ::create(0, 0.3);
 	//    作用：创建一个渐变消失的动作
@@ -693,6 +696,7 @@ void GameLayer::gameOverSettlement()
 
 void GameLayer::gameOverLayOut(float dt)
 {
+	MyJniHelper::showBan(0);
 	menu->overGame();
 }
 

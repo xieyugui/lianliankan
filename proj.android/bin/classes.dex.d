@@ -1,6 +1,7 @@
 D:\game\lianliankanx\proj.android\bin\classes.dex : \
 D:\game\lianliankanx\proj.android\bin\classes\org\cocos2dx\cpp\AppActivity$1.class \
 D:\game\lianliankanx\proj.android\bin\classes\org\cocos2dx\cpp\AppActivity$2.class \
+D:\game\lianliankanx\proj.android\bin\classes\org\cocos2dx\cpp\AppActivity$3.class \
 D:\game\lianliankanx\proj.android\bin\classes\org\cocos2dx\cpp\AppActivity$AdHandler.class \
 D:\game\lianliankanx\proj.android\bin\classes\org\cocos2dx\cpp\AppActivity.class \
 D:\game\lianliankanx\proj.android\bin\classes\org\cocos2dx\lianliankanx\BuildConfig.class \

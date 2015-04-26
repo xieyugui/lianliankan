@@ -42,9 +42,11 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.unionsy.sdk.OnExitScreenListener;
 import com.unionsy.sdk.OnGetAdsSizeListener;
@@ -61,6 +63,7 @@ public class AppActivity extends Cocos2dxActivity {
 	private static final String TAG = "Ads_SDK_Demo_Main";
 	//private static Context mContext;
 	private static Handler handler;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);   
@@ -85,35 +88,48 @@ public class AppActivity extends Cocos2dxActivity {
 	   //初始化广告
     public void initAds(){
 		SsjjPauseScreenManager.preLoad(AppActivity.this); // 预加载 插屏 广告
-		SsjjExitScreenManager.preLoad(AppActivity.this);  // 预加载 退出插屏广告
-		SsjjFullScreenManager.preLoad(AppActivity.this);  // 预加载 全屏 广告
+		//SsjjExitScreenManager.preLoad(AppActivity.this);  // 预加载 退出插屏广告
+		//SsjjFullScreenManager.preLoad(AppActivity.this);  // 预加载 全屏 广告
     }
     
     class AdHandler extends Handler {
     	public void handleMessage(Message msg) {
     		switch (msg.what) {
-    		default:
+    		case 0:
     			SsjjPauseScreenManager.show(AppActivity.this, mOnSsjjAdsListener);
+    			break;
+    		case 1:
+    			this.getBannerAd();
     			break;
     		}
     		
     	}
     	//添加互动广告
-    	private LinearLayout getBannerAd() {
+    	private void getBannerAd() {
+    		
+
+    		
     		// 互动广告
-    		LinearLayout adBannerLayout = new LinearLayout(AppActivity.this);
-    		adBannerLayout.setOrientation(LinearLayout.VERTICAL);
-    		FrameLayout.LayoutParams lp_banner = new FrameLayout.LayoutParams(
-    				FrameLayout.LayoutParams.WRAP_CONTENT,
-    				FrameLayout.LayoutParams.WRAP_CONTENT);
-    		// 设置adBannerLayout的悬浮位置,具体的位置开发者根据需要设置
-    		lp_banner.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
-    		AppActivity.this.addContentView(adBannerLayout, lp_banner);
-    		
-    		LinearLayout bannerLayout = new LinearLayout(AppActivity.this);
-    		adBannerLayout.addView(bannerLayout);
-    		
-    		return bannerLayout;
+    		SsjjAdsView mBannerx=new SsjjAdsView(AppActivity.this);
+    		// 设置广告状态回调监听[可选]
+    		mBannerx.setOnSsjjAdsListener(mOnSsjjAdsListener); 
+    		// 启用广告预加载[建议调用]
+    		mBannerx.preLoad();   
+    		//mBannerx.setSsjjAdsSize(SsjjAdsSize.SIZE_MATCH_PARENT);
+    		mBannerx.setSsjjAdsSize(-1, 60); // 自定义广告尺寸，单位px
+    		// 设置广告右上角的开关按钮是否显示[可选]
+    		mBannerx.enableCloseButton(false);
+    		RelativeLayout mAdContainer = new RelativeLayout(AppActivity.this);
+			
+            FrameLayout.LayoutParams lp_banner = new FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT);
+            lp_banner.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+			mAdContainer.addView(mBannerx, lp_banner);
+			
+			AppActivity.this.addContentView(mAdContainer, lp_banner);
+			mBannerx.show();
+			
     	}
     }
     
@@ -178,6 +194,28 @@ public class AppActivity extends Cocos2dxActivity {
 	
 	private LinearLayout bannerLayout; //本demo中放置banner广告的容器
 	
+	// 使用代码方式动态生成 banner广告
+	private void addBanner() {
+		
+		final SsjjAdsView banner = new SsjjAdsView(AppActivity.this);
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		//bannerLayout为容纳banner的父view
+		bannerLayout.addView(banner, params); 
+		
+		// 监听获取到的广告图片的大小[自定义布局可参考使用]
+		banner.setOnGetAdsSizeListener(new OnGetAdsSizeListener() {
+			@Override
+			public void onGetAdsSize(SsjjAdsView view, int widthPx, int heightPx) {
+				// 得到广告图片的大小，这里可以进行重新设置布局 
+				float ratio = widthPx / heightPx; //计算获取的广告的宽高比
+				int widthDp = 300; // 自定义广告的宽度
+				banner.setSsjjAdsSize(widthDp, (int) (widthDp / ratio));
+			}
+		});
+		// 必须手动调用 show方法, banner广告才会显示
+//		banner.setTimeout(200);
+		banner.show(); 
+	}	
 	
 	/**
 	 *  广告的回调接口

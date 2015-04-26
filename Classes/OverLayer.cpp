@@ -45,7 +45,8 @@ bool OverLayer::init()
 	{
 		return false;
 	}
-	
+
+
 	CCPoint origin = CCDirector::getInstance()->getVisibleOrigin();
 
 	CCMenuItemImage *pContinueItem = CCMenuItemImage::create(
@@ -75,6 +76,7 @@ bool OverLayer::init()
 	CCMenu* pMenu = CCMenu::create(pContinueItem, pLoginItem, NULL);
 	pMenu->setPosition(Vec2::ZERO);
 	this->addChild(pMenu, 1000);
+
 
 	CCDirector::sharedDirector()->pause();
 

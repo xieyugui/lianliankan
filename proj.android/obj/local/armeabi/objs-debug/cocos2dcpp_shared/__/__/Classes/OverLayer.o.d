@@ -357,7 +357,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/OverLayer.o: \
  jni/../../Classes/GameUtils.h jni/../../Classes/LevelSelectLayer.h \
  jni/../../Classes/LevelSelectContent.h \
  jni/../../Classes/LevelSelectItem.h jni/../../Classes/GameData.h \
- jni/../../Classes/GameScene.h
+ jni/../../Classes/GameScene.h jni/../../Classes/MyJniHelper.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/3d/../platform/android/jni/JniHelper.h
 
 jni/../../Classes/OverLayer.h:
 
@@ -1082,3 +1083,7 @@ jni/../../Classes/LevelSelectItem.h:
 jni/../../Classes/GameData.h:
 
 jni/../../Classes/GameScene.h:
+
+jni/../../Classes/MyJniHelper.h:
+
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/3d/../platform/android/jni/JniHelper.h:
