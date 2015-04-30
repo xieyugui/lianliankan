@@ -94,6 +94,8 @@ void GameData::initLevelData() {
 	auto allkeys = Array::create();
 	//level_data = dynamic_cast<Array *>(Dictionary::createWithContentsOfFile(plistPath.c_str()));
 	auto plistDic = Dictionary::createWithContentsOfFile(plistPath.c_str());
+	auto game_freq= dynamic_cast<String *> (plistDic->objectForKey("freq"));
+	this->setblockCount(game_freq->intValue());
 	auto block_count= dynamic_cast<String *> (plistDic->objectForKey("block_count"));
 	this->setblockCount(block_count->intValue());
 	log("block_count=%s", block_count->getCString());

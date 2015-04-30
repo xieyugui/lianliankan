@@ -14,6 +14,7 @@ public:
 	void contentFadeOut();
 	void initAllLevels(int page,float topH);
 private:
+
 	Menu* _levelMenu;
 
 

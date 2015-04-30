@@ -48,6 +48,9 @@ public:
 	CC_SYNTHESIZE(float,block_scale,blockScale);
 	CC_SYNTHESIZE(int,block_count,blockCount);
 	CC_SYNTHESIZE(float,max_level,maxLevel);
+	CC_SYNTHESIZE(int,freq,Freq);//广告频率
+
+	
 
 	//CC_SYNTHESIZE(int, next_level, NextLevel);
 

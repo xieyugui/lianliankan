@@ -37,11 +37,11 @@ bool MenuLayer::init() {
 	startBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 
 	//more
-	moreBtn = MenuItemImage::create("btn_more.png", "btn_more.png",CC_CALLBACK_0(MenuLayer::menuMore, this));
-	moreBtn->setScaleX(GetXScaleRate);
-	moreBtn->setScaleY(GetYScaleRate);
-	moreBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - moreBtn->boundingBox().size.height - 20));
-	log("morebtn = %f, = %f",moreBtn->getContentSize().height,moreBtn->boundingBox().size.height);
+	//moreBtn = MenuItemImage::create("btn_more.png", "btn_more.png",CC_CALLBACK_0(MenuLayer::menuMore, this));
+	//moreBtn->setScaleX(GetXScaleRate);
+	//moreBtn->setScaleY(GetYScaleRate);
+	//moreBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2 - moreBtn->boundingBox().size.height - 20));
+	//log("morebtn = %f, = %f",moreBtn->getContentSize().height,moreBtn->boundingBox().size.height);
 
 	// music
 	MenuItemImage *_turnOn, *_turnOff;
@@ -58,7 +58,7 @@ bool MenuLayer::init() {
 	if(GameData::getInstance()->getisPause())
 		toggleItem->setSelectedIndex(1);
 
-	pMenu = Menu::create(moreBtn,toggleItem,startBtn, NULL);
+	pMenu = Menu::create(toggleItem,startBtn, NULL);
 	pMenu->setPosition(Vec2::ZERO);
 
 	this->addChild(pMenu,0);

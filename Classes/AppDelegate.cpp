@@ -34,7 +34,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::create("Lian Lian Kan");
         director->setOpenGLView(glview);
     }
-	glview->setDesignResolutionSize(480, 800, ResolutionPolicy::SHOW_ALL);
+	glview->setDesignResolutionSize(640, 960, ResolutionPolicy::SHOW_ALL);
     // turn on display FPS
     director->setDisplayStats(false);
 

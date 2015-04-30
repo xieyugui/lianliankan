@@ -72,7 +72,7 @@ bool LevelSelectLayer::init(){
 
 //初始化导航  
 void LevelSelectLayer::initNavigation(){
-	float alreadyUseH = pBack->boundingBox().size.height + level_space*2  + (g_EachPageCount/g_EachLineCount)*(GameData::getInstance()->getlevelSpriteW() +level_space*2);
+	float alreadyUseH = banner_height + level_space;
 
 	leftMenuSpritePre = MenuItemImage::create("page_pre.png", "page_pre.png", CC_CALLBACK_0(LevelSelectLayer::prePageBack, this));
 	log("changdu %f,%f",leftMenuSpritePre->getContentSize().width,leftMenuSpritePre->getContentSize().height);
@@ -80,14 +80,14 @@ void LevelSelectLayer::initNavigation(){
 	leftMenuSpritePre->setScaleY(GetYScaleRate);
 	float leftW = leftMenuSpritePre->boundingBox().size.width;
 	float leftH = leftMenuSpritePre->boundingBox().size.height;
-	leftMenuSpritePre->setPosition(VISIBLE_WIDTH*0.5 - leftW ,VISIBLE_HEIGHT -(alreadyUseH+leftH/2));
+	leftMenuSpritePre->setPosition(VISIBLE_WIDTH*0.5 - leftW ,alreadyUseH+leftH/2);
 
 	rightMenuSpritePre = MenuItemImage::create("page_next.png", "page_next.png", CC_CALLBACK_0(LevelSelectLayer::nextPageBack, this));
 	rightMenuSpritePre->setScaleX(GetXScaleRate);
 	rightMenuSpritePre->setScaleY(GetYScaleRate);
 	float rightW = rightMenuSpritePre->boundingBox().size.width;
 	float rightH = rightMenuSpritePre->boundingBox().size.height;
-	rightMenuSpritePre->setPosition(VISIBLE_WIDTH*0.5 + rightW ,VISIBLE_HEIGHT -(alreadyUseH+leftH/2));
+	rightMenuSpritePre->setPosition(VISIBLE_WIDTH*0.5 + rightW ,alreadyUseH+leftH/2);
 
 	pageMenu = Menu::create(leftMenuSpritePre,rightMenuSpritePre, NULL);
 	pageMenu->setPosition(Vec2::ZERO);

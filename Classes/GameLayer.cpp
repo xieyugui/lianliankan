@@ -14,6 +14,8 @@
 #include "MyJniHelper.h"
 
 #include <algorithm>
+#include <stdlib.h>
+
 using std::random_shuffle;
 
 USING_NS_CC_EXT;
@@ -81,9 +83,13 @@ void GameLayer::initData()
 		node1->autorelease();
 		node1->imgid = 0;
 
+
+		
+
 		if(index < grid_count*2) {
-			srand( (unsigned)time( NULL ) + index*rand()%1000 );
-			node->imgid = rand() % scope + 1;
+
+			//srand( (unsigned)time( NULL ) + index*rand()%1000 );
+			node->imgid = index %scope +1;
 			node1->imgid = node->imgid;
 			log("initData imgid = %d", node->imgid);
 			mapArray.pushBack(node);
@@ -152,6 +158,7 @@ void GameLayer::initUI()
 	block_top->setScale(GameData::getInstance()->getblockScale());
 	block_w = block_top->boundingBox().size.width;
 	block_h = block_top->boundingBox().size.height;
+	bottom_h = this->getStartH();
 	int block_index = 0;
 	int wIndex = 0;
 	for (Vector<MapNode*>::const_iterator it = mapArray.begin(); it != mapArray.end(); ++it)  {
@@ -175,8 +182,8 @@ void GameLayer::initUI()
 				log("windex = %d,= %d",wIndex,int(block_index / x_count));
 		}
 			
-		sprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+banner_height));
-		topSprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+banner_height));
+		sprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+bottom_h));
+		topSprite->setPosition(ccp((block_w / 2) + block_w * wIndex+level_space, (block_h / 2) + int(block_index / x_count)*block_h+bottom_h));
 		this->addChild(sprite, 2, TAG_START_SPRITE + block_index);
 		this->addChild(topSprite, 3, TAG_START_SPRITE *2 + block_index);
 		block_index++;
@@ -192,6 +199,20 @@ void GameLayer::initFillBlock() {
 }
 
 
+//为了居中，计算一下从底部开始的位置
+float GameLayer::getStartH() {
+	auto headerbg = Sprite::create("header_bg.png");
+	headerbg->setScaleX(GetXScaleRate);
+	headerbg->setScaleY(GetYScaleRate);
+	float al_space = VISIBLE_HEIGHT - (headerbg->boundingBox().size.height + banner_height);
+	float block_allH = block_h*y_count;
+	if(block_allH >= al_space)
+		return banner_height;
+
+	return ((al_space - block_allH)/2 + banner_height);
+}
+
+
 
 //屏幕坐标转换成地图坐标
 Vec2 GameLayer::pointOfView(Vec2 point)
@@ -201,8 +222,8 @@ Vec2 GameLayer::pointOfView(Vec2 point)
 	int y = -1;
 	if (point.x > level_space && point.x < (x_count * block_w+level_space))
 		x = (point.x-level_space) / (block_w);
-	if (point.y > banner_height && point.y < y_count * block_h+banner_height)
-		y = (point.y-banner_height) / (block_h );
+	if (point.y > bottom_h && point.y < y_count * block_h+bottom_h)
+		y = (point.y-bottom_h) / (block_h );
 	log("debug %f,%f",point.x,point.y);
 	return Vec2(x, y);
 }
@@ -411,7 +432,7 @@ void GameLayer::clearAnimation(float dt)
 		auto point = linePoints[i];
 		auto sprite = Sprite::create("block/"+fileName);
 		sprite->setScale(GameData::getInstance()->getblockScale());
-		sprite->setPosition(ccp((block_w / 2) + block_w * point.x+level_space, (block_h / 2) + point.y*block_h+banner_height));
+		sprite->setPosition(ccp((block_w / 2) + block_w * point.x+level_space, (block_h / 2) + point.y*block_h+bottom_h));
 		this->addChild(sprite, 3, TAG_START_SPRITE*4 + i);
 		sprite->runAction(this->getSpecialEffectsAnimation());
 	}
@@ -425,6 +446,8 @@ void GameLayer::clearAnimation(float dt)
 	log("current_score  %d", current_score);
 	log("need_socre %d", need_score);
 	if (current_score >= need_score) {
+		if(GameData::getInstance()->getChooseLevel() % GameData::getInstance()->getFreq() == 0)//设置广告频率
+			MyJniHelper::showBan(0);
 		this->scheduleOnce(schedule_selector(GameLayer::gameOverLayOut),0.5);
 		//this->gameOverLayOut();
 		//this->gameOverSettlement();
@@ -696,7 +719,7 @@ void GameLayer::gameOverSettlement()
 
 void GameLayer::gameOverLayOut(float dt)
 {
-	MyJniHelper::showBan(0);
+
 	menu->overGame();
 }
 

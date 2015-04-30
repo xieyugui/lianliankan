@@ -18,6 +18,7 @@ public:
 
 	CC_SYNTHESIZE(float,block_w,blockW);//缩放之后的大小
 	CC_SYNTHESIZE(float,block_h,blockH);
+	CC_SYNTHESIZE(float,bottom_h,bottomH);//距离底部高度
 private:
 	void initUI(void);
 
@@ -64,6 +65,8 @@ private:
 	FiniteTimeAction* getSpecialEffectsAnimation();
 
 	void addLinePoints(Vec2 a, Vec2 b,bool X);
+
+	float getStartH();
 
 	Vec2 prePoint; //前一个点坐标
 	Vec2 location; //当前点坐标

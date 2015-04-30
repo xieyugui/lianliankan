@@ -34,6 +34,8 @@ void LevelSelectContent::initAllLevels(int page,float topH){//初始化当前pag
 	auto levelSp = Sprite::create("lockLevel.png");
 	float levelW = levelSp->getContentSize().width*GameData::getInstance()->getlevelSacle();
 	float space = level_space;
+	int levelLine = (eachPageItemCount/g_EachLineCount);
+	float hSpace = (VISIBLE_HEIGHT - topH*2 - levelLine *levelW - banner_height)/(levelLine-1);
 	//float constStartPositionX = levelW/2+space*2;
 	float constStartPositionX = VISIBLE_WIDTH * 0.5 - (levelW+space*2)*(g_EachLineCount / 2 )+levelW/2+space;
 	log("rizhi=%f,=%f,=%f",levelW,VISIBLE_WIDTH * 0.5,constStartPositionX);
@@ -45,7 +47,7 @@ void LevelSelectContent::initAllLevels(int page,float topH){//初始化当前pag
 			int lineCount = g_EachLineCount;
 			if (i != (0 + page * eachPageItemCount) && i % lineCount == 0){
 				startPositionX = constStartPositionX;
-				topStartPositionY = topStartPositionY - levelW -space *2;
+				topStartPositionY = topStartPositionY - levelW -hSpace;
 			}
 
 			int levelCount = i + 1;
