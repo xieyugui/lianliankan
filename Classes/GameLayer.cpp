@@ -149,8 +149,10 @@ void GameLayer::initUI()
 	this->addChild(gameBg, -1);
 
 	//top Menu
-	menu = TopMenu::create();
-	this->addChild(menu);
+	//menu = TopMenu::create();
+	//menu->setgameLayer(this);
+	//this->addChild(menu);
+	this->initTopMenuUI();
 
 	srand( (unsigned)time(NULL));
 	random_shuffle(mapArray.begin(),mapArray.end());
@@ -188,6 +190,48 @@ void GameLayer::initUI()
 		this->addChild(topSprite, 3, TAG_START_SPRITE *2 + block_index);
 		block_index++;
 	}
+}
+
+void GameLayer::initTopMenuUI()
+{
+	auto header_bg = Sprite::create("header_bg.png");
+	header_bg->setScaleX(GetXScaleRate);
+	header_bg->setScaleY(GetYScaleRate);
+	header_bg->setPosition(VISIBLE_WIDTH/2,VISIBLE_HEIGHT-header_bg->boundingBox().size.height/2);
+	this->addChild(header_bg,1);
+
+	//block_h = block_top->boundingBox().size.height;
+
+	float topH = VISIBLE_HEIGHT-header_bg->boundingBox().size.height/2;
+
+
+	auto levelSp = Sprite::create("header_level.png");
+	levelSp->setScaleX(GetXScaleRate);
+	levelSp->setScaleY(GetYScaleRate);
+	levelSp->setPosition(level_space+levelSp->boundingBox().size.width/2,topH);
+	this->addChild(levelSp,2);
+
+
+	auto level = Label::create(String::createWithFormat("%d", GameData::getInstance()->getChooseLevel())->_string, "Verdana-Bold",45*GetXScaleRate,Size(85*GetXScaleRate,65*GetYScaleRate),TextHAlignment::CENTER,TextVAlignment::CENTER);
+	level->setPosition(header_bg->boundingBox().size.width/4+level_space, topH);
+	this->addChild(level,2);
+
+	auto startBtn = MenuItemImage::create("btn_pause.png", "btn_pause.png", CC_CALLBACK_0(GameLayer::pauseGame, this));
+	startBtn->setScaleX(GetXScaleRate);
+	startBtn->setScaleY(GetYScaleRate);
+	startBtn->setPosition(Vec2(VISIBLE_WIDTH - startBtn->boundingBox().size.width/2 - level_space,topH));
+
+	auto promptBtn = MenuItemImage::create("btn_hint.png", "btn_hint.png", CC_CALLBACK_0(GameLayer::promptGame, this));
+	promptBtn->setScaleX(GetXScaleRate);
+	promptBtn->setScaleY(GetYScaleRate);
+	promptBtn->setPosition(Vec2(VISIBLE_WIDTH - promptBtn->boundingBox().size.width/2 - startBtn->boundingBox().size.width-level_space *2,topH));
+
+
+
+	auto top_menu = Menu::create(promptBtn,startBtn, NULL);
+	top_menu->setPosition(Vec2::ZERO);
+	//menu->alignItemsVertically();
+	this->addChild(top_menu,2);
 }
 
 //根据当前等级生成随机数
@@ -720,7 +764,41 @@ void GameLayer::gameOverSettlement()
 void GameLayer::gameOverLayOut(float dt)
 {
 
-	menu->overGame();
+	this->overGame();
+}
+
+void GameLayer::promptGame()
+{
+
+}
+
+
+void GameLayer::pauseGame() {
+	Audio::getInstance()->playButtonClick();
+	
+	//CCSize visibleSize = CCDirector::getInstance()->getVisibleSize();
+	CCRenderTexture *renderTexture = CCRenderTexture::create(VISIBLE_WIDTH, VISIBLE_HEIGHT);
+ 
+	renderTexture->begin();
+	this->getParent()->visit();
+	renderTexture->end();
+
+	//暂停页面
+	CCDirector::getInstance()->pushScene(PauseLayer::scene(renderTexture));
+}
+
+//结束版面
+void GameLayer::overGame() {
+
+	//CCSize visibleSize = CCDirector::getInstance()->getVisibleSize();
+	CCRenderTexture *renderTexture = CCRenderTexture::create(VISIBLE_WIDTH, VISIBLE_HEIGHT);
+ 
+	renderTexture->begin();
+	this->getParent()->visit();
+	renderTexture->end();
+
+	//结束页面
+	CCDirector::getInstance()->pushScene(OverLayer::scene(renderTexture));
 }
 
 

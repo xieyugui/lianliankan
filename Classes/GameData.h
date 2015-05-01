@@ -65,7 +65,6 @@ public:
 	void getLevelData(int level,float &x_count,float &y_count, int &grid_count,int &scope);
 	std::vector<std::string> split(std::string str,std::string pattern);
 
-
 private:
 	GameData();
 	void init();

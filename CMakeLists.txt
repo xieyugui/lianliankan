@@ -132,7 +132,6 @@ set(GAME_SRC
   Classes/OverLayer.cpp
   Classes/PauseLayer.cpp
   Classes/SetMusic.cpp
-  Classes/TopMenu.cpp
   ${PLATFORM_SPECIFIC_SRC}
 )
 
@@ -155,7 +154,6 @@ set(GAME_HEADERS
   Classes/OverLayer.h
   Classes/PauseLayer.h
   Classes/SetMusic.h
-  Classes/TopMenu.h
   ${PLATFORM_SPECIFIC_HEADERS}
 )
 
