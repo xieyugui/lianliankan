@@ -10,19 +10,49 @@ Vec2 GameUtils::pointOffsetCenter(float x, float y){
 }
 
 float GameUtils::getXScaleRate(){
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	if(visibleSize.width < size_width) {
-		return visibleSize.width / size_width;
-	}
-	return 1.0;
+	auto size_width = 640.0;
+	if(VISIBLE_WIDTH > size_width) 
+		size_width = 768.0;
+	//if(VISIBLE_WIDTH < size_width) {
+	//	return VISIBLE_WIDTH / size_width;
+	//}
+	return VISIBLE_WIDTH / size_width;
 }
 
 float GameUtils::getYScaleRate() {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	if( visibleSize.height < size_height) {
-		return visibleSize.height / size_height;
+	auto size_height = 960.0;
+	if(VISIBLE_HEIGHT > 960 && VISIBLE_HEIGHT <= 1024.0) 
+		size_height =  1024.0;
+	else if ( VISIBLE_HEIGHT > 1024.0)
+		size_height = 1136.0;
+	//if( VISIBLE_HEIGHT < size_height) {
+	//	return VISIBLE_HEIGHT / size_height;
+	//}
+	return VISIBLE_HEIGHT / size_height;
+}
+
+float GameUtils::getConScaleFactorX() {
+	auto designSize = Size(640, 960);
+	if(GameData::getInstance()->getscW() > 640) 
+	{
+		auto resourceSize = Size(768, 1024);
+		return resourceSize.width/designSize.width;
 	}
 	return 1.0;
+
+}
+
+float GameUtils::getConScaleFactorY() {
+	auto designSize = Size(640, 960);
+	if(GameData::getInstance()->getscH() <= 960) 
+	{
+		return 1.0;
+	}
+	else if(GameData::getInstance()->getscH() > 960 && GameData::getInstance()->getscH() < 1136) 
+	{
+		return 1024/960;
+	}
+	return 1136/960;
 }
 
 
@@ -61,13 +91,16 @@ float GameUtils::getVisibleWidth(){
 
 float GameUtils::getVisibleHeight(){
 	auto visibleSize = Director::getInstance()->getVisibleSize();
+	//auto screenSize = Director::getInstance()->getOpenGLView()->getFrameSize();
+	//return screenSize.height;
 	return visibleSize.height;
 }
 
+
 float GameUtils::getLevelScale(Sprite* sprite) {
-	//两端各空10  元素之间空10
+	// 元素之间空10
 	//float spaceSize = GameData::getInstance()->getlevelSpace();
-	float scaleRate = (VISIBLE_WIDTH - level_space * 2- g_EachLineCount *2*level_space)/(sprite->getContentSize().width * g_EachLineCount);
+	float scaleRate = (VISIBLE_WIDTH - g_EachLineCount *2*level_space)/(sprite->getContentSize().width * g_EachLineCount);
 
 	return scaleRate;
 }

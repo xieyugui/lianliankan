@@ -23,7 +23,7 @@ void GameData::init() {
 	this->initLevelData();
 	is_pause = false;
 	//初始化等级关卡一些参数
-	this->initLevelScale();
+	//this->initLevelScale();
 }
 
 void GameData::initLevelScale() {
@@ -95,7 +95,7 @@ void GameData::initLevelData() {
 	//level_data = dynamic_cast<Array *>(Dictionary::createWithContentsOfFile(plistPath.c_str()));
 	auto plistDic = Dictionary::createWithContentsOfFile(plistPath.c_str());
 	auto game_freq= dynamic_cast<String *> (plistDic->objectForKey("freq"));
-	this->setblockCount(game_freq->intValue());
+	this->setFreq(game_freq->intValue());
 	auto block_count= dynamic_cast<String *> (plistDic->objectForKey("block_count"));
 	this->setblockCount(block_count->intValue());
 	log("block_count=%s", block_count->getCString());
@@ -104,6 +104,9 @@ void GameData::initLevelData() {
 	//7,7,10,10;7,8,12,17
 	auto level_info = dynamic_cast<String *> (plistDic->objectForKey("level_info"));
 	level_data = this->split(level_info->getCString(),";");
+
+	//bann_height = VISIBLE_HEIGHT/960 * banner_height;
+
 	//log("level_info=%s", level_info->getCString());
 
 }

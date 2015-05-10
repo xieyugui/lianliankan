@@ -34,12 +34,36 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::create("Lian Lian Kan");
         director->setOpenGLView(glview);
     }
-	glview->setDesignResolutionSize(640, 960, ResolutionPolicy::SHOW_ALL);
+	//auto screenSize = glview->getFrameSize();
+
+
+	//if(screenSize.width > 640)
+	//	glview->setDesignResolutionSize(768, 1024, ResolutionPolicy::SHOW_ALL);
+	//else if (screenSize.height > 960)
+	//	glview->setDesignResolutionSize(640, 1136, ResolutionPolicy::SHOW_ALL);
+	//else 
+	glview->setDesignResolutionSize(640, 960, ResolutionPolicy::FIXED_WIDTH);
+	//static cocos2d::CCSize designResolutionSize = cocos2d::CCSizeMake(640, 960);
+	//glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionShowAll);
     // turn on display FPS
     director->setDisplayStats(false);
 
+	
+	//auto designSize = Size(640, 960);
+	//if(screenSize.width > 640) 
+	//{
+	//	auto resourceSize = Size(768, 1024);
+	//	director->setContentScaleFactor(resourceSize.height/designSize.height);
+	//}else if(screenSize.height > 960) 
+	//{
+	//	auto resourceSize = Size(640, 1136);
+	//	director->setContentScaleFactor(resourceSize.height/designSize.height);
+	//}
+
+	//glview->setDesignResolutionSize(designSize.width, designSize.height, ResolutionPolicy::FIXED_WIDTH);
+
     // set FPS. the default value is 1.0/60 if you don't call this
-    director->setAnimationInterval(1.0 / 60);
+    //director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
 	auto scene = MenuScene::create();

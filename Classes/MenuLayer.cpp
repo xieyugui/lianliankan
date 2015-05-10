@@ -3,12 +3,13 @@
 #include "GameUtils.h"
 #include "GameData.h"
 #include "LevelSelectLayer.h"
+#include "MyJniHelper.h"
 
 bool MenuLayer::init() {
 	if (!Layer::init()) {
 		return false;
 	}
-
+	clicked = false;
 	this->setTouchEnabled(true);
 	this->setKeypadEnabled(true);
 
@@ -23,6 +24,8 @@ bool MenuLayer::init() {
 	//}
 
 	//background->setTextureRect(rect);
+	//background->setScaleX(GameUtils::getConScaleFactorX());
+	//background->setScaleY(GameUtils::getConScaleFactorY());
 	background->setScaleX(GetXScaleRate);
 	background->setScaleY(GetYScaleRate);
 	background->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
@@ -34,6 +37,8 @@ bool MenuLayer::init() {
 	startBtn = MenuItemImage::create("btn_start.png", "btn_start.png", CC_CALLBACK_0(MenuLayer::startGame, this));
 	startBtn->setScaleX(GetXScaleRate);
 	startBtn->setScaleY(GetYScaleRate);
+	//startBtn->setScaleX(GameUtils::getConScaleFactorX());
+	//startBtn->setScaleY(GameUtils::getConScaleFactorY());
 	startBtn->setPosition(Vec2(VISIBLE_WIDTH / 2, VISIBLE_HEIGHT / 2));
 
 	//more
@@ -64,6 +69,15 @@ bool MenuLayer::init() {
 	this->addChild(pMenu,0);
 
 
+	MyJniHelper::showBan(1);
+
+		//对手机返回键的监听 
+	auto listener = EventListenerKeyboard::create(); 
+	//和回调函数绑定 
+	listener->onKeyReleased = CC_CALLBACK_2(MenuLayer::onKeyReleased,this); 
+	//添加到事件分发器中 
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener,this); 
+
 	return true;
 
 }
@@ -88,4 +102,34 @@ void MenuLayer::startGame() {
 	GameData::getInstance();
 	Director::getInstance()->replaceScene(LevelSelectLayer::createScene());
 	log("START!");
+}
+
+void MenuLayer::onKeyReleased(EventKeyboard::KeyCode keyCode,Event * pEvent) 
+{ 
+	if (keyCode == EventKeyboard::KeyCode::KEY_MENU){
+		if(clicked) {
+			clicked= false;
+			CCLog("doubleclick");
+			Director::getInstance()->end();
+			#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+				exit(0);
+			#endif
+		}else {
+			//延时0.25s执行（注意在这0.25s的延时过程中clicked已经为true），
+			//如果在这个过程中再次click，那么就执行上面的双击事件处理了
+			//否则，那么就执行下面的回调函数了，处理单击事件
+			scheduleOnce(schedule_selector(MenuLayer::doubleClickState),0.25f);
+			clicked= true;
+		}
+	}
+
+} 
+
+void MenuLayer::doubleClickState(float tt)
+{
+    if(clicked) {
+        clicked = false;
+		CCLog("singleclick");
+    }
+
 }

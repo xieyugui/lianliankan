@@ -30,6 +30,7 @@ bool TopMenu::init(){
 
 
 	auto level = Label::create(String::createWithFormat("%d", GameData::getInstance()->getChooseLevel())->_string, "Verdana-Bold",45*GetXScaleRate,Size(85*GetXScaleRate,65*GetYScaleRate),TextHAlignment::CENTER,TextVAlignment::TOP);
+	//auto level = Label::create(String::createWithFormat("%f", VISIBLE_HEIGHT)->_string, "Verdana-Bold",45*GetXScaleRate,Size(85*GetXScaleRate,65*GetYScaleRate),TextHAlignment::CENTER,TextVAlignment::TOP);	
 	level->setPosition(206 * GetXScaleRate+ 85*GetXScaleRate/2, topH);
 	this->addChild(level,2);
 

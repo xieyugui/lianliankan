@@ -13,6 +13,9 @@ public:
 	virtual bool init();
 	CREATE_FUNC(LevelSelectLayer);
 	static Scene* createScene();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode,Event * pEvent);
+
+	void doubleClickState(float tt);
 
 private:
 	LevelSelectContent* levelSelectContent;//等级内容
@@ -29,6 +32,8 @@ private:
 	void nextPageBack();//下一页
 	void prePageBack();//前一页
 	void menuBackMainMenu();
+
+	bool clicked;
 };
 
 

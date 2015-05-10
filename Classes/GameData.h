@@ -23,8 +23,8 @@ const char PlayerPassLevelCountKey[] = "LianLianKanByXie";
 const int g_EachPageCount = 16;
 const float g_EachLineCount = 4;
 
-const float size_width = 768;
-const float size_height = 1136;
+//const float size_width = 768;
+//const float size_height = 1136;
 
 const float level_space = 10;
 
@@ -33,7 +33,7 @@ const float level_space = 10;
 
 //const int block_count = 17; //图标的个数
 
-const float banner_height = 60; //广告条的高度
+const float banner_height = 50; //广告条的高度
 
 class GameData{
 public:
@@ -49,6 +49,10 @@ public:
 	CC_SYNTHESIZE(int,block_count,blockCount);
 	CC_SYNTHESIZE(float,max_level,maxLevel);
 	CC_SYNTHESIZE(int,freq,Freq);//广告频率
+	CC_SYNTHESIZE(float,sc_w,scW);
+	CC_SYNTHESIZE(float,sc_h,scH);
+
+	//CC_SYNTHESIZE(float,bann_height,bannerHeight);//广告拉伸的高度
 
 	
 

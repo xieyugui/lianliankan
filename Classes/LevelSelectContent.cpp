@@ -33,14 +33,13 @@ void LevelSelectContent::initAllLevels(int page,float topH){//初始化当前pag
 	
 	auto levelSp = Sprite::create("lockLevel.png");
 	float levelW = levelSp->getContentSize().width*GameData::getInstance()->getlevelSacle();
-	float space = level_space;
 	int levelLine = (eachPageItemCount/g_EachLineCount);
-	float hSpace = (VISIBLE_HEIGHT - topH*2 - levelLine *levelW - banner_height)/(levelLine-1);
+	float hSpace = (VISIBLE_HEIGHT - topH*2 - levelLine *levelW - banner_height - level_space)/levelLine;
 	//float constStartPositionX = levelW/2+space*2;
-	float constStartPositionX = VISIBLE_WIDTH * 0.5 - (levelW+space*2)*(g_EachLineCount / 2 )+levelW/2+space;
+	float constStartPositionX = VISIBLE_WIDTH * 0.5 - (levelW+level_space*2)*(g_EachLineCount / 2 )+levelW/2+level_space;
 	log("rizhi=%f,=%f,=%f",levelW,VISIBLE_WIDTH * 0.5,constStartPositionX);
 	float startPositionX = constStartPositionX;
-	float topStartPositionY = VISIBLE_HEIGHT - topH - levelW/2;
+	float topStartPositionY = VISIBLE_HEIGHT - topH - levelW/2 - level_space;
 
 	for (int i = 0 + page * eachPageItemCount; i < eachPageItemCount + page * eachPageItemCount; i++){
 		if (i < GameData::getInstance()->getmaxLevel()){
@@ -55,7 +54,7 @@ void LevelSelectContent::initAllLevels(int page,float topH){//初始化当前pag
 			_levelMenu->addChild(oneLevelItem);
 			log("jiba = %f, =%f,=%f",oneLevelItem->getContentSize().width,oneLevelItem->getContentSize().height,GameData::getInstance()->getlevelSacle());
 			oneLevelItem->setPosition(startPositionX, topStartPositionY);
-			startPositionX += levelW+space*2;
+			startPositionX += levelW+level_space*2;
 		}
 	}
 

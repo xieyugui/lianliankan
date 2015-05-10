@@ -18,6 +18,8 @@ public:
 	static float getBlockScale(Sprite* sprite,float x_count);
 	static float getPageScale(Sprite* page,Sprite* sprite);
 	static float getSpaceSizeRate(int spCount);
+	static float getConScaleFactorX();
+	static float getConScaleFactorY();
 
 	static Animation* getAnimationByKeyAndFrameName(const std::string& aniKey, const std::string& frameName, const int& frameCount, float delay);
 	static Animation* getAnimationByKeyAndFileName(const std::string& aniKey, const std::string& fileName, const int& frameCount, float delay);

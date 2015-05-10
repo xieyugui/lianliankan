@@ -11,6 +11,7 @@ public:
 	virtual bool init();
 	virtual bool onTouchBegan(Touch *pTouch, Event *pEvent);
 	virtual void onTouchEnded(Touch *pTouch, Event *pEvent);
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode,Event * pEvent);
 	CREATE_FUNC(GameLayer);
 	GameLayer();
 	~GameLayer();
@@ -68,6 +69,8 @@ private:
 
 	float getStartH();
 
+	void doubleClickState(float tt);
+
 	void pauseGame();//游戏暂停
 	void promptGame(); //游戏提示
 	void overGame();//游戏结束
@@ -97,6 +100,7 @@ private:
 	float y_count;
 	int grid_count;
 	int scope;
+	bool clicked;
 
 
 };

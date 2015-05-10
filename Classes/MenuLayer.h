@@ -7,6 +7,7 @@ USING_NS_CC;
 class MenuLayer : public Layer{
 public:
 	virtual bool init();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode,Event * pEvent);
 	CREATE_FUNC(MenuLayer);
 	void startGame();
 
@@ -14,6 +15,7 @@ public:
 	void menuMore();
 
 	void menuMusicCallback();
+	void doubleClickState(float tt);
 
 private:
 	MenuItemImage *startBtn;
@@ -21,6 +23,8 @@ private:
 	MenuItemImage *soundBtn;
 
 	Menu *pMenu;
+
+	bool clicked;
 };
 
 #endif
