@@ -40,6 +40,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.unionsy.sdk.OnExitScreenListener;
 import com.unionsy.sdk.OnGetAdsSizeListener;
@@ -58,8 +60,8 @@ import com.unionsy.sdk.SsjjExitScreenManager;
 import com.unionsy.sdk.SsjjFullScreenManager;
 import com.unionsy.sdk.SsjjPauseScreenManager;
 
-public class AppActivity extends Cocos2dxActivity {
-	
+public class AppActivity extends Cocos2dxActivity{
+	private long exitTime = 0; 
 	private static final String TAG = "Ads_SDK_Demo_Main";
 	//private static Context mContext;
 	private static Handler handler;
@@ -92,8 +94,12 @@ public class AppActivity extends Cocos2dxActivity {
 		//SsjjFullScreenManager.preLoad(AppActivity.this);  // 预加载 全屏 广告
     }
     
+    boolean isExit;
+    private SsjjAdsView mBanner; // banner广告
+    
     class AdHandler extends Handler {
     	public void handleMessage(Message msg) {
+    		isExit = false;
     		switch (msg.what) {
     		case 0:
     			SsjjPauseScreenManager.show(AppActivity.this, mOnSsjjAdsListener);
@@ -110,46 +116,29 @@ public class AppActivity extends Cocos2dxActivity {
 
     		
     		// 互动广告
-    		SsjjAdsView mBannerx=new SsjjAdsView(AppActivity.this);
+    		mBanner = new SsjjAdsView(AppActivity.this);
     		// 设置广告状态回调监听[可选]
-    		mBannerx.setOnSsjjAdsListener(mOnSsjjAdsListener); 
+    		mBanner.setOnSsjjAdsListener(mOnSsjjAdsListener); 
     		// 启用广告预加载[建议调用]
-    		mBannerx.preLoad();   
+    		mBanner.preLoad();   
     		//mBannerx.setSsjjAdsSize(SsjjAdsSize.SIZE_MATCH_PARENT);
-    		mBannerx.setSsjjAdsSize(-1, 60); // 自定义广告尺寸，单位px
+    		mBanner.setSsjjAdsSize(-1, 50); // 自定义广告尺寸，单位px
     		// 设置广告右上角的开关按钮是否显示[可选]
-    		mBannerx.enableCloseButton(false);
+    		mBanner.enableCloseButton(false);
     		RelativeLayout mAdContainer = new RelativeLayout(AppActivity.this);
 			
             FrameLayout.LayoutParams lp_banner = new FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT);
             lp_banner.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
-			mAdContainer.addView(mBannerx, lp_banner);
+			mAdContainer.addView(mBanner, lp_banner);
 			
 			AppActivity.this.addContentView(mAdContainer, lp_banner);
-			mBannerx.show();
+			mBanner.show();
 			
     	}
     }
-    
-	
-	@Override
-	public void onBackPressed() {
-		// 退屏广告
-		SsjjExitScreenManager.show(AppActivity.this, new OnExitScreenListener() {
-			@Override
-			public void onExit() {
-				// 正式退出
-				finish();
-			}
-			@Override
-			public void onCancel() {
-				// 取消退出
-				SsjjExitScreenManager.preLoad(AppActivity.this); // 预加载退出插屏广告
-			}
-		}, "您确定退出么？", "退出", "取消");
-	}
+     
 	
 	@Override
 	protected void onDestroy() {
@@ -158,7 +147,8 @@ public class AppActivity extends Cocos2dxActivity {
 	}
 	
 	
-	private SsjjAdsView mBanner; // banner广告
+	
+	
 	private void showBanner() {
 		mBanner = (SsjjAdsView) findViewById(R.id.banner);
 		// 设置广告状态回调监听[可选]

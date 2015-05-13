@@ -1,371 +1,356 @@
 obj/local/armeabi/objs/cocos2dx_internal_static/2d/CCParticleBatchNode.o: \
- jni/../../cocos2d/cocos/./2d/CCParticleBatchNode.cpp \
- jni/../../cocos2d/cocos/./2d/CCParticleBatchNode.h \
- jni/../../cocos2d/cocos/./2d/CCNode.h \
- jni/../../cocos2d/cocos/./base/ccMacros.h \
- jni/../../cocos2d/cocos/./base/CCConsole.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/select.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/cdefs.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/cdefs_elf.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/android/api-level.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/time.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/types.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/stdint.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/machine/wchar_limits.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/types.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/types.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/types.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/int-ll64.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/bitsperlong.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/bitsperlong.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/posix_types.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/stddef.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/compiler.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/posix_types.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/posix_types.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/sysmacros.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/time.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/signal.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/errno.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/errno.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/errno.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/errno.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/errno-base.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/limits.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/limits.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/limits.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/syslimits.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/string.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/malloc.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/signal.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/signal.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/signal-defs.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/siginfo.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/siginfo.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/thread \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/vector \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/map \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/mutex \
- jni/../../cocos2d/cocos/./base/CCRef.h \
- jni/../../cocos2d/cocos/./platform/CCPlatformMacros.h \
- jni/../../cocos2d/cocos/./base/ccConfig.h \
- jni/../../cocos2d/cocos/./platform/CCPlatformConfig.h \
- jni/../../cocos2d/cocos/./platform/CCPlatformDefine.h \
- jni/../../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/android/log.h \
- jni/../../cocos2d/cocos/./platform/CCStdC.h \
- jni/../../cocos2d/cocos/./platform/android/CCStdC-android.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/math.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/stdlib.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/alloca.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/strings.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/memory.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cassert \
- jni/../../cocos2d/cocos/./base/ccRandom.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/random \
- jni/../../cocos2d/cocos/./base/CCVector.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/algorithm \
- jni/../../cocos2d/cocos/./base/CCProtocols.h \
- jni/../../cocos2d/cocos/./base/ccTypes.h \
- jni/../../cocos2d/cocos/./math/CCGeometry.h \
- jni/../../cocos2d/cocos/./math/CCMath.h \
- jni/../../cocos2d/cocos/./math/Vec2.h \
- jni/../../cocos2d/cocos/./math/CCMathBase.h \
- jni/../../cocos2d/cocos/./math/Vec2.inl \
- jni/../../cocos2d/cocos/./math/Vec2.h \
- jni/../../cocos2d/cocos/./math/Vec3.h \
- jni/../../cocos2d/cocos/./math/Vec3.inl \
- jni/../../cocos2d/cocos/./math/Vec3.h \
- jni/../../cocos2d/cocos/./math/Mat4.h \
- jni/../../cocos2d/cocos/./math/Vec4.h \
- jni/../../cocos2d/cocos/./math/Vec4.inl \
- jni/../../cocos2d/cocos/./math/Mat4.inl \
- jni/../../cocos2d/cocos/./math/Vec4.h \
- jni/../../cocos2d/cocos/./math/Mat4.h \
- jni/../../cocos2d/cocos/./math/Quaternion.h \
- jni/../../cocos2d/cocos/./math/Quaternion.inl \
- jni/../../cocos2d/cocos/./platform/CCGL.h \
- jni/../../cocos2d/cocos/./platform/android/CCGL-android.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/GLES2/gl2platform.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/KHR/khrplatform.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/GLES2/gl2.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/GLES2/gl2ext.h \
- jni/../../cocos2d/cocos/./renderer/CCTexture2D.h \
- jni/../../cocos2d/cocos/./base/CCScriptSupport.h \
- jni/../../cocos2d/cocos/./platform/CCCommon.h \
- jni/../../cocos2d/cocos/./base/CCTouch.h \
- jni/../../cocos2d/cocos/./base/CCEventTouch.h \
- jni/../../cocos2d/cocos/./base/CCEvent.h \
- jni/../../cocos2d/cocos/./base/CCEventKeyboard.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/list \
- jni/../../cocos2d/cocos/./math/CCAffineTransform.h \
- jni/../../cocos2d/cocos/./renderer/CCBatchCommand.h \
- jni/../../cocos2d/cocos/./renderer/CCRenderCommand.h \
- jni/../../cocos2d/cocos/./2d/CCGrid.h \
- jni/../../cocos2d/cocos/./base/CCDirector.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/stack \
- jni/../../cocos2d/cocos/./2d/CCScene.h \
- jni/../../cocos2d/cocos/./platform/CCGLView.h \
- jni/../../cocos2d/cocos/./2d/CCParticleSystem.h \
- jni/../../cocos2d/cocos/./base/CCValue.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/unordered_map \
- jni/../../cocos2d/cocos/./renderer/CCTextureCache.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/condition_variable \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/queue \
- jni/../../cocos2d/cocos/./platform/CCImage.h \
- jni/../../cocos2d/cocos/./renderer/CCQuadCommand.h \
- jni/../../cocos2d/cocos/./renderer/CCGLProgramState.h \
- jni/../../cocos2d/cocos/./renderer/CCRenderer.h \
- jni/../../cocos2d/cocos/./renderer/CCGLProgram.h \
- jni/../../cocos2d/cocos/./renderer/CCTextureAtlas.h \
- jni/../../cocos2d/cocos/./deprecated/CCString.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/sstream \
- jni/../../cocos2d/cocos/./deprecated/CCArray.h \
- jni/../../cocos2d/cocos/./base/ccCArray.h \
- jni/../../cocos2d/cocos/./base/CCDataVisitor.h
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCParticleBatchNode.cpp \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCParticleBatchNode.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCNode.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccMacros.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCConsole.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/select.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/cdefs.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/cdefs_elf.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/android/api-level.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/time.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/stdint.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/_types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/_types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/posix_types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/stddef.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/compiler.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/posix_types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/kernel.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/sysmacros.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/time.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/signal.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/limits.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/limits.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/limits.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/internal_types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/limits.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/syslimits.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/page.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/string.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/malloc.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/signal.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm-generic/signal.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/sigcontext.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/siginfo.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm-generic/siginfo.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/thread \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/vector \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/map \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCRef.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCPlatformMacros.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccConfig.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCPlatformConfig.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCPlatformDefine.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/android/log.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCStdC.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/android/CCStdC-android.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/math.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/stdlib.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/alloca.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/strings.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/memory.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccRandom.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/random \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCVector.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCProtocols.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccTypes.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCGeometry.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCMath.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec2.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCMathBase.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec2.inl \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec2.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec3.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec3.inl \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec3.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Mat4.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec4.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec4.inl \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Mat4.inl \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec4.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Mat4.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Quaternion.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Quaternion.inl \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCGL.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/android/CCGL-android.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/GLES2/gl2platform.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/KHR/khrplatform.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/GLES2/gl2.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/GLES2/gl2ext.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCTexture2D.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCScriptSupport.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCCommon.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCTouch.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCEventTouch.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCEvent.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCEventKeyboard.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCAffineTransform.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCBatchCommand.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCRenderCommand.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCGrid.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCDirector.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/stack \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCScene.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCGLView.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCParticleSystem.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCValue.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCTextureCache.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/queue \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCImage.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCQuadCommand.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCGLProgramState.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCRenderer.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCGLProgram.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCTextureAtlas.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./deprecated/CCString.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./deprecated/CCArray.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccCArray.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCDataVisitor.h
 
-jni/../../cocos2d/cocos/./2d/CCParticleBatchNode.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCParticleBatchNode.h:
 
-jni/../../cocos2d/cocos/./2d/CCNode.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCNode.h:
 
-jni/../../cocos2d/cocos/./base/ccMacros.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccMacros.h:
 
-jni/../../cocos2d/cocos/./base/CCConsole.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCConsole.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/select.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/select.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/cdefs.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/cdefs.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/cdefs_elf.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/cdefs_elf.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/android/api-level.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/android/api-level.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/time.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/time.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/types.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/stdint.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/stdint.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/machine/wchar_limits.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/_types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/types.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/_types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/types.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/posix_types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/types.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/stddef.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/int-ll64.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/compiler.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/bitsperlong.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/posix_types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/bitsperlong.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/posix_types.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/stddef.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/kernel.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/compiler.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/sysmacros.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/posix_types.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/time.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/posix_types.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/signal.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/sysmacros.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/limits.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/time.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/limits.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/signal.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/linux/limits.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/errno.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/internal_types.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/errno.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/limits.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/errno.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/syslimits.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/errno.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/page.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/errno-base.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/string.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/limits.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/malloc.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/limits.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/signal.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/limits.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm-generic/signal.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/sys/syslimits.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/sigcontext.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/string.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm/siginfo.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/malloc.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/asm-generic/siginfo.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/linux/signal.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/thread:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/signal.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/vector:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/signal-defs.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/map:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm/siginfo.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/asm-generic/siginfo.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCRef.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/thread:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCPlatformMacros.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/vector:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccConfig.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/map:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCPlatformConfig.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/mutex:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCPlatformDefine.h:
 
-jni/../../cocos2d/cocos/./base/CCRef.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h:
 
-jni/../../cocos2d/cocos/./platform/CCPlatformMacros.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/android/log.h:
 
-jni/../../cocos2d/cocos/./base/ccConfig.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCStdC.h:
 
-jni/../../cocos2d/cocos/./platform/CCPlatformConfig.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/android/CCStdC-android.h:
 
-jni/../../cocos2d/cocos/./platform/CCPlatformDefine.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/math.h:
 
-jni/../../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/stdlib.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/android/log.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/alloca.h:
 
-jni/../../cocos2d/cocos/./platform/CCStdC.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/strings.h:
 
-jni/../../cocos2d/cocos/./platform/android/CCStdC-android.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/memory.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/math.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/stdlib.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccRandom.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/alloca.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/random:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/strings.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCVector.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/memory.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cassert:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCProtocols.h:
 
-jni/../../cocos2d/cocos/./base/ccRandom.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccTypes.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/random:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCGeometry.h:
 
-jni/../../cocos2d/cocos/./base/CCVector.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCMath.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/algorithm:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec2.h:
 
-jni/../../cocos2d/cocos/./base/CCProtocols.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCMathBase.h:
 
-jni/../../cocos2d/cocos/./base/ccTypes.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec2.inl:
 
-jni/../../cocos2d/cocos/./math/CCGeometry.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec2.h:
 
-jni/../../cocos2d/cocos/./math/CCMath.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec3.h:
 
-jni/../../cocos2d/cocos/./math/Vec2.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec3.inl:
 
-jni/../../cocos2d/cocos/./math/CCMathBase.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec3.h:
 
-jni/../../cocos2d/cocos/./math/Vec2.inl:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Mat4.h:
 
-jni/../../cocos2d/cocos/./math/Vec2.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec4.h:
 
-jni/../../cocos2d/cocos/./math/Vec3.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec4.inl:
 
-jni/../../cocos2d/cocos/./math/Vec3.inl:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Mat4.inl:
 
-jni/../../cocos2d/cocos/./math/Vec3.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Vec4.h:
 
-jni/../../cocos2d/cocos/./math/Mat4.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Mat4.h:
 
-jni/../../cocos2d/cocos/./math/Vec4.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Quaternion.h:
 
-jni/../../cocos2d/cocos/./math/Vec4.inl:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/Quaternion.inl:
 
-jni/../../cocos2d/cocos/./math/Mat4.inl:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCGL.h:
 
-jni/../../cocos2d/cocos/./math/Vec4.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/android/CCGL-android.h:
 
-jni/../../cocos2d/cocos/./math/Mat4.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/GLES2/gl2platform.h:
 
-jni/../../cocos2d/cocos/./math/Quaternion.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/KHR/khrplatform.h:
 
-jni/../../cocos2d/cocos/./math/Quaternion.inl:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/GLES2/gl2.h:
 
-jni/../../cocos2d/cocos/./platform/CCGL.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/GLES2/gl2ext.h:
 
-jni/../../cocos2d/cocos/./platform/android/CCGL-android.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCTexture2D.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/GLES2/gl2platform.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCScriptSupport.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/KHR/khrplatform.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCCommon.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/GLES2/gl2.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCTouch.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/GLES2/gl2ext.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCEventTouch.h:
 
-jni/../../cocos2d/cocos/./renderer/CCTexture2D.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCEvent.h:
 
-jni/../../cocos2d/cocos/./base/CCScriptSupport.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCEventKeyboard.h:
 
-jni/../../cocos2d/cocos/./platform/CCCommon.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list:
 
-jni/../../cocos2d/cocos/./base/CCTouch.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./math/CCAffineTransform.h:
 
-jni/../../cocos2d/cocos/./base/CCEventTouch.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCBatchCommand.h:
 
-jni/../../cocos2d/cocos/./base/CCEvent.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCRenderCommand.h:
 
-jni/../../cocos2d/cocos/./base/CCEventKeyboard.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCGrid.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/list:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCDirector.h:
 
-jni/../../cocos2d/cocos/./math/CCAffineTransform.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/stack:
 
-jni/../../cocos2d/cocos/./renderer/CCBatchCommand.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCScene.h:
 
-jni/../../cocos2d/cocos/./renderer/CCRenderCommand.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCGLView.h:
 
-jni/../../cocos2d/cocos/./2d/CCGrid.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./2d/CCParticleSystem.h:
 
-jni/../../cocos2d/cocos/./base/CCDirector.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCValue.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/stack:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map:
 
-jni/../../cocos2d/cocos/./2d/CCScene.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCTextureCache.h:
 
-jni/../../cocos2d/cocos/./platform/CCGLView.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable:
 
-jni/../../cocos2d/cocos/./2d/CCParticleSystem.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/queue:
 
-jni/../../cocos2d/cocos/./base/CCValue.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./platform/CCImage.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/unordered_map:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCQuadCommand.h:
 
-jni/../../cocos2d/cocos/./renderer/CCTextureCache.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCGLProgramState.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/condition_variable:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCRenderer.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/queue:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCGLProgram.h:
 
-jni/../../cocos2d/cocos/./platform/CCImage.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./renderer/CCTextureAtlas.h:
 
-jni/../../cocos2d/cocos/./renderer/CCQuadCommand.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./deprecated/CCString.h:
 
-jni/../../cocos2d/cocos/./renderer/CCGLProgramState.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream:
 
-jni/../../cocos2d/cocos/./renderer/CCRenderer.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./deprecated/CCArray.h:
 
-jni/../../cocos2d/cocos/./renderer/CCGLProgram.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/ccCArray.h:
 
-jni/../../cocos2d/cocos/./renderer/CCTextureAtlas.h:
-
-jni/../../cocos2d/cocos/./deprecated/CCString.h:
-
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/sstream:
-
-jni/../../cocos2d/cocos/./deprecated/CCArray.h:
-
-jni/../../cocos2d/cocos/./base/ccCArray.h:
-
-jni/../../cocos2d/cocos/./base/CCDataVisitor.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/./base/CCDataVisitor.h:

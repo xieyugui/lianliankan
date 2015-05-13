@@ -1,56 +1,59 @@
 obj/local/armeabi/objs/cocostudio_static/CocoLoader.o: \
- jni/../../cocos2d/cocos/editor-support/cocostudio/CocoLoader.cpp \
- jni/../../cocos2d/cocos/editor-support/cocostudio/CocoLoader.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/stdint.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/machine/wchar_limits.h \
- jni/../../cocos2d/external/flatbuffers/../json/document.h \
- jni/../../cocos2d/external/flatbuffers/../json/reader.h \
- jni/../../cocos2d/external/flatbuffers/../json/rapidjson.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdlib \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cstring \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/inttypes.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cassert \
- jni/../../cocos2d/external/flatbuffers/../json/internal/pow10.h \
- jni/../../cocos2d/external/flatbuffers/../json/internal/stack.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/csetjmp \
- jni/../../cocos2d/external/flatbuffers/../json/internal/strfunc.h \
- D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/new \
- jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CocosStudioExport.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/zlib.h \
- D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/zconf.h
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/editor-support/cocostudio/CocoLoader.cpp \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/editor-support/cocostudio/CocoLoader.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/stdint.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/_types.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/_types.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/document.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/reader.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/rapidjson.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cstdlib \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cstring \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/inttypes.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert \
+ D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/internal/pow10.h \
+ D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/internal/stack.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/csetjmp \
+ D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/internal/strfunc.h \
+ D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/new \
+ D:\game\lianliankanx\proj.android\../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CocosStudioExport.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/zlib.h \
+ D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/zconf.h
 
-jni/../../cocos2d/cocos/editor-support/cocostudio/CocoLoader.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/editor-support/cocostudio/CocoLoader.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/stdint.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/stdint.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/machine/wchar_limits.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/sys/_types.h:
 
-jni/../../cocos2d/external/flatbuffers/../json/document.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/machine/_types.h:
 
-jni/../../cocos2d/external/flatbuffers/../json/reader.h:
+D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/document.h:
 
-jni/../../cocos2d/external/flatbuffers/../json/rapidjson.h:
+D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/reader.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdlib:
+D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/rapidjson.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cstring:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cstdlib:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/inttypes.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cstring:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/cassert:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/inttypes.h:
 
-jni/../../cocos2d/external/flatbuffers/../json/internal/pow10.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert:
 
-jni/../../cocos2d/external/flatbuffers/../json/internal/stack.h:
+D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/internal/pow10.h:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/csetjmp:
+D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/internal/stack.h:
 
-jni/../../cocos2d/external/flatbuffers/../json/internal/strfunc.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/csetjmp:
 
-D:/code/android-ndk-r10/sources/cxx-stl/gnu-libstdc++/4.9/include/new:
+D:\game\lianliankanx\proj.android\../cocos2d/external/flatbuffers/../json/internal/strfunc.h:
 
-jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CocosStudioExport.h:
+D:/code/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/new:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/zlib.h:
+D:\game\lianliankanx\proj.android\../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CocosStudioExport.h:
 
-D:/code/android-ndk-r10/platforms/android-L/arch-arm/usr/include/zconf.h:
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/zlib.h:
+
+D:/code/android-ndk-r9d/platforms/android-19/arch-arm/usr/include/zconf.h:

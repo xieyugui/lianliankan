@@ -24,14 +24,13 @@ D:\game\lianliankanx\proj.android\assets\alreadyPass.png \
 D:\game\lianliankanx\proj.android\assets\bg.png \
 D:\game\lianliankanx\proj.android\assets\block \
 D:\game\lianliankanx\proj.android\assets\btn_back.png \
+D:\game\lianliankanx\proj.android\assets\btn_hint.png \
 D:\game\lianliankanx\proj.android\assets\btn_more.png \
 D:\game\lianliankanx\proj.android\assets\btn_pause.png \
 D:\game\lianliankanx\proj.android\assets\btn_start.png \
-D:\game\lianliankanx\proj.android\assets\common.plist \
 D:\game\lianliankanx\proj.android\assets\fonts \
 D:\game\lianliankanx\proj.android\assets\header_bg.png \
-D:\game\lianliankanx\proj.android\assets\icon1.plist \
-D:\game\lianliankanx\proj.android\assets\icon1.png \
+D:\game\lianliankanx\proj.android\assets\header_level.png \
 D:\game\lianliankanx\proj.android\assets\levelinfo.plist \
 D:\game\lianliankanx\proj.android\assets\lockLevel.png \
 D:\game\lianliankanx\proj.android\assets\music \
@@ -46,8 +45,6 @@ D:\game\lianliankanx\proj.android\assets\pause_level.png \
 D:\game\lianliankanx\proj.android\assets\pause_play.png \
 D:\game\lianliankanx\proj.android\assets\pause_win.png \
 D:\game\lianliankanx\proj.android\assets\res \
-D:\game\lianliankanx\proj.android\assets\startUI.plist \
-D:\game\lianliankanx\proj.android\assets\startUI.png \
 D:\game\lianliankanx\proj.android\assets\switchBg.png \
 D:\game\lianliankanx\proj.android\assets\title_bg.png \
 D:\game\lianliankanx\proj.android\assets\block\block_1.png \

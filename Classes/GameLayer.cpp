@@ -91,9 +91,6 @@ void GameLayer::initData()
 		node1->autorelease();
 		node1->imgid = 0;
 
-
-		
-
 		if(index < grid_count*2) {
 
 			//srand( (unsigned)time( NULL ) + index*rand()%1000 );
@@ -135,7 +132,7 @@ void GameLayer::onKeyReleased(EventKeyboard::KeyCode keyCode,Event * pEvent)
 	if (keyCode == EventKeyboard::KeyCode::KEY_MENU){
 		if(clicked) {
 			clicked= false;
-			CCLog("doubleclick");
+			//CCLog("doubleclick");
 			Director::getInstance()->end();
 			#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 				exit(0);
@@ -351,6 +348,15 @@ void GameLayer::clearNode(Vec2 point)
 //判断两个是否可以消除
 bool GameLayer::canClearTwo(Vec2 pointpre, Vec2 pointcurrent)
 {
+	if (this->isValiableNode(pointpre) == false || this->isValiableNode(pointcurrent) == false)
+		return false;
+
+	if (this->isEmptyNode(pointpre) || this->isEmptyNode(pointcurrent))
+		return false;
+	
+	if (this->isSamePoints(pointpre, pointcurrent))
+		return false;
+	
 	bool bMatch = false;
 	int pre = this->indexFromPoint(pointpre);
 	int current = this->indexFromPoint(pointcurrent);
@@ -799,10 +805,45 @@ void GameLayer::gameOverLayOut(float dt)
 	this->overGame();
 }
 
+//提示
 void GameLayer::promptGame()
 {
+	//canClearTwo()
+	//先清除之前选中的状态
+	auto isfound = false;
+	int game_index = 0;
+	for(int index_y = 0; index_y < y_count; index_y++) {
+		for(int index_x = 0; index_x < x_count; index_x++) {
+			((Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(Vec2(index_x,index_y))))->setVisible(false);
+			if(!isfound)
+				game_index = this->findCanClear(index_x,index_y);
+			if(!isfound && game_index){
+				isfound = true;
+				((Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(Vec2(index_x,index_y))))->setVisible(true);
+			}
+			if(isfound && this->indexFromPoint(Vec2(index_x,index_y)) ==  game_index) {
+				((Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(Vec2(index_x,index_y))))->setVisible(true);
+			}
 
+		}
+	}
 }
+
+
+int GameLayer::findCanClear(int x, int y)
+{
+	for(int index_y = 0; index_y < y_count; index_y++) {
+		for(int index_x = 0; index_x < x_count; index_x++) {
+			if(this->canClearTwo(Vec2(x,y),Vec2(index_x,index_y))){
+				((Sprite *)this->getChildByTag(TAG_START_SPRITE*2 + this->indexFromPoint(Vec2(index_x,index_y))))->setVisible(true);
+				return index_y*x_count + index_x;
+			}
+		}
+	}
+
+	return 0;
+}
+
 
 
 void GameLayer::pauseGame() {
@@ -837,7 +878,7 @@ void GameLayer::doubleClickState(float tt)
 {
     if(clicked) {
         clicked = false;
-		CCLog("singleclick");
+		//CCLog("singleclick");
     }
 
 }
