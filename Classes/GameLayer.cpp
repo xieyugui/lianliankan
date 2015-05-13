@@ -12,6 +12,7 @@
 #include "PauseLayer.h"
 #include "OverLayer.h"
 #include "MyJniHelper.h"
+#include "GameScene.h"
 
 #include <algorithm>
 #include <stdlib.h>
@@ -272,7 +273,7 @@ void GameLayer::initFillBlock() {
 }
 
 
-//为了居中，计算一下从底部开始的位置
+//为了居中，空余 取半
 float GameLayer::getStartH() {
 	auto headerbg = Sprite::create("header_bg.png");
 	headerbg->setScaleX(GetXScaleRate);
@@ -805,7 +806,7 @@ void GameLayer::gameOverLayOut(float dt)
 	this->overGame();
 }
 
-//提示
+//提示，没有如果则说明是死局，就重新开始
 void GameLayer::promptGame()
 {
 	//canClearTwo()
@@ -826,6 +827,10 @@ void GameLayer::promptGame()
 			}
 
 		}
+	}
+
+	if(!isfound) {
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5, GameScene::create()));
 	}
 }
 
