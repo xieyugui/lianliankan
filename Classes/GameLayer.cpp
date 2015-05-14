@@ -543,7 +543,7 @@ FiniteTimeAction* GameLayer::getSpecialEffectsAnimation()
 {
 	//作用创建一个旋转的动作
 	//参数1：旋转的时间  参数2：旋转饿角度  0 - 360
-    ActionInterval * rotateby = CCRotateBy::create(0.3, 360);
+    ActionInterval * rotateby = CCRotateBy::create(0.2, 360);
     //CCActionInterval*  actionByBack = actionBy->reverse();                            //回复
 	ActionInterval * scaleto = CCScaleTo ::create(0, 0.3);
 	//    作用：创建一个渐变消失的动作
